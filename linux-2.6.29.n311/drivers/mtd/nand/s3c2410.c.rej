@@ -1,0 +1,78 @@
+--- drivers/mtd/nand/s3c2410.c
++++ drivers/mtd/nand/s3c2410.c
+@@ -170,11 +183,7 @@
+ 
+ static inline int allow_clk_suspend(struct s3c2410_nand_info *info)
+ {
+-#ifdef CONFIG_MTD_NAND_S3C2410_CLKSTOP
+-	return 1;
+-#else
+-	return 0;
+-#endif
++	return clock_stop;
+ }
+ 
+ /**
+@@ -456,7 +465,6 @@
+ 
+ /* ECC handling functions */
+ 
+-#ifdef CONFIG_MTD_NAND_S3C2410_HWECC
+ static int s3c2410_nand_correct_data(struct mtd_info *mtd, u_char *dat,
+ 				     u_char *read_ecc, u_char *calc_ecc)
+ {
+@@ -826,31 +833,32 @@
+ 	nmtd->mtd.owner    = THIS_MODULE;
+ 	nmtd->set	   = set;
+ 
+-#ifdef CONFIG_MTD_NAND_S3C2410_HWECC
+-	chip->ecc.calculate = s3c2410_nand_calculate_ecc;
+-	chip->ecc.correct   = s3c2410_nand_correct_data;
+-	chip->ecc.mode	    = NAND_ECC_HW;
+-	chip->ecc.strength  = 1;
+-
+-	switch (info->cpu_type) {
+-	case TYPE_S3C2410:
+-		chip->ecc.hwctl	    = s3c2410_nand_enable_hwecc;
++	if (hardware_ecc) {
+ 		chip->ecc.calculate = s3c2410_nand_calculate_ecc;
+-		break;
++		chip->ecc.correct   = s3c2410_nand_correct_data;
++		chip->ecc.mode	    = NAND_ECC_HW;
++		chip->ecc.strength  = 1;
++
++		switch (info->cpu_type) {
++		case TYPE_S3C2410:
++			chip->ecc.hwctl	    = s3c2410_nand_enable_hwecc;
++			chip->ecc.calculate = s3c2410_nand_calculate_ecc;
++			break;
++
++		case TYPE_S3C2412:
++  			chip->ecc.hwctl     = s3c2412_nand_enable_hwecc;
++  			chip->ecc.calculate = s3c2412_nand_calculate_ecc;
++			break;
++
++		case TYPE_S3C2440:
++  			chip->ecc.hwctl     = s3c2440_nand_enable_hwecc;
++  			chip->ecc.calculate = s3c2440_nand_calculate_ecc;
++			break;
+ 
+-	case TYPE_S3C2412:
+-		chip->ecc.hwctl     = s3c2412_nand_enable_hwecc;
+-		chip->ecc.calculate = s3c2412_nand_calculate_ecc;
+-		break;
+-
+-	case TYPE_S3C2440:
+-		chip->ecc.hwctl     = s3c2440_nand_enable_hwecc;
+-		chip->ecc.calculate = s3c2440_nand_calculate_ecc;
+-		break;
++		}
++	} else {
++		chip->ecc.mode	    = NAND_ECC_SOFT;
+ 	}
+-#else
+-	chip->ecc.mode	    = NAND_ECC_SOFT;
+-#endif
+ 
+ 	if (set->ecc_layout != NULL)
+ 		chip->ecc.layout = set->ecc_layout;
