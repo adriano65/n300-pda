@@ -1,0 +1,14 @@
+
+This file lists the most important changes to
+the previous released version. For a full list of changes
+please refer to the ChangeLog file.
+
+New for version 2.1:
+ - applied some pending patches (see ChangeLog for a complete list)
+ - added support for socket connections
+ - fixed compiling issues on Solaris
+ - new maintainer: Adam Lackorzynski
+ - new homepage: http://minicom.alioth.debian.org/
+ - new mailinglists (-devel and -announce):
+      http://alioth.debian.org/mail/?group_id=31
+

@@ -1,0 +1,2365 @@
+# Portuguese messages for minicom
+# Copyright (C) 1998,1999 Free Software Foundation, Inc.
+# Arnaldo Carvalho de Melo <acme@conectiva.com.br>
+# Ricardo Soares Guimarães <ricardo@conectiva.com.br>
+msgid ""
+msgstr ""
+"Project-Id-Version: minicom 1.83.0\n"
+"POT-Creation-Date: 2003-05-16 22:33+0200\n"
+"PO-Revision-Date: 1999-12-17 14:00-0200\n"
+"Last-Translator: Vagner A. Farias <vfarias@conesul.com.br>\n"
+"Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+# ../config.c:48
+#: src/config.c:54
+msgid "minicom: WARNING: configuration file not found, using defaults\n"
+msgstr ""
+"minicom: AVISO: arquivo de configuração não encontrado, usando padrões\n"
+
+# ../config.c:53
+#: src/config.c:59
+#, c-format
+msgid "minicom: there is no global configuration file %s\n"
+msgstr "minicom: não existe arquivo de configuração global %s\n"
+
+# ../config.c:54
+#: src/config.c:60
+msgid "Ask your sysadm to create one (with minicom -s).\n"
+msgstr "Peça ao seu administrador para criar um (com minicom -s).\n"
+
+# ../config.c:76
+#: src/config.c:82
+#, c-format
+msgid "minicom: cannot open macro file %s\n"
+msgstr "minicom: não foi possível abrir arquivo de macro %s\n"
+
+# ../config.c:180 ../config.c:203 ../config.c:231
+#: src/config.c:186 src/config.c:210 src/config.c:248
+msgid "You are not allowed to change this parameter"
+msgstr "Você não tem permissão para mudar este parâmetro"
+
+# ../config.c:257
+#: src/config.c:274
+msgid " A - File name (empty=disable) :"
+msgstr " A - Nome do arquivo (nenhum=desabilitado) :"
+
+# ../config.c:258
+#: src/config.c:275
+msgid " B - Log connects and hangups  :"
+msgstr " B - Registra conexões e desconexões  :"
+
+# ../config.c:259
+#: src/config.c:276
+msgid " C - Log file transfers        :"
+msgstr " C - Registra transferência de arquivos        :"
+
+# ../config.c:260 ../config.c:312 ../config.c:537 ../config.c:632
+# ../config.c:1131 ../dial.c:1004
+#: src/config.c:277 src/config.c:329 src/config.c:556 src/config.c:654
+#: src/config.c:1153 src/dial.c:1006
+msgid "Change which setting?"
+msgstr "Alterar qual configuração?"
+
+# ../config.c:264
+#: src/config.c:281
+msgid "Logging options"
+msgstr "Opções para registro"
+
+# ../config.c:306
+#: src/config.c:323
+msgid " A - Download directory :"
+msgstr " A - Diretório de recepção      :"
+
+# ../config.c:307
+#: src/config.c:324
+msgid " B - Upload directory   :"
+msgstr " B - Diretório de transmissão   :"
+
+# ../config.c:308
+#: src/config.c:325
+msgid " C - Script directory   :"
+msgstr " C - Diretório de Scripts       :"
+
+# ../config.c:309
+#: src/config.c:326
+msgid " D - Script program     :"
+msgstr " D - Programa Script            :"
+
+# ../config.c:310
+#: src/config.c:327
+msgid " E - Kermit program     :"
+msgstr " E - Programa Kermit            :"
+
+# ../config.c:311
+#: src/config.c:328
+msgid " F - Logging options"
+msgstr " F - Opções para registro"
+
+# ../config.c:364 ../rwconf.c:109 ../rwconf.c:142 ../rwconf.c:143
+#: src/config.c:383 src/rwconf.c:118 src/rwconf.c:151 src/rwconf.c:152
+msgid "Yes"
+msgstr "Sim"
+
+# ../config.c:364
+#: src/config.c:383
+msgid "No "
+msgstr "Não"
+
+# ../config.c:431
+#: src/config.c:450
+msgid "M  Zmodem download string activates..."
+msgstr "M  String de recepção Zmodem ativa....."
+
+# ../config.c:432
+#: src/config.c:451
+msgid "N  Use filename selection window......"
+msgstr "N  Usar janela de seleção de arquivos.."
+
+# ../config.c:433
+#: src/config.c:452
+msgid "O  Prompt for download directory......"
+msgstr "O  Pergunte por diretório de recepção.."
+
+# ../config.c:434
+#: src/config.c:453
+msgid "Change which setting? (SPACE to delete)"
+msgstr "Escolha opção: (ESPAÇO para apagar)"
+
+# ../config.c:437
+#: src/config.c:456
+msgid "     Name             Program"
+msgstr "     Nome            Programa"
+
+# ../config.c:439
+#: src/config.c:458
+msgid "Name U/D FullScr IO-Red. Multi"
+msgstr "Nome R/T TelaCheia IO-Red.Multi"
+
+# ../config.c:469
+#: src/config.c:488
+msgid "Delete which protocol? "
+msgstr "Remover qual protocolo? "
+
+# ../config.c:530
+#: src/config.c:549
+msgid " A -    Serial Device      :"
+msgstr " A - Dispositivo Serial            :"
+
+# ../config.c:531
+#: src/config.c:550
+msgid " B - Lockfile Location     :"
+msgstr " B - Localização do Arquivo de Travamento :"
+
+# ../config.c:532
+#: src/config.c:551
+msgid " C -   Callin Program      :"
+msgstr " C - Programa de Entrada           :"
+
+# ../config.c:533
+#: src/config.c:552
+msgid " D -  Callout Program      :"
+msgstr " D - Programa de Saída             :"
+
+# ../config.c:534
+#: src/config.c:553
+msgid " E -    Bps/Par/Bits       :"
+msgstr " E - Bps/Paridade/Bits             :"
+
+# ../config.c:535
+#: src/config.c:554
+msgid " F - Hardware Flow Control :"
+msgstr " F - Controle de Fluxo por Hardware:"
+
+# ../config.c:536
+#: src/config.c:555
+msgid " G - Software Flow Control :"
+msgstr " G - Controle de Fluxo por Software:"
+
+# ../config.c:602
+#: src/config.c:624
+msgid "DTE speed "
+msgstr "Veloc.DTE  "
+
+# ../config.c:604
+#: src/config.c:626
+msgid "line speed"
+msgstr "Veloc.linha"
+
+# ../config.c:612
+#: src/config.c:634
+msgid " A - Init string ........."
+msgstr " A - String de Inicialização ......"
+
+# ../config.c:613
+#: src/config.c:635
+msgid " B - Reset string ........"
+msgstr " B - String para Inicialização ............"
+
+# ../config.c:614
+#: src/config.c:636
+msgid " C - Dialing prefix #1...."
+msgstr " C - Prefixo de Discagem #1 ......."
+
+# ../config.c:615
+#: src/config.c:637
+msgid " D - Dialing suffix #1...."
+msgstr " D - Sufixo de Discagem #1 ........"
+
+# ../config.c:616
+#: src/config.c:638
+msgid " E - Dialing prefix #2...."
+msgstr " E - Prefixo de Discagem #2 ......."
+
+# ../config.c:617
+#: src/config.c:639
+msgid " F - Dialing suffix #2...."
+msgstr " F - Sufixo de Discagem #2 ........"
+
+# ../config.c:618
+#: src/config.c:640
+msgid " G - Dialing prefix #3...."
+msgstr " G - Prefixo de Discagem #3 ......."
+
+# ../config.c:619
+#: src/config.c:641
+msgid " H - Dialing suffix #3...."
+msgstr " H - Sufixo de Discagem #3 ........"
+
+# ../config.c:620
+#: src/config.c:642
+msgid " I - Connect string ......"
+msgstr " I - String de Conexão ............"
+
+# ../config.c:621
+#: src/config.c:643
+msgid " J - No connect strings .."
+msgstr " J - Strings de NÃO Conexão ......."
+
+# ../config.c:622
+#: src/config.c:644
+msgid " K - Hang-up string ......"
+msgstr " K - String de Desconexão ........."
+
+# ../config.c:623
+#: src/config.c:645
+msgid " L - Dial cancel string .."
+msgstr " L - String cancelamento discagem .."
+
+# ../config.c:624
+#: src/config.c:646
+msgid " M - Dial time ..........."
+msgstr " M - Tempo de discagem ......."
+
+# ../config.c:625
+#: src/config.c:647
+msgid " N - Delay before redial ."
+msgstr " N - Pausa antes de rediscagem"
+
+# ../config.c:626
+#: src/config.c:648
+msgid " O - Number of tries ....."
+msgstr " O - Número de tentativas ...."
+
+# ../config.c:627
+#: src/config.c:649
+msgid " P - DTR drop time (0=no)."
+msgstr " P - Tempo de drop DTR (0=não)"
+
+# ../config.c:628
+#: src/config.c:650
+msgid " Q - Auto bps detect ....."
+msgstr " Q - Auto-detecção de bps .........."
+
+# ../config.c:629
+#: src/config.c:651
+msgid " R - Modem has DCD line .."
+msgstr " R - Modem tem linha DCD (Portadora)"
+
+# ../config.c:630
+#: src/config.c:652
+msgid " S - Status line shows ..."
+msgstr " S - Linha de estado mostra:"
+
+# ../config.c:631
+#: src/config.c:653
+msgid " T - Multi-line untag ...."
+msgstr "T - Desmarcar Multi-linhas ..."
+
+# ../config.c:637
+#: src/config.c:659
+msgid "Modem and dialing parameter setup"
+msgstr "Configuração de parâmetros para Modem e Discagem"
+
+# ../config.c:670
+#: src/config.c:692
+msgid "      (Return or Esc to exit)"
+msgstr "     (Enter ou Esc para sair)"
+
+# ../config.c:792
+#: src/config.c:814
+msgid " A - Command key is         :"
+msgstr " A - Tecla de comando é             :"
+
+# ../config.c:793
+#: src/config.c:815
+msgid " B - Backspace key sends    :"
+msgstr " B - Tecla backspace envia          :"
+
+# ../config.c:794
+#: src/config.c:816
+msgid " C - Status line is         :"
+msgstr " C - Linha de estado está           :"
+
+# ../config.c:795
+#: src/config.c:817
+msgid " D - Alarm sound            :"
+msgstr " D - Som de alarme                  :"
+
+# ../config.c:796
+#: src/config.c:818
+msgid " E - Foreground Color (menu):"
+msgstr " E - Cor de fundo (menu)            :"
+
+# ../config.c:797
+#: src/config.c:819
+msgid " F - Background Color (menu):"
+msgstr " F - Cor de fundo (menu)            :"
+
+# ../config.c:798
+#: src/config.c:820
+msgid " G - Foreground Color (term):"
+msgstr " G - Cor do caractere (terminal)    :"
+
+# ../config.c:799
+#: src/config.c:821
+msgid " H - Background Color (term):"
+msgstr " H - Cor de fundo (terminal)        :"
+
+# ../config.c:800
+#: src/config.c:822
+msgid " I - Foreground Color (stat):"
+msgstr " I - Cor do caractere (estatísticas):"
+
+# ../config.c:801
+#: src/config.c:823
+msgid " J - Background Color (stat):"
+msgstr " J - Cor de fundo (estatísticas)    :"
+
+# ../config.c:802
+#: src/config.c:824
+msgid " K - History Buffer Size    :"
+msgstr " K - Tamanho do buffer histórico    :"
+
+# ../config.c:806 ../config.c:1507
+#. fmg - ok, so I was lazy..
+#: src/config.c:825 src/config.c:1538
+msgid "Change which setting?  (Esc to exit)"
+msgstr "Escolha opção a ser alterada: (Esc para sair)"
+
+# ../config.c:803
+#: src/config.c:827
+msgid " L - Macros file            :"
+msgstr " L - Arquivo de macros              :"
+
+# ../config.c:804
+#: src/config.c:828
+msgid " N - Macros enabled         :"
+msgstr " N - Macros habilitados             :"
+
+# ../config.c:805
+#: src/config.c:829
+msgid " O - Character conversion   :"
+msgstr " O - Conversão de caracteres        :"
+
+# ../config.c:817 ../config.c:1318
+#: src/config.c:839 src/config.c:1340
+msgid "Screen and keyboard"
+msgstr "Tela e teclado"
+
+# ../config.c:837
+#: src/config.c:859
+msgid " M - Edit Macros\n"
+msgstr " M - Editar Macros\n"
+
+# ../config.c:859
+#: src/config.c:881
+msgid "You can't change colors in black and white mode"
+msgstr "Você não pode mudar as cores no modo preto e branco"
+
+# ../config.c:872
+#: src/config.c:894
+msgid "Menu foreground == background color, change!"
+msgstr "A cor de fundo do menu esta igual a cor do caractere, mude!"
+
+# ../config.c:882
+#: src/config.c:904
+msgid "Terminal foreground == background color, change!"
+msgstr "A cor de fundo do terminal esta igual a cor do caractere, mude!"
+
+# ../config.c:894
+#: src/config.c:916
+msgid "History Buffer Size"
+msgstr "Tamanho do buffer de histórico"
+
+# ../config.c:895
+#: src/config.c:917
+msgid ""
+"\n"
+"  You have changed the history buffer size.\n"
+"  You will need to save the configuration file and\n"
+"  restart minicom for the change to take effect.\n"
+"\n"
+"  Hit a key to Continue... "
+msgstr ""
+"\n"
+"  Você alterou o tamanho do buffer de histórico.\n"
+"  Será necessário salvar a configuração e\n"
+"  reinicializar o minicom para as mudanças surtirem\n"
+"  efeito.\n"
+"  Pressione qualquer tecla para continuar... "
+
+# ../config.c:912
+#: src/config.c:934
+msgid "Program new command key"
+msgstr "Nova tecla de comandos"
+
+# ../config.c:913
+#: src/config.c:935
+msgid ""
+"\n"
+" Press the new command key. If you want to use\n"
+msgstr ""
+"\n"
+" Pressione a nova tecla de comandos. Se deseja usar\n"
+
+# ../config.c:914
+#: src/config.c:936
+msgid ""
+" the META or ALT key enter:\n"
+"\n"
+msgstr ""
+" a tecla META ou ALT pressione:\n"
+"\n"
+
+# ../config.c:915
+#: src/config.c:937
+msgid "  o SPACE if your meta key sets the 8th bit high\n"
+msgstr "  o ESPAÇO se sua tecla meta liga o oitavo bit\n"
+
+# ../config.c:916
+#: src/config.c:938
+msgid "  o ESC   if your meta key sends the ESCAPE prefix (standard)\n"
+msgstr "  o ESC   se sua tecla meta envia um prefixo de ESCAPE (padrão)\n"
+
+# ../config.c:917
+#: src/config.c:939
+msgid ""
+"\n"
+"\n"
+" Press new command key: "
+msgstr ""
+"\n"
+"\n"
+" Pressione nova tecla de comando: "
+
+# ../config.c:922
+#: src/config.c:944
+msgid "Meta-8th bit "
+msgstr "Meta-8th bit "
+
+# ../config.c:924
+#: src/config.c:946
+msgid "Escape (Meta)"
+msgstr "Escape (Meta)"
+
+# ../config.c:957 ../config.c:1181
+#: src/config.c:979 src/config.c:1203
+msgid "disabled"
+msgstr "Desabilitada"
+
+# ../config.c:960 ../config.c:1184 ../rwconf.c:141
+#: src/config.c:982 src/config.c:1206 src/rwconf.c:150
+msgid "enabled"
+msgstr "Habilitada  "
+
+# ../config.c:1067
+#: src/config.c:1089
+msgid "This system does not support history"
+msgstr "Este sistema não suporta histórico"
+
+# ../config.c:1079
+#. Permission denied, hacker!
+#: src/config.c:1101
+msgid "ERROR: you do not have permission to create a file there!"
+msgstr "ERRO: você não tem permissão para criar um arquivo neste lugar!"
+
+# ../config.c:1085
+#. File does exist, but cannot be opened.
+#: src/config.c:1107
+#, c-format
+msgid "ERROR: cannot open macro file %s"
+msgstr "ERRO: não foi possível abrir o arquivo de macros %s"
+
+# ../config.c:1091
+#. Read macros from the file.
+#: src/config.c:1113
+msgid "Reading macros"
+msgstr "Lendo macros"
+
+# ../config.c:1127
+#: src/config.c:1149
+msgid " A - Terminal emulation  :"
+msgstr " A - Emulação de Terminal:"
+
+# ../config.c:1128
+#: src/config.c:1150
+msgid " B - Backspace key sends :"
+msgstr " B - tecla Backspace envia     :"
+
+# ../config.c:1129
+#: src/config.c:1151
+msgid " C -      Status line is :"
+msgstr " C - Linha de estado está:"
+
+# ../config.c:1130
+#: src/config.c:1152
+msgid " D -  Newline delay (ms) :"
+msgstr " D - Atraso para nova linha (ms):"
+
+# ../config.c:1134
+#: src/config.c:1156
+msgid "Terminal settings"
+msgstr "Configuração do Terminal"
+
+# ../config.c:1225 ../config.c:1234
+#: src/config.c:1247 src/config.c:1256
+#, c-format
+msgid "Cannot write to %s"
+msgstr "Não foi possível escrever em %s"
+
+# ../config.c:1230 ../config.c:1239
+#: src/config.c:1252 src/config.c:1261
+msgid "Configuration saved"
+msgstr "Configuração salva"
+
+# ../config.c:1259
+#. fmg - they might want to know...
+#: src/config.c:1281
+msgid "ERROR: Macros have changed but no filename is set!"
+msgstr ""
+"Erro: macros foram alterados mas nenhum nome de arquivo está configurado"
+
+# ../config.c:1263
+#: src/config.c:1285
+#, c-format
+msgid "Cannot write macros file %s"
+msgstr "Não foi possível gravar o arquivo de macros %s"
+
+# ../config.c:1269
+#: src/config.c:1291
+msgid "Macros saved"
+msgstr "Macros salvos"
+
+# ../config.c:1287
+#: src/config.c:1309
+msgid "You are not allowed to create a configuration"
+msgstr "Você não tem permissão para criar uma configuração"
+
+# ../config.c:1292
+#: src/config.c:1314
+msgid "Give name to save this configuration?"
+msgstr "Nome do arquivo para salvar configuração: "
+
+# ../config.c:1314
+#: src/config.c:1336
+msgid "Filenames and paths"
+msgstr "Nomes de arquivos e rotas"
+
+# ../config.c:1315
+#: src/config.c:1337
+msgid "File transfer protocols"
+msgstr "Protocolos de transferência de arquivos"
+
+# ../config.c:1316
+#: src/config.c:1338
+msgid "Serial port setup"
+msgstr "Configuração da porta serial"
+
+# ../config.c:1317
+#: src/config.c:1339
+msgid "Modem and dialing"
+msgstr "Modem e discagem"
+
+# ../config.c:1320
+#: src/config.c:1342
+msgid "Save setup as.."
+msgstr "Salvar configuração como.."
+
+# ../config.c:1321
+#: src/config.c:1343
+msgid "Exit"
+msgstr "Sair"
+
+# ../config.c:1322
+#: src/config.c:1344
+msgid "Exit from Minicom"
+msgstr "Sair do Minicom"
+
+# ../config.c:1335
+#: src/config.c:1357
+#, c-format
+msgid "Save setup as %s"
+msgstr "Salvar configuração como %s"
+
+# ../config.c:1339
+#: src/config.c:1361
+msgid "configuration"
+msgstr "Configuração"
+
+# ../config.c:1347
+#: src/config.c:1369
+msgid "BLACK"
+msgstr "PRETO   "
+
+# ../config.c:1347
+#: src/config.c:1369
+msgid "RED"
+msgstr "VERMELHO"
+
+# ../config.c:1347
+#: src/config.c:1369
+msgid "GREEN"
+msgstr "VERDE   "
+
+# ../config.c:1347
+#: src/config.c:1369
+msgid "YELLOW"
+msgstr "AMARELO "
+
+# ../config.c:1348
+#: src/config.c:1370
+msgid "BLUE"
+msgstr "AZUL    "
+
+# ../config.c:1348
+#: src/config.c:1370
+msgid "MAGENTA"
+msgstr "MAGENTA "
+
+# ../config.c:1348
+#: src/config.c:1370
+msgid "CYAN"
+msgstr "CIANO   "
+
+# ../config.c:1348
+#: src/config.c:1370
+msgid "WHITE"
+msgstr "BRANCO  "
+
+# ../config.c:1369
+#: src/config.c:1392
+msgid "Comm Parameters"
+msgstr "Parâmetros de Comunicação"
+
+# ../config.c:1374
+#: src/config.c:1397
+msgid ""
+"   Speed          Parity          Data\n"
+"\n"
+msgstr ""
+"   Velocidade     Paridade        Dados\n"
+"\n"
+
+# ../config.c:1375
+#: src/config.c:1398
+msgid " A: 300           L: None         S: 5\n"
+msgstr " A: 300           L: Nenhuma      S: 5\n"
+
+# ../config.c:1376
+#: src/config.c:1399
+msgid " B: 1200          M: Even         T: 6\n"
+msgstr " B: 1200          M: Par          T: 6\n"
+
+# ../config.c:1377
+#: src/config.c:1400
+msgid " C: 2400          N: Odd          U: 7\n"
+msgstr " C: 2400          N: Ímpar        U: 7\n"
+
+# ../config.c:1378
+#: src/config.c:1401
+msgid " D: 4800          O: Mark         V: 8\n"
+msgstr " D: 4800          O: Marca        V: 8\n"
+
+# ../config.c:1379
+#: src/config.c:1402
+msgid " E: 9600          P: Space\n"
+msgstr " E: 9600          P: Espaço\n"
+
+# ../config.c:1376
+#: src/config.c:1404
+#, fuzzy
+msgid " F: 19200                      Stopbits\n"
+msgstr " B: 1200          M: Par          T: 6\n"
+
+# ../config.c:1375
+#: src/config.c:1408
+#, fuzzy
+msgid " G: 38400                         W: 1\n"
+msgstr " A: 300           L: Nenhuma      S: 5\n"
+
+# ../dial.c:1405
+#: src/config.c:1410
+#, fuzzy
+msgid "                                    W: 1\n"
+msgstr "     Nome            Número            Última em    Vezes Script\n"
+
+# ../config.c:1375
+#: src/config.c:1412
+#, fuzzy
+msgid " H: 57600                         X: 2\n"
+msgstr " A: 300           L: Nenhuma      S: 5\n"
+
+# ../config.c:1393
+#: src/config.c:1416
+msgid " I: 115200        Q: 8-N-1\n"
+msgstr " I: 115200        Q: 8-N-1\n"
+
+# ../config.c:1395
+#: src/config.c:1418
+msgid "                  Q: 8-N-1\n"
+msgstr "                  Q: 8-N-1\n"
+
+# ../config.c:1397
+#: src/config.c:1420
+msgid " J: 230400        R: 7-E-1\n"
+msgstr " J: 230400        R: 7-E-1\n"
+
+# ../config.c:1399
+#: src/config.c:1422
+msgid "                  R: 7-E-1\n"
+msgstr "                  R: 7-E-1\n"
+
+# ../config.c:1401
+#: src/config.c:1424
+msgid " K: Current\n"
+msgstr " K: Atual\n"
+
+# ../config.c:1404
+#: src/config.c:1427
+msgid ""
+"\n"
+" Choice, or <Enter> to exit? "
+msgstr ""
+"\n"
+" Escolha a opção, ou <Enter> para sair: "
+
+# ../config.c:1415
+#: src/config.c:1438
+#, fuzzy, c-format
+msgid "Current: %5s %s%s%s  "
+msgstr "Atual: %5s %s%s1 "
+
+# ../config.c:1510
+#: src/config.c:1541
+msgid "F1 to F10 Macros"
+msgstr "Macros de F1 a F10"
+
+# ../config.c:1529
+#: src/config.c:1560
+msgid " (LEGEND: ^M = C-M, ^L = C-L, ^G = C-G, ^R = C-R, ^~ = pause 1 second,"
+msgstr " (LEGENDA:^M = C-M, ^L = C-L, ^G = C-G, ^R = C-R, ^~ = pausa de 1 seg,"
+
+# ../config.c:1531
+#: src/config.c:1562
+msgid "  \\u = username, \\p = password, \\\\ = \\)"
+msgstr "  \\u = usuário,  \\p = senha, \\\\ = \\)"
+
+# ../config.c:1543
+#: src/config.c:1574
+msgid "CHANGED"
+msgstr "ALTERADO"
+
+# ../config.c:1631
+#: src/config.c:1662
+msgid "Character conversion"
+msgstr "Conversão de Caracteres"
+
+# ../config.c:1636
+#: src/config.c:1667
+msgid " char    in out    char    in out    char    in out    char    in out\n"
+msgstr ""
+" caract. En. Saída caract. En. Saída caract. En. Saída caract. En. Saída\n"
+
+# ../config.c:1657
+#: src/config.c:1688
+msgid ""
+"\n"
+" A - load table\tB - save table"
+msgstr ""
+"\n"
+" A - carregar tabela\tB - salvar tabela"
+
+# ../config.c:1659
+#: src/config.c:1690
+#, c-format
+msgid "\tfile:%s"
+msgstr "\tarquivo:%s"
+
+# ../config.c:1660
+#: src/config.c:1691
+msgid ""
+"\n"
+" C - edit char\tD - next screen\tE - prev screen\n"
+msgstr ""
+"\n"
+" C - edita caractere\tD - próx. tela\tE - tela anterior\n"
+
+# ../config.c:1661
+#: src/config.c:1692
+#, c-format
+msgid " F - convert capture: %s\n"
+msgstr " F - converta captura: %s\n"
+
+# ../config.c:1676
+#: src/config.c:1707
+#, c-format
+msgid "Load file: %s"
+msgstr "Carregar arquivo: %s"
+
+# ../config.c:1688
+#: src/config.c:1719
+#, c-format
+msgid "Save as file: %s"
+msgstr "Salvar como: %s"
+
+# ../config.c:1699
+#: src/config.c:1730
+msgid "Character to be edited: "
+msgstr "Caractere a ser editado: "
+
+# ../config.c:1706 ../config.c:1718 ../config.c:1730
+#: src/config.c:1737 src/config.c:1749 src/config.c:1761
+msgid "Input character ascii value 0-255"
+msgstr "Caractere de entrada (valor ascii 0-255)"
+
+# ../config.c:1712
+#: src/config.c:1743
+#, c-format
+msgid "Change input to: %s"
+msgstr "Mudar entrada para: %s"
+
+# ../config.c:1724
+#: src/config.c:1755
+#, c-format
+msgid "Change output to: %s"
+msgstr "Mudar saída para: %s"
+
+# ../config.c:1762
+#: src/config.c:1793
+#, c-format
+msgid "Cannot open conversion table %s"
+msgstr "Não foi possível abrir a tabela de conversão %s"
+
+# ../config.c:1776
+#: src/config.c:1807
+#, c-format
+msgid "Cannot write conversion table %s"
+msgstr "Não foi possível gravar a tabela de conversão %s"
+
+# ../dial.c:197
+#: src/dial.c:190
+msgid "Initializing Modem"
+msgstr "Inicializando Modem"
+
+# ../dial.c:212
+#: src/dial.c:205
+msgid "Resetting Modem"
+msgstr "Reinicializando Modem"
+
+# ../dial.c:227
+#: src/dial.c:220
+msgid "Hanging up"
+msgstr "Desconectando"
+
+# ../dial.c:231
+#: src/dial.c:224
+#, c-format
+msgid "Hangup (%ld:%02ld:%02ld)"
+msgstr "Desconexão (%ld:%02ld:%02ld)"
+
+# ../dial.c:263
+#: src/dial.c:257
+msgid "Sending BREAK"
+msgstr "Enviando BREAK"
+
+# ../dial.c:329
+#: src/dial.c:323
+#, c-format
+msgid "    No connection: %s.      \n"
+msgstr "      Sem conexão: %s.      \n"
+
+# ../dial.c:331
+#: src/dial.c:325
+msgid "   Press any key to continue..    "
+msgstr " Pressione qualquer tecla para continuar.."
+
+# ../dial.c:336 ../dial.c:347
+#: src/dial.c:330 src/dial.c:341
+#, c-format
+msgid "     Retry in %2d seconds             "
+msgstr "      Esperar %2d segundos para tentar novamente"
+
+# ../dial.c:373
+#: src/dial.c:367
+msgid "Max retries"
+msgstr "Máximo de tentativas"
+
+# ../dial.c:383
+#: src/dial.c:377
+msgid "You are already online! Hang up first."
+msgstr "Você já está conectado! Desconecte antes."
+
+# ../dial.c:388
+#: src/dial.c:382
+msgid "Autodial"
+msgstr "Auto-discagem"
+
+# ../dial.c:392
+#: src/dial.c:386
+msgid "Dialing"
+msgstr "Discando"
+
+# ../dial.c:393
+#: src/dial.c:387
+#, c-format
+msgid "      At : %s\n"
+msgstr " Telefone : %s\n"
+
+# ../dial.c:395
+#. jl 26.01.98
+#: src/dial.c:389
+#, c-format
+msgid " Last on : %s at %s\n"
+msgstr " Última em : %s às %s\n"
+
+# ../dial.c:419
+#: src/dial.c:413
+#, c-format
+msgid " Dialing : %s"
+msgstr " Discando: %s"
+
+# ../dial.c:421
+#: src/dial.c:415
+#, c-format
+msgid ""
+"\n"
+"      At : %s"
+msgstr ""
+"\n"
+"      às : %s"
+
+# ../dial.c:424
+#: src/dial.c:418
+#, c-format
+msgid ""
+"\n"
+" Last on : %s at %s"
+msgstr ""
+"\n"
+" Última em : %s às %s"
+
+# ../dial.c:438
+#: src/dial.c:432
+#, c-format
+msgid "    Time : %-3d"
+msgstr "    Tempo: %-3d"
+
+# ../dial.c:439
+#: src/dial.c:433
+#, c-format
+msgid "     Attempt #%d"
+msgstr "   Tentativa #%d"
+
+# ../dial.c:440
+#: src/dial.c:434
+msgid ""
+"\n"
+"\n"
+"\n"
+" Escape to cancel, space to retry."
+msgstr ""
+"\n"
+"\n"
+"\n"
+" Esc para cancelar, space para tentar novamente."
+
+# ../dial.c:480
+#: src/dial.c:474
+msgid "Cancelled"
+msgstr "Cancelado"
+
+# ../dial.c:535
+#: src/dial.c:531
+msgid "Connected. Press any key to continue"
+msgstr "Conectado. Pressione qq tecla para continuar"
+
+# ../dial.c:612
+#: src/dial.c:608
+msgid "Timeout"
+msgstr "Tempo Esgotado"
+
+# ../dial.c:765
+#: src/dial.c:767
+msgid "Manually entered number"
+msgstr "Número informado manualmente"
+
+# ../dial.c:773
+#: src/dial.c:775
+msgid "Cannot open ~/.dialdir: permission denied"
+msgstr "Não foi possível abrir ~/.dialdir: permissão negada"
+
+# ../dial.c:823
+#: src/dial.c:825
+msgid "Phonelist garbled (unknown version?)"
+msgstr "Lista telefônica inválida (versão desconhecida?)"
+
+# ../dial.c:830
+#: src/dial.c:832
+msgid "Unknown dialing directory version"
+msgstr "Versão desconhecida de diretório de discagem"
+
+# ../dial.c:837
+#: src/dial.c:839
+msgid "Phonelist garbled (?)"
+msgstr "Lista telefônica inválida (?)"
+
+# ../dial.c:860
+#: src/dial.c:862
+msgid "Out of memory while reading dialing directory"
+msgstr "Sem memória durante leitura do diretório de discagem"
+
+# ../dial.c:899
+#: src/dial.c:901
+#, c-format
+msgid "Old dialdir copied as %s.%hd"
+msgstr "dialdir anterior copiado como %s.%hd"
+
+# ../dial.c:932
+#: src/dial.c:934
+msgid "Can't write to ~/.dialdir"
+msgstr "Não foi possível escrever em ~/.dialdir"
+
+# ../dial.c:954
+#: src/dial.c:956
+msgid "Error writing ~/.dialdir!"
+msgstr "Erro gravando ~/.dialdir!"
+
+# ../dial.c:992
+#: src/dial.c:994
+msgid " A -  Name                :"
+msgstr " A - Nome                         :"
+
+# ../dial.c:993
+#: src/dial.c:995
+msgid " B -  Number              :"
+msgstr " B - Número                       :"
+
+# ../dial.c:994
+#: src/dial.c:996
+msgid " C -  Dial string #       :"
+msgstr " C - Número da string de discagem :"
+
+# ../dial.c:995
+#: src/dial.c:997
+msgid " D -  Local echo          :"
+msgstr " D - Eco local                    :"
+
+# ../dial.c:996
+#: src/dial.c:998
+msgid " E -  Script              :"
+msgstr " E - Script                       :"
+
+# ../dial.c:997
+#: src/dial.c:999
+msgid " F -  Username            :"
+msgstr " F - Nome do usuário              :"
+
+# ../dial.c:998
+#: src/dial.c:1000
+msgid " G -  Password            :"
+msgstr " G - Senha                        :"
+
+# ../dial.c:999
+#: src/dial.c:1001
+msgid " H -  Terminal Emulation  :"
+msgstr " H - Emulação de Terminal         :"
+
+# ../dial.c:1000
+#: src/dial.c:1002
+msgid " I -  Backspace key sends :"
+msgstr " I - Tecla backspace envia        :"
+
+# ../dial.c:1001
+#: src/dial.c:1003
+msgid " J -  Linewrap            :"
+msgstr " J - Quebra de linha              :"
+
+# ../dial.c:1002
+#: src/dial.c:1004
+msgid " K -  Line Settings       :"
+msgstr " K - Configuração da linha        :"
+
+# ../dial.c:1003
+#: src/dial.c:1005
+msgid " L -  Conversion table    :"
+msgstr " L - Tabela de conversão          :"
+
+# ../dial.c:1016
+#: src/dial.c:1018
+msgid "Delete"
+msgstr "Apagar"
+
+# ../dial.c:1016 ../dial.c:1086 ../dial.c:1093
+#: src/dial.c:1018 src/dial.c:1088 src/dial.c:1095
+msgid "Backspace"
+msgstr "Retrocesso"
+
+# ../dial.c:1018
+#: src/dial.c:1020
+msgid "On"
+msgstr "Ligado   "
+
+# ../dial.c:1018 ../dial.c:1088 ../dial.c:1098
+#: src/dial.c:1020 src/dial.c:1090 src/dial.c:1100
+msgid "Off"
+msgstr "Desligado"
+
+# ../dial.c:1022
+#: src/dial.c:1024
+#, c-format
+msgid "      Last dialed         : %s %s\n"
+msgstr "      Última discagem     : %s %s\n"
+
+# ../dial.c:1023
+#: src/dial.c:1025
+#, c-format
+msgid "      Times on            : %d"
+msgstr "      Número de discagens : %d"
+
+# ../dial.c:1086 ../dial.c:1093
+#: src/dial.c:1088 src/dial.c:1095
+msgid "Delete   "
+msgstr "Apagar   "
+
+# ../dial.c:1088 ../dial.c:1098
+#: src/dial.c:1090 src/dial.c:1100
+msgid "On "
+msgstr "Ligado   "
+
+# ../dial.c:1117
+#: src/dial.c:1120
+msgid "  Dial    Find    Add     Edit   Remove   moVe   Manual "
+msgstr " Discag    Procurar  Incluir   Editar    Remover   Manual   "
+
+# ../dial.c:1261 ../file.c:68 ../minicom.c:52 ../minicom.c:55
+#. Little menu.
+#: src/dial.c:1264 src/file.c:66 src/minicom.c:60 src/minicom.c:63
+msgid "   Yes  "
+msgstr "   Sim  "
+
+# ../dial.c:1261 ../file.c:68 ../minicom.c:52 ../minicom.c:55
+#: src/dial.c:1264 src/file.c:66 src/minicom.c:60 src/minicom.c:63
+msgid "   No   "
+msgstr "   Não  "
+
+# ../dial.c:1354
+#: src/dial.c:1359
+#, c-format
+msgid "Entry \"%s\" not found. Enter dialdir?"
+msgstr "Entrada \"%s\" não encontrada. Entrar no diretório de discagem?"
+
+# ../dial.c:1383 ../file.c:373
+#: src/dial.c:1388 src/file.c:391
+msgid "( Escape to exit, Space to tag )"
+msgstr "( Esc para sair, Espaço para marcar )"
+
+# ../dial.c:1384
+#: src/dial.c:1389
+msgid " Move entry up/down, Escape to exit"
+msgstr "Move entrada para cima/baixo, ESC para sair"
+
+# ../dial.c:1403
+#: src/dial.c:1408
+msgid "Dialing Directory"
+msgstr "Diretório de Discagem"
+
+# ../dial.c:1405
+#: src/dial.c:1410
+msgid "     Name            Number            Last on      Times Script\n"
+msgstr "     Nome            Número            Última em    Vezes Script\n"
+
+# ../dial.c:1578
+#: src/dial.c:1583
+msgid "Find an entry"
+msgstr "Procurar entrada"
+
+# ../dial.c:1636
+#. Delete an entry from the list
+#: src/dial.c:1641
+msgid "Remove entry?"
+msgstr "Remove entrada?"
+
+# ../dial.c:1679
+#: src/dial.c:1684
+msgid "Enter number"
+msgstr "Informe número"
+
+# ../file.c:62
+#: src/file.c:60
+msgid " [Goto]  [Prev]  [Show]  [Tag]  [Untag]  [Okay] "
+msgstr "[Ir Para] [Anterior] [Mostrar] [Marcar] [Desmarcar] [Ok] "
+
+# ../file.c:331
+#. select <a file|one or more files|a directory> for <upload|download>
+#: src/file.c:349
+#, c-format
+msgid "Select %s for %s"
+msgstr "Selecione %s para %s"
+
+# ../file.c:332
+#: src/file.c:350
+msgid "one or more files"
+msgstr "um ou mais arquivos"
+
+# ../file.c:332
+#: src/file.c:350
+msgid "a file"
+msgstr "um arquivo"
+
+# ../file.c:333
+#: src/file.c:351
+msgid "a directory"
+msgstr "um diretório"
+
+# ../file.c:334 ../updown.c:243
+#: src/file.c:352 src/updown.c:250
+msgid "download"
+msgstr "recepção"
+
+# ../file.c:334 ../updown.c:243
+#: src/file.c:352 src/updown.c:250
+msgid "upload"
+msgstr "transmissão"
+
+# ../file.c:339
+#: src/file.c:357
+#, c-format
+msgid "Directory: %%-%ds"
+msgstr "Diretório: %%-%ds"
+
+# ../file.c:402
+#: src/file.c:420
+msgid "Can't back up!"
+msgstr "Não posso voltar!"
+
+# ../file.c:504
+#: src/file.c:522
+msgid "Too many files tagged - buffer would overflow"
+msgstr "Muitos arquivos selecionados - buffer será insuficiente"
+
+# ../file.c:618 ../file.c:770
+#: src/file.c:636 src/file.c:788
+msgid "Can select only one!"
+msgstr "Só é possível selecionar um!"
+
+# ../file.c:745
+#: src/file.c:763
+msgid "Goto directory:"
+msgstr "Ir para diretório:"
+
+# ../file.c:759
+#: src/file.c:777
+msgid "Filename pattern:"
+msgstr "Padrão de Arquivos:"
+
+# ../file.c:776
+#: src/file.c:794
+msgid "Tag pattern:"
+msgstr "Padrão para Seleção:"
+
+# ../file.c:780
+#: src/file.c:798
+msgid "No file(s) tagged"
+msgstr "Nenhum arquivo selecionado"
+
+# ../file.c:797
+#: src/file.c:815
+msgid "Untag pattern:"
+msgstr "Padrão para desmarcar seleção:"
+
+# ../file.c:801
+#: src/file.c:819
+msgid "No file(s) untagged"
+msgstr "Nenhum arquivo desmarcado"
+
+# ../file.c:817
+#: src/file.c:835
+msgid "No file selected - enter filename:"
+msgstr "Nenhum arquivo selecionado - informe arquivo:"
+
+# ../file.c:827
+#: src/file.c:845
+#, c-format
+msgid "File: \"%s\" exists!. Over-write?"
+msgstr "O arquivo \"%s\" existe!. Sobreponho?"
+
+# ../file.c:841
+#: src/file.c:859
+msgid "no such file!"
+msgstr "arquivo não encontrado!"
+
+#: src/getsdir.c:166
+#, c-format
+msgid "DBUG: initial readdir() failed (errno == %d)\n"
+msgstr ""
+
+# ../getsdir.c:429
+#: src/getsdir.c:435
+#, c-format
+msgid "%d files:\n"
+msgstr "%d arquivos:\n"
+
+# ../help.c:36
+#: src/help.c:43
+msgid "Minicom Command Summary"
+msgstr "Sumário de Comandos do Minicom"
+
+# ../help.c:39
+#: src/help.c:46
+#, c-format
+msgid "Commands can be called by %s<key>"
+msgstr "Comandos podem ser executados através da tecla %s"
+
+# ../help.c:42
+#: src/help.c:49
+msgid "Main Functions"
+msgstr "Funções Principais"
+
+# ../help.c:44
+#: src/help.c:51
+msgid "Other Functions"
+msgstr "Outras Funções"
+
+# ../help.c:46
+#: src/help.c:53
+#, fuzzy
+msgid " Dialing directory..D  run script (Go)....G | Clear Screen.......C\n"
+msgstr " Diretório Discagem.D  Executar script....G | Limpar Tela........C\n"
+
+# ../help.c:47
+#: src/help.c:54
+#, fuzzy
+msgid " Send files.........S  Receive files......R | cOnfigure Minicom..O\n"
+msgstr " Enviar arquivos....S  Receber arquivos...R | cOnfigurar Minicom.O\n"
+
+# ../help.c:48
+#: src/help.c:55
+#, fuzzy
+msgid " comm Parameters....P  Add linefeed.......A | "
+msgstr " Parâmetros Comunic.P  Adic. salto linha..A |"
+
+# ../help.c:50
+#: src/help.c:57
+msgid "Suspend minicom....J\n"
+msgstr " Suspender minicom..J\n"
+
+# ../help.c:52
+#: src/help.c:59
+msgid "Jump to a shell....J\n"
+msgstr "Ir para um  shell..J\n"
+
+# ../help.c:54
+#: src/help.c:61
+#, fuzzy
+msgid " Capture on/off.....L  Hangup.............H | eXit and reset.....X\n"
+msgstr ""
+" Capturar lig./desl.L  Desconectar........H | Sair reinicializando.....X\n"
+
+# ../help.c:55
+#: src/help.c:62
+#, fuzzy
+msgid " send break.........F  initialize Modem...M | Quit with no reset.Q\n"
+msgstr ""
+" Enviar break.......F  Inicializar Modem..M | Sair sem inicializar...Q\n"
+
+# ../help.c:56
+#: src/help.c:63
+#, fuzzy
+msgid " Terminal settings..T  run Kermit.........K | Cursor key mode....I\n"
+msgstr " Config. Terminal.. T  Executar Kermit....K | Modo com cursor....I\n"
+
+# ../help.c:57
+#: src/help.c:64
+msgid " lineWrap on/off....W"
+msgstr " Quebra de Linha lig/desl.....W"
+
+# ../help.c:59
+#: src/help.c:66
+#, fuzzy
+msgid "  local Echo on/off..E | Help screen........Z"
+msgstr "  Eco local lig/desl.E | Tela de ajuda......Z"
+
+# ../help.c:61
+#: src/help.c:68
+#, fuzzy
+msgid "                       | Help screen........Z"
+msgstr "                       | Tela de Ajuda......Z"
+
+# ../help.c:65
+#: src/help.c:72
+#, fuzzy
+msgid "| scroll Back........B"
+msgstr "| Volta tela.........B"
+
+# ../help.c:69
+#: src/help.c:76
+msgid "Written by Miquel van Smoorenburg 1991-1995"
+msgstr "Escrito por Miquel van Smoorenburg 1991-1995"
+
+# ../help.c:71
+#: src/help.c:78
+#, fuzzy
+msgid "Some additions by Jukka Lahtinen 1997-2000"
+msgstr "Algumas adições por Jukka Lahtinen 1997-1999"
+
+# ../help.c:73
+#: src/help.c:80
+msgid "i18n by Arnaldo Carvalho de Melo 1998"
+msgstr "i18n por Arnaldo Carvalho de Melo 1998"
+
+# ../help.c:75
+#: src/help.c:82
+msgid "Select function or press Enter for none."
+msgstr "Selecione função ou pressione Enter para sair."
+
+# ../ipc.c:57
+#: src/ipc.c:66
+#, c-format
+msgid "sigack: unexpected ACK signal &^%%$!! (pardon my French)%c\n"
+msgstr "sigack: sinal ACK não esperado %c\n"
+
+# ../ipc.c:73
+#: src/ipc.c:82
+msgid "minicom: out of file descriptors\n"
+msgstr "minicom: todos os descritores de arquivo já estão sendo usados\n"
+
+# ../ipc.c:85
+#: src/ipc.c:94
+msgid "minicom: could not fork.\n"
+msgstr "minicom: não foi possível realizar um fork().\n"
+
+# ../ipc.c:115
+#: src/ipc.c:124
+msgid "minicom: could not exec keyserv\n"
+msgstr "minicom: não foi possível executar o keyserv\n"
+
+# ../main.c:133
+#: src/main.c:197
+msgid "Lockfile is stale. Overriding it..\n"
+msgstr "Arquivo de travamento inválido. Desconsiderando-o..\n"
+
+# ../main.c:141
+#: src/main.c:205
+#, c-format
+msgid "Device %s is locked.\n"
+msgstr "O dispositivo %s está sendo usado por outro processo.\n"
+
+# ../main.c:156
+#: src/main.c:220
+msgid "Cannot create lockfile. Sorry.\n"
+msgstr "Não foi possível criar arquivo de travamento. Sinto Muito.\n"
+
+# ../main.c:171
+#: src/main.c:235
+msgid "Could not setup for dial out.\n"
+msgstr "Não foi possível configurar para discagem para máquinas remotas.\n"
+
+# ../main.c:207
+#: src/main.c:288
+#, c-format
+msgid "minicom: cannot open %s: %s\n"
+msgstr "minicom: não foi possível abrir %s: %s\n"
+
+# ../main.c:210
+#: src/main.c:291
+#, c-format
+msgid "minicom: cannot open %s. Sorry.\n"
+msgstr "minicom: não foi possível abrir %s. Sinto muito.\n"
+
+# ../main.c:217
+#: src/main.c:298
+#, c-format
+msgid "Cannot open %s!"
+msgstr "Não foi possível abrir %s!"
+
+# ../main.c:373
+#: src/main.c:461
+msgid "Offline"
+msgstr "Desconectado"
+
+# ../main.c:373
+#: src/main.c:461
+msgid "OFFLINE"
+msgstr "DESCONECTADO"
+
+# ../main.c:375
+#: src/main.c:463
+msgid "Online"
+msgstr "Conectado"
+
+# ../main.c:375
+#: src/main.c:463
+msgid "ONLINE"
+msgstr "CONECTADO"
+
+# ../main.c:401
+#: src/main.c:489
+#, c-format
+msgid "Gone offline (%ld:%02ld:%02ld)"
+msgstr "Desconectado (%ld:%02ld:%02ld)"
+
+# ../main.c:469
+#: src/main.c:558
+#, fuzzy, c-format
+msgid " %7.7sZ for help |           |     | Minicom %-6.6s |       | "
+msgstr " %7.7sZ = Ajuda  ³           ³     ³ Minicom %-6.6s ³       ³ "
+
+# ../main.c:567
+#: src/main.c:656
+msgid "Could not re-initialize window system."
+msgstr "Não foi possível reinicializar o sistema de janelas."
+
+# ../main.c:570
+#: src/main.c:661
+msgid "Resize not supported, screen may be messed up!"
+msgstr "Redimensionamento não suportado, a tela pode estar embaralhada!"
+
+# ../minicom.c:42 ../minicom.c:44
+#: src/minicom.c:50 src/minicom.c:52
+#, c-format
+msgid "Got signal %d"
+msgstr "Recebi sinal %d"
+
+# ../minicom.c:53 ../minicom.c:54
+#: src/minicom.c:61 src/minicom.c:62
+msgid "  Close "
+msgstr " Fechar "
+
+# ../minicom.c:53
+#: src/minicom.c:61
+msgid " Pause  "
+msgstr " Pausa  "
+
+# ../minicom.c:53 ../minicom.c:54
+#: src/minicom.c:61 src/minicom.c:62
+msgid "  Exit  "
+msgstr "  Sair  "
+
+# ../minicom.c:54
+#: src/minicom.c:62
+msgid " Unpause"
+msgstr " Continuar"
+
+# ../minicom.c:69
+#: src/minicom.c:77
+msgid "Hang-up line?"
+msgstr "Desconectar linha?"
+
+# ../minicom.c:80
+#: src/minicom.c:88
+#, c-format
+msgid "Killed by signal %d !\n"
+msgstr "Terminado pelo sinal %d !\n"
+
+# ../minicom.c:100
+#: src/minicom.c:109
+msgid "Suspended. Type \"fg\" to resume.\n"
+msgstr "Suspenso. Digite \"fg\" para voltar.\n"
+
+# ../minicom.c:120
+#: src/minicom.c:130
+msgid "SHELL variable not set"
+msgstr "Variável SHELL não configurada"
+
+# ../minicom.c:124 ../updown.c:251 ../updown.c:384 ../updown.c:589
+#: src/minicom.c:134 src/updown.c:258 src/updown.c:391 src/updown.c:596
+msgid "Out of memory: could not fork()"
+msgstr "Sem memória: não foi possível executar fork()"
+
+# ../minicom.c:134
+#: src/minicom.c:144
+msgid "Shelled out. Type \"exit\" to return.\n"
+msgstr "Interpretador de comandos. Digite \"exit\" para voltar.\n"
+
+# ../minicom.c:256
+#: src/minicom.c:265
+msgid "SEARCH FOR (ESC=Exit)"
+msgstr "PROCURAR POR (ESC=Sair)"
+
+# ../minicom.c:308 ../minicom.c:331
+#: src/minicom.c:317 src/minicom.c:340
+msgid "Search Wrapping Around to Start!"
+msgstr "Procura voltando ao início!"
+
+# ../minicom.c:468
+#.
+#. * fmg 8/20/97
+#. * added /=Srch, \=CaseLess, and N=Next and changed rest of line...
+#. * Hope you like it :-)
+#.
+#: src/minicom.c:477
+msgid ""
+"HISTORY: U=Up D=Down F=PgDn B=PgUp s=Srch S=CaseLess N=Next C=Cite ESC=Exit "
+msgstr ""
+"HIST.: U=Cima D=Baixo F=PgBx B=PbCm s=Proc S=SemCaso N=Próx C=Cita ESC=sair"
+
+#: src/minicom.c:479
+msgid ""
+"  SCROLL MODE    U=up D=down F=page-forward B=page-backward C=Cite ESC=exit "
+msgstr ""
+
+# ../minicom.c:510
+#: src/minicom.c:519
+msgid "History buffer Disabled!"
+msgstr "Buffer de histórico desabilitado!"
+
+# ../minicom.c:512
+#: src/minicom.c:521
+msgid "History buffer empty!"
+msgstr "Buffer de histórico vazio!"
+
+# ../minicom.c:559
+#: src/minicom.c:568
+msgid ""
+"No previous search!\n"
+"  Please 's' or 'S' first!"
+msgstr ""
+"Nenhuma procura anterior!\n"
+"  Use 's' ou 'S' primeiro!"
+
+# ../minicom.c:728 ../minicom.c:764
+#: src/minicom.c:737 src/minicom.c:773
+msgid ""
+"  CITATION: ENTER=select start line ESC=exit                               "
+msgstr ""
+"  CITAÇÃO: ENTER=seleciona linha inicial ESC=sair                          "
+
+# ../minicom.c:743
+#: src/minicom.c:752
+msgid ""
+"  CITATION: ENTER=select end line ESC=exit                                 "
+msgstr ""
+"  CITAÇÃO: ENTER=seleciona linha final ESC=sair                            "
+
+# ../minicom.c:827
+#: src/minicom.c:833
+#, fuzzy, c-format
+msgid "Wrong option in environment MINICOM=\"%s\"\n"
+msgstr "Opção inválida na variável de ambiente MINICOM=%s\n"
+
+# ../minicom.c:829
+#: src/minicom.c:834
+#, fuzzy, c-format
+msgid "Type \"minicom %s\" for help.\n"
+msgstr "Digite \"minicom -h\" para obter ajuda.\n"
+
+#: src/minicom.c:843
+#, c-format
+msgid "Usage: %s [OPTION]... [configuration]\n"
+msgstr ""
+
+#: src/minicom.c:844
+msgid ""
+"A terminal program for Linux and other unix-like systems.\n"
+"\n"
+msgstr ""
+
+# ../minicom.c:843
+#: src/minicom.c:845
+#, fuzzy
+msgid "  -s, --setup            : enter setup mode (only as root)\n"
+msgstr ""
+"  -s             : entrar em modo de configuração (somente como superusuário "
+"(root))\n"
+
+# ../minicom.c:844
+#: src/minicom.c:846
+#, fuzzy
+msgid ""
+"  -o, --noinit           : do not initialize modem & lockfiles at startup\n"
+msgstr ""
+"  -o             : não inicialize modem & arquivos de travamento  durante "
+"inicialização\n"
+
+# ../minicom.c:845
+#: src/minicom.c:847
+#, fuzzy
+msgid "  -m, --metakey          : use meta or alt key for commands\n"
+msgstr "  -m             : use tecla meta ou alt para comandos\n"
+
+# ../minicom.c:845
+#: src/minicom.c:848
+#, fuzzy
+msgid "  -M, --metakey8         : use 8bit meta key for commands\n"
+msgstr "  -m             : use tecla meta ou alt para comandos\n"
+
+# ../minicom.c:846
+#: src/minicom.c:849
+#, fuzzy
+msgid ""
+"  -l, --ansi             : literal; assume screen uses the IBM-PC character "
+"set\n"
+msgstr ""
+"  -l             : literal ; assuma que a tela usa o conjunto de caracteres "
+"IBM-PC\n"
+
+# ../minicom.c:847
+#: src/minicom.c:850
+#, fuzzy
+msgid "  -L, --iso              : Ditto, but assume screen uses ISO8859\n"
+msgstr "  -L             : mesma coisa, mas assuma que a tela usa ISO8859\n"
+
+# ../dial.c:1001
+#: src/minicom.c:851
+#, fuzzy
+msgid "  -w, --wrap             : Linewrap on\n"
+msgstr " J - Quebra de linha              :"
+
+# ../minicom.c:848
+#: src/minicom.c:852
+#, fuzzy
+msgid "  -z, --statline         : try to use terminal's status line\n"
+msgstr "  -z             : tente usar a linha de estado do terminal\n"
+
+# ../minicom.c:849
+#: src/minicom.c:853
+#, fuzzy
+msgid "  -8, --8bit             : 8bit clean mode (for Japanese, etc)\n"
+msgstr "  -8             : modo 8bits (para japonês, etc.)\n"
+
+# ../minicom.c:850
+#: src/minicom.c:854
+#, fuzzy
+msgid "  -c, --color=on/off     : ANSI style color usage on or off\n"
+msgstr "  -c [on | off]  : usar cores ANSI? on=sim, off=não\n"
+
+# ../minicom.c:851
+#: src/minicom.c:855
+#, fuzzy
+msgid ""
+"  -a, --attrib=on/off    : use reverse or highlight attributes on or off\n"
+msgstr ""
+"  -a [on | off]  : usar atributos reverso ou alta intensidade? on=sim, "
+"off=não\n"
+
+# ../minicom.c:852
+#: src/minicom.c:856
+#, fuzzy
+msgid "  -t, --term=TERM        : override TERM environment variable\n"
+msgstr ""
+"  -t term        : utilizar term no lugar da variável de ambiente TERM\n"
+
+# ../minicom.c:853
+#: src/minicom.c:857
+#, fuzzy
+msgid "  -S, --script=SCRIPT    : run SCRIPT at startup\n"
+msgstr "  -S nome_script : execute script durante inicialização\n"
+
+# ../minicom.c:854
+#: src/minicom.c:858
+#, fuzzy
+msgid "  -d, --dial=ENTRY       : dial ENTRY from the dialing directory\n"
+msgstr "  -d entrada     : disque `entrada' do diretório de discagem\n"
+
+# ../minicom.c:855
+#: src/minicom.c:859
+#, fuzzy
+msgid "  -p, --ptty=TTYP        : connect to pseudo terminal\n"
+msgstr "  -p ttyp..      : conectar ao  pseudo terminal\n"
+
+#: src/minicom.c:860
+msgid "  -C, --capturefile=FILE : start capturing to FILE\n"
+msgstr ""
+
+#: src/minicom.c:861
+msgid "  -T, --disabletime      : disable display of online time\n"
+msgstr ""
+
+#: src/minicom.c:862
+msgid "  -v, --version          : output version information and exit\n"
+msgstr ""
+
+# ../minicom.c:857
+#: src/minicom.c:863
+#, fuzzy
+msgid ""
+"  configuration          : configuration file to use\n"
+"\n"
+msgstr ""
+"  configuração   : arquivo de configuração a ser usado\n"
+"\n"
+
+# ../minicom.c:858
+#: src/minicom.c:864
+msgid ""
+"These options can also be specified in the MINICOM environment variable.\n"
+msgstr ""
+"Estas opções também podem ser especificadas na variável de ambiente "
+"MINICOM.\n"
+
+# ../minicom.c:859
+#: src/minicom.c:865
+#, fuzzy, c-format
+msgid "This variable is currently %s"
+msgstr "Esta variável atualmente tem o seguinte valor %s%s.\n"
+
+# ../minicom.c:859
+#: src/minicom.c:865
+msgid "set to "
+msgstr "configure para"
+
+# ../minicom.c:859
+#: src/minicom.c:865
+#, fuzzy
+msgid "unset.\n"
+msgstr "NÃO CONFIGURADA"
+
+#: src/minicom.c:868
+msgid ""
+"The configuration directory for the access file and the configurations\n"
+msgstr ""
+
+# ../minicom.c:840
+#: src/minicom.c:869
+#, fuzzy, c-format
+msgid ""
+"is compiled to %s.\n"
+"\n"
+msgstr " (compilado %s)"
+
+#: src/minicom.c:870
+msgid "Report bugs to <minicom-devel@lists.alioth.debian.org>.\n"
+msgstr ""
+
+#: src/minicom.c:1045
+#, c-format
+msgid "%s version %s"
+msgstr ""
+
+# ../minicom.c:840
+#: src/minicom.c:1047
+#, c-format
+msgid " (compiled %s)"
+msgstr " (compilado %s)"
+
+# ../minicom.c:842
+#: src/minicom.c:1050
+#, fuzzy
+msgid ""
+"Copyright (C) Miquel van Smoorenburg.\n"
+"\n"
+msgstr ""
+"(c) Miquel van Smoorenburg\n"
+"\n"
+"%s\n"
+
+# ../minicom.c:1003
+#: src/minicom.c:1059
+msgid "minicom: -s switch needs root privilige\n"
+msgstr "minicom: opção -s precisa de privilégio de superusuário (root)\n"
+
+# ../minicom.c:1018
+#: src/minicom.c:1077
+msgid "minicom: argument to -p must be a pty\n"
+msgstr "minicom: o argumento para a opção -p deve ser um pty\n"
+
+# ../minicom.c:1085 ../minicom.c:1391
+#: src/minicom.c:1144 src/minicom.c:1442
+msgid "Cannot open capture file"
+msgstr "Não foi possível abrir arquivo de captura"
+
+#: src/minicom.c:1178
+msgid ""
+"minicom: WARNING: please don't run minicom as root when not maintaining\n"
+"                  it (with the -s switch) since all changes to the\n"
+"                  configuration will be GLOBAL !.\n"
+msgstr ""
+
+# ../minicom.c:1126
+#: src/minicom.c:1191
+msgid "You don't exist. Go away.\n"
+msgstr "Você não existe. Vá embora.\n"
+
+# ../minicom.c:1164
+#: src/minicom.c:1229
+#, c-format
+msgid "Sorry %s. You are not allowed to use configuration %s.\n"
+msgstr "Sinto muito %s. Você não tem permissão para usar a configuração %s.\n"
+
+# ../minicom.c:1167
+#: src/minicom.c:1232
+#, c-format
+msgid "Ask your sysadm to add your name to %s\n"
+msgstr "Peça ao seu administrador para adicionar seu nome em %s\n"
+
+# ../minicom.c:1205
+#: src/minicom.c:1270
+msgid "Sorry. Your screen is too small.\n"
+msgstr "Sua tela é muito pequena.\n"
+
+#: src/minicom.c:1338
+msgid "Welcome to minicom"
+msgstr ""
+
+# ../minicom.c:1288
+#: src/minicom.c:1339
+msgid "OPTIONS"
+msgstr "OPÇÕES"
+
+# ../minicom.c:1291
+#: src/minicom.c:1342
+msgid "Compiled on"
+msgstr "Compilado em"
+
+# ../minicom.c:1293
+#: src/minicom.c:1344
+#, c-format
+msgid ""
+"\n"
+"Press %sZ for help on special keys%c\n"
+"\n"
+msgstr ""
+"\n"
+"Pressione %sZ para ajuda sobre teclas especiais%c\n"
+"\n"
+
+# ../minicom.c:1313
+#: src/minicom.c:1364
+msgid "Add linefeed ON"
+msgstr "Adicionar salto de linha LIGADO"
+
+# ../minicom.c:1313
+#: src/minicom.c:1364
+msgid "Add linefeed OFF"
+msgstr "Adicionar salto de linha DESLIGADO"
+
+# ../minicom.c:1321
+#: src/minicom.c:1372
+msgid "Local echo ON"
+msgstr "Eco local LIGADO"
+
+# ../minicom.c:1321
+#: src/minicom.c:1372
+msgid "Local echo OFF"
+msgstr "Eco local DESLIGADO"
+
+# ../minicom.c:1342
+#: src/minicom.c:1393
+msgid "You are online. Really initialize?"
+msgstr "Você está conectado. Quer mesmo inicializar?"
+
+# ../minicom.c:1349
+#. Exit without resetting
+#: src/minicom.c:1400
+msgid "Leave without reset?"
+msgstr "Sair sem reinicializar?"
+
+# ../minicom.c:1353 ../minicom.c:1374
+#: src/minicom.c:1404 src/minicom.c:1425
+msgid "Save macros?"
+msgstr "Salvar macros?"
+
+# ../minicom.c:1365
+#. Exit Minicom
+#: src/minicom.c:1416
+msgid "Leave Minicom?"
+msgstr "Sair do Minicom?"
+
+# ../minicom.c:1387
+#: src/minicom.c:1438
+msgid "Capture to which file? "
+msgstr "Captura para que arquivo? "
+
+# ../minicom.c:1396 ../minicom.c:1404
+#: src/minicom.c:1447 src/minicom.c:1455
+msgid "Capture file"
+msgstr "Capturar arquivo"
+
+# ../minicom.c:1436
+#: src/minicom.c:1487
+msgid "Linewrap ON"
+msgstr "Quebra de linha LIGADA"
+
+# ../minicom.c:1436
+#: src/minicom.c:1487
+msgid "Linewrap OFF"
+msgstr "Quebra de linha DESLIGADA"
+
+# ../minicom.c:1469
+#: src/minicom.c:1520
+msgid "Quit without reset while online."
+msgstr "Saiu sem reinicializar enquanto estava conectado."
+
+# ../rwconf.c:110 ../rwconf.c:144
+#: src/rwconf.c:119 src/rwconf.c:153
+msgid "No"
+msgstr "Não"
+
+# ../rwconf.c:216
+#: src/rwconf.c:229
+msgid "# Machine-generated file - use \"minicom -s\" to change parameters.\n"
+msgstr ""
+"# Arquivo gerado automaticamente - use \"minicom -s\" para alterações.\n"
+
+# ../rwconf.c:218
+#: src/rwconf.c:231
+msgid ""
+"# Machine-generated file - use setup menu in minicom to change parameters.\n"
+msgstr ""
+"#Arquivo gerado automaticamente-Menu de configuração para alterações.\n"
+
+#: src/rwconf.c:278
+#, c-format
+msgid "** Line %d of the %s config file not understood\n"
+msgstr ""
+
+# ../rwconf.c:274
+#: src/rwconf.c:279 src/rwconf.c:300 src/rwconf.c:356
+msgid "global"
+msgstr "global"
+
+# ../rwconf.c:274
+#: src/rwconf.c:279 src/rwconf.c:300 src/rwconf.c:356
+msgid "personal"
+msgstr "pessoal"
+
+# ../rwconf.c:270
+#: src/rwconf.c:296
+#, c-format
+msgid "** Parameter %s is %s, but is marked %s in %s config file\n"
+msgstr "** Parâmetro %s é %s, mas está como %s no arquivo de configuração %s\n"
+
+#: src/rwconf.c:298 src/rwconf.c:299
+msgid "private"
+msgstr ""
+
+#: src/rwconf.c:298 src/rwconf.c:299
+msgid "public"
+msgstr ""
+
+# ../rwconf.c:280
+#: src/rwconf.c:306
+#, c-format
+msgid "== Attempt to change private parameter %s - denied.\n"
+msgstr "== Tentativa de mudar um parâmetro privado %s - negada.\n"
+
+#: src/rwconf.c:355
+#, c-format
+msgid "** Line %d of the %s config file is unparsable.\n"
+msgstr ""
+
+# ../script.c:139
+#: src/script.c:146
+#, c-format
+msgid "script \"%s\": syntax error in line %d %s%s\n"
+msgstr "script: \"%s\": erro de sintaxe na linha %d %s%s\n"
+
+# ../script.c:165
+#: src/script.c:172
+#, c-format
+msgid "script \"%s\": global timeout%s\n"
+msgstr "script \"%s\": tempo global esgotado %s\n"
+
+# ../script.c:261
+#: src/script.c:277
+msgid "(word contains ESC or quote)"
+msgstr "(palavra contém ESC ou aspa)"
+
+# ../script.c:314
+#: src/script.c:330
+#, c-format
+msgid "runscript: couldn't open %s%s\n"
+msgstr "runscript: não foi possível abrir %s%s\n"
+
+# ../script.c:325
+#: src/script.c:341
+#, c-format
+msgid "script %s: out of memory%s\n"
+msgstr "script %s: memória insuficiente%s\n"
+
+# ../script.c:423
+#: src/script.c:439
+#, c-format
+msgid "script \"%s\" line %d: unknown variable \"%s\"%s\n"
+msgstr "script \"%s\" linha %d: variável desconhecida \"%s\"%s\n"
+
+# ../script.c:429
+#: src/script.c:445
+#, c-format
+msgid "script \"%s\": out of memory%s\n"
+msgstr "script \"%s\":memória insuficiente%s\n"
+
+# ../script.c:467
+#: src/script.c:483
+#, c-format
+msgid "script \"%s\": unexpected end of file%s\n"
+msgstr "script \"%s\": fim não esperado do arquivo%s\n"
+
+# ../script.c:474
+#: src/script.c:490
+msgid "(garbage after })"
+msgstr "(lixo depois do })"
+
+# ../script.c:481
+#: src/script.c:497
+msgid "(too many arguments)"
+msgstr "(número excessivo de argumentos)"
+
+# ../script.c:500
+#: src/script.c:516
+#, c-format
+msgid "script \"%s\" line %d: nested expect%s\n"
+msgstr "script \"%s\" linha %d: expects aninhados%s\n"
+
+# ../script.c:509
+#: src/script.c:525
+msgid "(garbage after {)"
+msgstr "(lixo depois do {)"
+
+# ../script.c:528 ../script.c:785 ../script.c:852
+#: src/script.c:544 src/script.c:801 src/script.c:868
+msgid "(argument expected)"
+msgstr "(argumento esperado)"
+
+# ../script.c:530 ../script.c:786
+#: src/script.c:546 src/script.c:802
+msgid "(invalid argument)"
+msgstr "(argumento inválido)"
+
+# ../script.c:625
+#: src/script.c:641
+msgid "(in goto/gosub label)"
+msgstr "(em um rótulo goto/gosub)"
+
+# ../script.c:630
+#: src/script.c:646
+#, c-format
+msgid "script \"%s\" line %d: label \"%s\" not found%s\n"
+msgstr "script \"%s\" linha %d: rótulo \"%s\" não encontrado%s\n"
+
+# ../script.c:653
+#: src/script.c:669
+#, c-format
+msgid "script \"%s\": no return from gosub%s\n"
+msgstr "script \"%s\": sem return para o gosub%s\n"
+
+# ../script.c:699
+#: src/script.c:715
+msgid "(missing var name)"
+msgstr "(faltando nome de variável)"
+
+# ../script.c:715 ../script.c:731
+#: src/script.c:731 src/script.c:747
+msgid "(expected variable)"
+msgstr "(variável esperada)"
+
+# ../script.c:759
+#: src/script.c:775
+msgid "(expected command after if)"
+msgstr "(comando esperado após o if)"
+
+# ../script.c:770
+#: src/script.c:786
+msgid "(unknown operator)"
+msgstr "(operador desconhecido)"
+
+# ../script.c:808
+#: src/script.c:824
+msgid "(unexpected argument)"
+msgstr "(argumento não esperado)"
+
+# ../script.c:835
+#: src/script.c:851
+#, c-format
+msgid "script \"%s\" line %d: break outside of expect%s\n"
+msgstr "script \"%s\" linha %d: break fora de um expect%s\n"
+
+# ../script.c:855
+#: src/script.c:871
+#, c-format
+msgid "script \"%s\" line %d: call inside expect%s\n"
+msgstr "script \"%s\" linha %d: chamada dentro de expect%s\n"
+
+# ../script.c:916
+#: src/script.c:932
+#, c-format
+msgid "script \"%s\" line %d: unknown command \"%s\"%s\n"
+msgstr "script \"%s\" linha %d: comando desconhecido \"%s\"%s\n"
+
+# ../script.c:973
+#: src/script.c:989
+#, c-format
+msgid "Usage: runscript <scriptfile> [logfile [homedir]]%s\n"
+msgstr "Uso: runscript <arq_script> [arq_travamento [dir_usuário]]%s\n"
+
+# ../updown.c:61
+#. This may look safe but you might I8N change the string! so
+#. snprintf it
+#: src/updown.c:68
+#, c-format
+msgid "Cannot chdir to %.30s"
+msgstr "Não foi possível ir para o diretório %.30s"
+
+# ../updown.c:171
+#: src/updown.c:178
+msgid "Upload"
+msgstr "Transmissão"
+
+# ../updown.c:171
+#: src/updown.c:178
+msgid "Download"
+msgstr "Recepção"
+
+# ../updown.c:227
+#: src/updown.c:234
+msgid "Please enter file names"
+msgstr "Informe o nome dos arquivos"
+
+# ../updown.c:242
+#: src/updown.c:249
+#, c-format
+msgid "%.30s %s - Press CTRL-C to quit"
+msgstr "%.30s %s - Pressione CTRL-C para sair"
+
+# ../updown.c:352
+#: src/updown.c:359
+msgid ""
+"\n"
+" READY: press any key to continue..."
+msgstr ""
+"\n"
+" PRONTO: pressione qualquer tecla para continuar..."
+
+# ../updown.c:412
+#: src/updown.c:419
+msgid "Cannot re-create lockfile!"
+msgstr "Não foi possível recriar arquivo de tratamento!"
+
+# ../config.c:1688
+#: src/updown.c:517
+#, fuzzy
+msgid "Same as last"
+msgstr "Salvar como: %s"
+
+# ../updown.c:511
+#: src/updown.c:518
+msgid " A -   Username        :"
+msgstr " A - Nome do usuário   :"
+
+# ../updown.c:512
+#: src/updown.c:519
+msgid " B -   Password        :"
+msgstr " B - Senha             :"
+
+# ../updown.c:513
+#: src/updown.c:520
+msgid " C -   Name of script  :"
+msgstr " C - Nome do script    :"
+
+# ../updown.c:514
+#: src/updown.c:521
+msgid "Change which setting?     (Return to run, ESC to stop)"
+msgstr "Escolha opção: (Enter para executar, ESC para parar)"
+
+# ../updown.c:519
+#: src/updown.c:526
+msgid "Run a script"
+msgstr "Executar uma script"
+
+# ../windiv.c:195
+#: src/windiv.c:202
+msgid "Select File(s) to Upload"
+msgstr "Selecione Arquivo(s) para Transmissão"
+
+# ../minicom.c:120
+#: src/window.c:1856
+#, fuzzy
+msgid "Environment variable TERM not set\n"
+msgstr "Variável SHELL não configurada"
+
+#: src/window.c:1862
+#, c-format
+msgid "No termcap entry for %s\n"
+msgstr ""
+
+#: src/window.c:1865
+msgid "No termcap database present!\n"
+msgstr ""
+
+#: src/window.c:1873
+msgid "No cursor motion capability (cm)\n"
+msgstr ""
+
+#: src/window.c:1882
+msgid "Number of terminal lines unknown\n"
+msgstr ""
+
+#: src/window.c:1886
+msgid "Number of terminal columns unknown\n"
+msgstr ""
+
+# ../minicom.c:861
+#, fuzzy
+#~ msgid "The LIBDIR to find the configuration files and the access file\n"
+#~ msgstr "A variável LIBDIR para encontrar os arquivos de configuração e\n"
+
+# ../minicom.c:862
+#, fuzzy
+#~ msgid ""
+#~ "minicom.users is compiled as %s.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "o arquivo de acesso minicom.users foi compilada como %s.\n"
+#~ "\n"
+
+# ../minicom.c:820
+#~ msgid ""
+#~ "Usage: minicom [-somlz8] [-c on] [-a on] [-t TERM] [-S scriptname] [-d "
+#~ "entry]\n"
+#~ "\t[-p ttyp] [-C capturefile] [configuration]\n"
+#~ msgstr ""
+#~ "Uso: minicom [-somlz8] [-c on] [-a on] [-t TERM] [-S nome_script] [-d "
+#~ "entrada]\n"
+#~ "\t[-p ttyp] [-C arquivo_de_captura] [configuração]\n"
+
+# ../minicom.c:856
+#~ msgid "  -C filename    : start capturing with the file name\n"
+#~ msgstr "  -C arquivo     : comece a capturar com o nome do arquivo\n"
+
+# ../config.c:1381
+#~ msgid " F: 19200\n"
+#~ msgstr " F: 19200\n"
+
+# ../config.c:1385
+#~ msgid " G: 38400\n"
+#~ msgstr " G: 38400\n"
+
+# ../config.c:1389
+#~ msgid " H: 57600\n"
+#~ msgstr " H: 57600\n"
+
+#~ msgid "                  O: Space\n"
+#~ msgstr "                  O: Espaço\n"

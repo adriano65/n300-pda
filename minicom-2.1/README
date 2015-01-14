@@ -1,0 +1,40 @@
+$Id: README,v 1.3 2003/04/12 23:57:13 al-guest Exp $
+
+                                 **************
+                                 *   README   *
+                                 **************
+
+Quick instructions for installation:
+
+1. Change to the minicom-$VERSION directory.
+2. ./configure (see ./configure --help for options)
+3. make
+4. make install
+5. minicom -s (this needs to be done as root)
+   Change what should be changed on your system, and choose
+   'Save setup as dfl' from the configuration menu to save the
+   changed settings as system defaults.
+   Now add every user which should be allowed to use minicom to
+   the group of the corresponding character devices (e.g. /dev/ttyS0).
+   On Debian this group already exists and is called 'dialout'.
+
+Now you should have minicom compiled, installed and ready to use.
+
+For more information, have a look at the other files.
+
+WWW: For information about the newest version, what has changed since the
+previous version, and sometimes possibly the newest beta version (if there
+is one available), look at http://alioth.debian.org/projects/minicom/.
+
+CVS: Current development version of minicom is in the Alioth CVS repository,
+see http://alioth.debian.org/cvs/?group_id=31 for instructions.
+
+If you want to use minicom with network-modem software, have a look at
+sunsite.unc.edu:/pub/Linux/apps/serialcomm/modem/modem-*.tar.gz by
+Merijn de Jonge <mdejonge@wins.uva.nl>.
+
+miquels@cistron.nl
+walker@netsonic.fi
+misiek@pld.org.pl
+martin@godisch.de
+adam@lackorzynski.de
