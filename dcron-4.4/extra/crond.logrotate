@@ -1,0 +1,8 @@
+/var/log/crond.log {
+   sharedscripts
+   copytruncate
+   missingok
+   postrotate
+	   kill -HUP `cat /var/run/cron.pid`
+   endscript
+}

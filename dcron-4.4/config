@@ -1,0 +1,8 @@
+PREFIX = /usr/local
+SBINDIR = /usr/local/sbin
+BINDIR = /usr/local/bin
+MANDIR = /usr/local/share/man
+CRONTAB_GROUP = root
+SCRONTABS = /var/spool/cron/cron.d
+CRONTABS = /var/spool/cron/crontabs
+CRONSTAMPS = /var/spool/cron/cronstamps
