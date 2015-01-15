@@ -1,0 +1,119 @@
+--- dm9000x_bak.c	2007-05-23 19:36:31.000000000 +0800
++++ dm9000x.c	2007-05-23 19:36:42.000000000 +0800
+@@ -124,7 +124,7 @@
+ 	DM9000_DBG("TSRII (0x04): %02x\n", DM9000_ior(4));
+ 	DM9000_DBG("RCR   (0x05): %02x\n", DM9000_ior(5));
+ 	DM9000_DBG("RSR   (0x06): %02x\n", DM9000_ior(6));
+-	DM9000_DBG("ISR   (0xFE): %02x\n", DM9000_ior(0xFE));
++	DM9000_DBG("ISR   (0xFE): %02x\n", DM9000_ior(ISR));
+ 	DM9000_DBG("\n");
+ }
+ #endif				/*  */
+@@ -156,7 +156,7 @@
+ static void
+ set_PHY_mode(void)
+ {
+-	u16 phy_reg4 = 0x41, phy_reg0 = 0x1100;
++	u16 phy_reg4 = 0x01e1, phy_reg0 = 0x1000;
+ 	if (!(media_mode & DM9000_AUTO)) {
+ 		switch (media_mode) {
+ 		case DM9000_10MHD:
+@@ -176,9 +176,13 @@
+ 			phy_reg0 = 0x3100;
+ 			break;
+ 		}
+-		phy_write(4, phy_reg4);	/* Set PHY media mode */
+-		phy_write(0, phy_reg0);	/*  Tmp */
++		//phy_write(4, phy_reg4);	/* Set PHY media mode */
++		//phy_write(0, phy_reg0);	/*  Tmp */
+ 	}
++	
++	phy_write(4, phy_reg4);	/* Set PHY media mode */
++	phy_write(0, phy_reg0);	/*  Tmp */
++	
+ 	DM9000_iow(DM9000_GPCR, 0x01);	/* Let GPIO0 output */
+ 	DM9000_iow(DM9000_GPR, 0x00);	/* Enable PHY */
+ }
+@@ -283,9 +287,18 @@
+ 	/* NIC Type: FASTETHER, HOMERUN, LONGRUN */
+ 	identify_nic();
+ 
++	DM9000_iow(DM9000_GPR, 0x01);
++	udelay(500);
++	
+ 	/* GPIO0 on pre-activate PHY */
+ 	DM9000_iow(DM9000_GPR, 0x00);	/*REG_1F bit0 activate phyxcer */
+-
++	udelay(2000);
++	
++	DM9000_iow(DM9000_GPR, 0x01);
++	udelay(20);
++	DM9000_iow(DM9000_GPR, 0x00);
++	udelay(4000);
++	
+ 	/* Set PHY */
+ 	set_PHY_mode();
+ 
+@@ -421,7 +434,7 @@
+ 	DM9000_DBG("eth_halt\n");
+ 	/* RESET devie */
+ 	phy_write(0, 0x8000);	/* PHY RESET */
+-	//DM9000_iow(DM9000_GPR, 0x01);	/* Power-Down PHY */
++	DM9000_iow(DM9000_GPR, 0x01);	/* Power-Down PHY */
+ 	DM9000_iow(DM9000_IMR, 0x80);	/* Disable all interrupt */
+ 	DM9000_iow(DM9000_RCR, 0x00);	/* Disable RX */
+ }
+@@ -592,53 +605,4 @@
+ 	DM9000_DBG("phy_write(reg:%d, value:%d)\n", reg, value);
+ 	udelay(1000);
+ }
+-
+-void dm9000_init(void)
+-{
+-	int i, oft, lnk;
+-	unsigned char bi_enetaddr[6];
+-
+-	/* RESET devie */
+-	dm9000_reset();
+-
+-	/* GPIO0 on pre-activate PHY */
+-	DM9000_iow(DM9000_GPR, 0x00);	/*REG_1F bit0 activate phyxcer */
+-
+-	/* Set PHY */
+-	set_PHY_mode();
+-
+-	/* Program operating register */
+-	DM9000_iow(DM9000_NCR, 0x0);	/* only intern phy supported by now */
+-	DM9000_iow(DM9000_TCR, 0);	/* TX Polling clear */
+-	DM9000_iow(DM9000_BPTR, 0x3f);	/* Less 3Kb, 200us */
+-	DM9000_iow(DM9000_FCTR, FCTR_HWOT(3) | FCTR_LWOT(8));	/* Flow Control : High/Low Water */
+-	DM9000_iow(DM9000_FCR, 0x0);	/* SH FIXME: This looks strange! Flow Control */
+-	DM9000_iow(DM9000_SMCR, 0);	/* Special Mode */
+-	DM9000_iow(DM9000_NSR, NSR_WAKEST | NSR_TX2END | NSR_TX1END);	/* clear TX status */
+-	DM9000_iow(DM9000_ISR, 0x0f);	/* Clear interrupt status */
+-
+-	/* Set Node address */
+-	bi_enetaddr[0]=0x00;
+-	bi_enetaddr[1]=0x80;
+-	bi_enetaddr[2]=0x00;
+-	bi_enetaddr[3]=0x80;
+-	bi_enetaddr[4]=0x00;
+-	bi_enetaddr[5]=0x80;
+-
+-	for (i = 0, oft = 0x10; i < 6; i++, oft++)
+-		DM9000_iow(oft, bi_enetaddr[i]);
+-	for (i = 0, oft = 0x16; i < 8; i++, oft++)
+-		DM9000_iow(oft, 0xff);
+-
+-	/* read back mac, just to be sure */
+-	for (i = 0, oft = 0x10; i < 6; i++, oft++)
+-		DM9000_DBG("%02x:", DM9000_ior(oft));
+-	DM9000_DBG("\n");
+-
+-	/* Activate DM9000 */
+-	DM9000_iow(DM9000_RCR, RCR_DIS_LONG | RCR_DIS_CRC | RCR_RXEN);	/* RX enable */
+-	DM9000_iow(DM9000_IMR, IMR_PAR);	/* Enable TX/RX interrupt mask */
+-	
+-	phy_write(0, 0x8000);	/* PHY RESET */
+-}
+ #endif				/* CONFIG_DRIVER_DM9000 */

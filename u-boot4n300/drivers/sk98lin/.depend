@@ -1,0 +1,71 @@
+skge.o: skge.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skaddr.o: skaddr.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skgehwt.o: skgehwt.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skgeinit.o: skgeinit.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skgepnmi.o: skgepnmi.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skgesirq.o: skgesirq.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+ski2c.o: ski2c.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+sklm80.o: sklm80.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skqueue.o: skqueue.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skrlmt.o: skrlmt.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+sktimer.o: sktimer.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skvpd.o: skvpd.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skxmac2.o: skxmac2.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+skcsum.o: skcsum.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+uboot_skb.o: uboot_skb.c /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h
+uboot_drv.o: uboot_drv.c /opt/N310/u-boot4n300/include/common.h \
+  /opt/N310/u-boot4n300/include/config.h \
+  /opt/N310/u-boot4n300/include/configs/n300.h \
+  /opt/N310/u-boot4n300/include/cmd_confdefs.h \
+  /opt/N310/u-boot4n300/include/linux/bitops.h \
+  /opt/N310/u-boot4n300/include/asm/bitops.h \
+  /opt/N310/u-boot4n300/include/linux/types.h \
+  /opt/N310/u-boot4n300/include/linux/config.h \
+  /opt/N310/u-boot4n300/include/linux/posix_types.h \
+  /opt/N310/u-boot4n300/include/linux/stddef.h \
+  /opt/N310/u-boot4n300/include/asm/posix_types.h \
+  /opt/N310/u-boot4n300/include/asm/types.h \
+  /opt/N310/u-boot4n300/include/linux/string.h \
+  /opt/N310/u-boot4n300/include/asm/string.h \
+  /opt/N310/u-boot4n300/include/asm/ptrace.h \
+  /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
+  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /opt/N310/u-boot4n300/include/part.h \
+  /opt/N310/u-boot4n300/include/ide.h \
+  /opt/N310/u-boot4n300/include/flash.h \
+  /opt/N310/u-boot4n300/include/image.h \
+  /opt/N310/u-boot4n300/include/asm/u-boot.h \
+  /opt/N310/u-boot4n300/include/asm/global_data.h \
+  /opt/N310/u-boot4n300/include/asm/mach-types.h \
+  /opt/N310/u-boot4n300/include/asm/setup.h \
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
