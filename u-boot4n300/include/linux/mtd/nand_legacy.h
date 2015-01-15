@@ -54,31 +54,17 @@
 #define NAND_CMD_ERASE2		0xd0
 #define NAND_CMD_RESET		0xff
 
-/* bits for nand_legacy_rw() `cmd'; or together as needed */
-#define NANDRW_READ		0x01
-#define NANDRW_WRITE	0x00
-#define NANDRW_JFFS2	0x02
-#define NANDRW_JFFS2_SKIP	0x04
-/* Extended commands for large page devices */
-#define NAND_CMD_READSTART	0x30
-#define NAND_CMD_RNDOUTSTART	0xE0
-#define NAND_CMD_CACHEDPROG	0x15
-
-
-/* ****************** WARNING *********************
- * When ALLOW_ERASE_BAD_DEBUG is non-zero the erase command will
- * erase (or at least attempt to erase) blocks that are marked
- * bad. This can be very handy if you are _sure_ that the block
- * is OK, say because you marked a good block bad to test bad
- * block handling and you are done testing, or if you have
- * accidentally marked blocks bad.
- *
- * Erasing factory marked bad blocks is a _bad_ idea. If the
- * erase succeeds there is no reliable way to find them again,
- * and attempting to program or erase bad blocks can affect
- * the data in _other_ (good) blocks.
+/*
+ * Enumeration for NAND flash chip state
  */
-#define	 ALLOW_ERASE_BAD_DEBUG 1
+typedef enum {
+	FL_READY,
+	FL_READING,
+	FL_WRITING,
+	FL_ERASING,
+	FL_SYNCING
+} nand_state_t;
+
 
 /*
  * NAND Private Flash Chip Data
@@ -118,12 +104,12 @@ struct Nand {
 };
 
 struct nand_chip {
-	int		page_shift;
-	u_char		*data_buf;
-	u_char		*data_cache;
+	int 		page_shift;
+	u_char 		*data_buf;
+	u_char 		*data_cache;
 	int		cache_page;
-	u_char		ecc_code_buf[6];
-	u_char		reserved[2];
+	u_char 		ecc_code_buf[6];
+	u_char 		reserved[2];
 	char ChipID; /* Type of DiskOnChip */
 	struct Nand *chips;
 	int chipshift;

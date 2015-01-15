@@ -167,9 +167,3 @@ zlib.o: zlib.c /opt/N310/u-boot4n300/include/zlib.h \
   /opt/N310/u-boot4n300/include/asm/posix_types.h \
   /opt/N310/u-boot4n300/include/asm/types.h \
   /opt/N310/u-boot4n300/include/asm/string.h
-div64.o: div64.c /opt/N310/u-boot4n300/include/linux/types.h \
-  /opt/N310/u-boot4n300/include/linux/config.h \
-  /opt/N310/u-boot4n300/include/linux/posix_types.h \
-  /opt/N310/u-boot4n300/include/linux/stddef.h \
-  /opt/N310/u-boot4n300/include/asm/posix_types.h \
-  /opt/N310/u-boot4n300/include/asm/types.h

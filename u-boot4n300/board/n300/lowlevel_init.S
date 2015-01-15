@@ -146,8 +146,6 @@ lowlevel_init:
 	cmp     r2, r0
 	bne     0b
 
-
-
 	/* everything is fine now */
 	mov	pc, lr
 
@@ -165,14 +163,12 @@ SMRDATA:
     .word ((B6_MT<<15)+(B6_Trcd<<2)+(B6_SCAN))
     .word ((B7_MT<<15)+(B7_Trcd<<2)+(B7_SCAN))
     .word ((REFEN<<23)+(TREFMD<<22)+(Trp<<20)+(Tsrc<<18)+(Tchr<<16)+REFCNT)
-    .word 0x32	@BANKSIZE - disable arm-core burst operations
+    .word 0x32
     .word 0x30
     .word 0x30
 
 SNIFFEDDATA:
-@	.word	0x22111110			@BWSCON
-	.word	0x221E1120			@BWSCON shown by superipl/eboot
-@	.word	0x22121120			@BWSCON - to enable correctly GOFORCE4000 access
+	.word	0x22111110			@BWSCON
 	.word	0x00000700			@BANKCON0
 	.word	0x00000700			@BANKCON1
 	.word	0x00000700			@BANKCON2
@@ -182,13 +178,9 @@ SNIFFEDDATA:
 	.word	0x00018009			@BANKCON6
 	.word	0x00018009			@BANKCON7
 	.word	0x00ac03f4			@REFRESH
-	.word	0x000000B2			@BANKSIZE - enable arm-core burst operations
+	.word	0x000000B2			@BANKSIZE
 	.word	0x00000030			@MRSRB6
 	.word	0x00000030			@MRSRB7
 
-/*
-	.long 0x008C04F4  @ HCLK=100MHz 
-#  .long 0x008C062C  @ HCLK=60MHz 
-#  .long 0x008C067A   @ HCLK=50MHz 
 
-*/
+

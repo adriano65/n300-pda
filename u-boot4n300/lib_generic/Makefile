@@ -28,7 +28,7 @@ LIB	= libgeneric.a
 OBJS	= bzlib.o bzlib_crctable.o bzlib_decompress.o \
 	  bzlib_randtable.o bzlib_huffman.o \
 	  crc32.o ctype.o display_options.o ldiv.o \
-	  string.o vsprintf.o zlib.o div64.o
+	  string.o vsprintf.o zlib.o
 
 $(LIB):	.depend $(OBJS)
 	$(AR) crv $@ $(OBJS)

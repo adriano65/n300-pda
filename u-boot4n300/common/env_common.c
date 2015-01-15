@@ -44,12 +44,11 @@ DECLARE_GLOBAL_DATA_PTR;
 	extern void disable_nvram(void);
 #endif
 
-#ifdef DEBUG_ENV_COMMON
-	#define DEBUGF(fmt,args...) printf(fmt ,##args)
-    #define DPRINTK(ARGS...)  printf("<%s>: ",__FUNCTION__);printf(ARGS)
+#undef DEBUG_ENV
+#ifdef DEBUG_ENV
+#define DEBUGF(fmt,args...) printf(fmt ,##args)
 #else
-	#define DEBUGF(fmt,args...)
-    #define DPRINTK( x... )
+#define DEBUGF(fmt,args...)
 #endif
 
 extern env_t *env_ptr;
@@ -57,7 +56,8 @@ extern env_t *env_ptr;
 extern void env_relocate_spec (void);
 extern uchar env_get_char_spec(int);
 
-uchar env_get_char_init (int index);
+static uchar env_get_char_init (int index);
+uchar (*env_get_char)(int) = env_get_char_init;
 
 /************************************************************************
  * Default settings to be used when no valid environment is found
@@ -135,32 +135,28 @@ uchar default_environment[] = {
 #if defined(CONFIG_PCI_BOOTDELAY) && (CONFIG_PCI_BOOTDELAY > 0)
 	"pcidelay="	MK_STR(CONFIG_PCI_BOOTDELAY)	"\0"
 #endif
-#if defined(CONFIG_MMC_CLK)
-	"mmc_clk="	MK_STR(CONFIG_MMC_CLK)	"\0"
-#else
-	"mmc_clk=15000000"
-#endif
 #ifdef  CONFIG_EXTRA_ENV_SETTINGS
 	CONFIG_EXTRA_ENV_SETTINGS
 #endif
 	"\0"
 };
 
-#if defined(CFG_ENV_IS_IN_NAND)		/* Environment is in Nand Flash */ \
-	|| defined(CONFIG_ENV_IS_IN_SPI_FLASH)
+#if defined(CFG_ENV_IS_IN_NAND)		/* Environment is in Nand Flash */
 int default_environment_size = sizeof(default_environment);
 #endif
 
-void env_crc_update (void) {
-	env_ptr->crc = crc32(0, env_ptr->data, CFG_ENV_SIZE);
-	DPRINTK("env_ptr->crc 0x%08X, env_ptr->data 0x%08X, CFG_ENV_SIZE 0x%08X\n", env_ptr->crc, env_ptr->data, CFG_ENV_SIZE);
+void env_crc_update (void)
+{
+	env_ptr->crc = crc32(0, env_ptr->data, ENV_SIZE);
 }
 
-uchar env_get_char_init (int index) {
+static uchar env_get_char_init (int index)
+{
 	uchar c;
 
 	/* if crc was bad, use the default environment */
-	if (gd->env_valid)	{
+	if (gd->env_valid)
+	{
 		c = env_get_char_spec(index);
 	} else {
 		c = default_environment[index];
@@ -186,7 +182,6 @@ uchar env_get_char_memory (int index)
 uchar env_get_char_memory (int index)
 {
 	if (gd->env_valid) {
-		//DPRINTK("\n");		//pass from here
 		return ( *((uchar *)(gd->env_addr + index)) );
 	} else {
 		return ( default_environment[index] );
@@ -194,19 +189,8 @@ uchar env_get_char_memory (int index)
 }
 #endif
 
-uchar env_get_char (int index) {
-	uchar c;
-
-	/* if relocated to RAM */
-	if (gd->flags & GD_FLG_RELOC)
-		c = env_get_char_memory(index);
-	else
-		c = env_get_char_init(index);
-
-	return (c);
-}
-
-uchar *env_get_addr (int index) {
+uchar *env_get_addr (int index)
+{
 	if (gd->env_valid) {
 		return ( ((uchar *)(gd->env_addr + index)) );
 	} else {
@@ -214,24 +198,10 @@ uchar *env_get_addr (int index) {
 	}
 }
 
-void set_default_env(void) {
-	DPRINTK ("\n");
-	if (sizeof(default_environment) > CFG_ENV_SIZE) {
-		puts ("*** Error - default environment is too large\n\n");
-		return;
-		}
-
-	memset(env_ptr, 0, sizeof(env_t));
-	memcpy(env_ptr->data, default_environment, sizeof(default_environment));
-	
-	DPRINTK ("sizeof(env_t) 0x%08X\n", sizeof(env_t));
-	
-	env_crc_update ();
-	gd->env_valid = 1;
-}
-
-void env_relocate (void) {
-	DPRINTK ("offset = 0x%lx\n", gd->reloc_off);
+void env_relocate (void)
+{
+	DEBUGF ("%s[%d] offset = 0x%lx\n", __FUNCTION__,__LINE__,
+		gd->reloc_off);
 
 #ifdef CONFIG_AMIGAONEG3SE
 	enable_nvram();
@@ -243,24 +213,43 @@ void env_relocate (void) {
 	 * just relocate the environment pointer
 	 */
 	env_ptr = (env_t *)((ulong)env_ptr + gd->reloc_off);
-	DPRINTK ("embedded ENV at %p\n", env_ptr);
+	DEBUGF ("%s[%d] embedded ENV at %p\n", __FUNCTION__,__LINE__,env_ptr);
 #else
 	/*
 	 * We must allocate a buffer for the environment
 	 */
 	env_ptr = (env_t *)malloc (CFG_ENV_SIZE);
-	DPRINTK ("malloced ENV at %p\n", env_ptr);
+	DEBUGF ("%s[%d] malloced ENV at %p\n", __FUNCTION__,__LINE__,env_ptr);
 #endif
 
+	/*
+	 * After relocation to RAM, we can always use the "memory" functions
+	 */
+	env_get_char = env_get_char_memory;
+
 	if (gd->env_valid == 0) {
-#if defined(CONFIG_GTH)	|| defined(CONFIG_ENV_IS_NOWHERE)	/* Environment not changable */
+#if defined(CONFIG_GTH)	|| defined(CFG_ENV_IS_NOWHERE)	/* Environment not changable */
 		puts ("Using default environment\n\n");
 #else
 		puts ("*** Warning - bad CRC, using default environment\n\n");
-		//show_boot_progress (-60);
 		SHOW_BOOT_PROGRESS (-1);
 #endif
-		set_default_env();
+
+		if (sizeof(default_environment) > ENV_SIZE)
+		{
+			puts ("*** Error - default environment is too large\n\n");
+			return;
+		}
+
+		memset (env_ptr, 0, sizeof(env_t));
+		memcpy (env_ptr->data,
+			default_environment,
+			sizeof(default_environment));
+#ifdef CFG_REDUNDAND_ENVIRONMENT
+		env_ptr->flags = 0xFF;
+#endif
+		env_crc_update ();
+		gd->env_valid = 1;
 	}
 	else {
 		env_relocate_spec ();

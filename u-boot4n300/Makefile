@@ -105,7 +105,6 @@ include $(TOPDIR)/config.mk
 # U-Boot objects....order is important (i.e. start must be first)
 
 OBJS  = cpu/$(CPU)/start.o
-
 ifeq ($(CPU),i386)
 OBJS += cpu/$(CPU)/start16.o
 OBJS += cpu/$(CPU)/reset.o
@@ -138,7 +137,7 @@ LIBS += disk/libdisk.a
 LIBS += rtc/librtc.a
 LIBS += dtt/libdtt.a
 LIBS += drivers/libdrivers.a
-LIBS += drivers/nand/libnand.a
+#LIBS += drivers/nand/libnand.a
 LIBS += drivers/nand_legacy/libnand_legacy.a
 LIBS += drivers/sk98lin/libsk98lin.a
 LIBS += post/libpost.a post/cpu/libcpu.a
@@ -155,8 +154,7 @@ PLATFORM_LIBS += -L $(shell dirname `$(CC) $(CFLAGS) -print-libgcc-file-name`) -
 SUBDIRS	= tools \
 	  examples \
 	  post \
-	  post/cpu \
-	  drivers/nand
+	  post/cpu
 .PHONY : $(SUBDIRS)
 
 #########################################################################
@@ -164,19 +162,18 @@ SUBDIRS	= tools \
 
 #ALL = u-boot.srec u-boot.bin System.map
 #ALL = u-boot.bin
-ALL = u-boot.bin u-boot.S 
+ALL = u-boot.bin u-boot.S
 
 all:		$(ALL)
 
-u-boot.n300:
-	#1. create a 0xFF filled 256k file with dd
-	dd if=/dev/zero ibs=1k count=256 | tr "\000" "\377" >superipl.nb0
-	#2. copy u-boot (NAND VERSION! not RAM one) to superipl.nbo
-	dd if=u-boot.nand-boot of=superipl.nb0 conv=notrunc
-	#3. put file on SD card and use update FW procedure for N300
+u-boot.zero:
+		dd if=/dev/zero of=u-boot.zero count=50
 
 u-boot.hex:	u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O ihex $< $@
+
+u-boot.srec:	u-boot
+		$(OBJCOPY) ${OBJCFLAGS} -O srec $< $@
 
 u-boot.bin:	u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
@@ -194,7 +191,7 @@ u-boot.S:	u-boot
 u-boot:		depend version $(SUBDIRS) $(OBJS) $(LIBS) $(LDSCRIPT)
 		UNDEF_SYM=`$(OBJDUMP) -x $(LIBS) |sed  -n -e 's/.*\(__u_boot_cmd_.*\)/-u\1/p'|sort|uniq`;\
 		$(LD) $(LDFLAGS) $$UNDEF_SYM $(OBJS) \
-			--start-group $(LIBS) --end-group $(PLATFORM_LIBS) -o u-boot
+			--start-group $(LIBS) --end-group $(PLATFORM_LIBS) -Map u-boot.map -o u-boot
 
 $(LIBS):
 		$(MAKE) -C `dirname $@`
@@ -1977,20 +1974,4 @@ backup:
 	F=`basename $(TOPDIR)` ; cd .. ; \
 	gtar --force-local -zcvf `date "+$$F-%Y-%m-%d-%T.tar.gz"` $$F
 
-#superipl.bin: cpu/arm920t/superipl
-superipl:
-	rm -f superipl.o superipl.bin
-	#arm-angstrom-linux-gnueabi-gcc -c cpu/arm920t/superipl.S -I /opt/N310/u-boot4n300/include
-	arm-angstrom-linux-gnueabi-gcc -g -march=armv4t -c cpu/arm920t/superipl.S -I$(TOPDIR)/include 
-	arm-angstrom-linux-gnueabi-objcopy -O binary superipl.o superipl.bin
-	#rm superipl.o
-	$(OBJDUMP) -d superipl.o > superipl.s
-	#arm-angstrom-linux-gnueabi-objcopy -O binary $< $@
-	# _or_
-	#$(MAKE) superipl.S 
-
-eboot:
-	rm -f cpu/arm920t/eboot-nb0.o eboot.bin
-	arm-angstrom-linux-gnueabi-gcc -c cpu/arm920t/eboot-nb0.S -I$(TOPDIR)/include
-	arm-angstrom-linux-gnueabi-objcopy -O binary eboot-nb0.o eboot.bin
-########################################################################
+#########################################################################

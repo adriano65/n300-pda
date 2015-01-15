@@ -184,15 +184,18 @@ SDHC-Card: 0x1d "AD" "        Adata8G_HC" bl  512 sz  8092385280 Class(2) CCC 5b
 #define MMC_VDD_35_36           0x00800000      /* VDD voltage 3.5 ~ 3.6 */
 
 
-typedef struct mmc_cid {
+typedef struct mmc_cid
+{
 	/* FIXME: BYTE_ORDER */
-	uchar	year:4, month:4;
+	uchar	year:4,
+		month:4;
 	uchar	sn[3];
-	uchar	fwrev:4, hwrev:4;
+	uchar	fwrev:4,
+		hwrev:4;
 	uchar	name[6];
 	uchar	id[3];
 } mmc_cid_t;
-/*
+
 typedef struct mmc_csd
 {
 	uchar	ecc:2,
@@ -232,28 +235,6 @@ typedef struct mmc_csd
   		spec_vers:4,
 		csd_structure:2;
 } mmc_csd_t;
-*/
-typedef struct mmc_csd {
-	u8	csd_structure:2, spec_vers:4, rsvd1:2; 
-	u8	taac; 
-	u8	nsac; 
-	u8	tran_speed; 
-	u16	ccc:12, read_bl_len:4; 
-	u64	read_bl_partial:1, write_blk_misalign:1, read_blk_misalign:1,  dsr_imp:1, rsvd2:2, c_size:12, 
-	vdd_r_curr_min:3, 
-	vdd_r_curr_max:3, 
-	vdd_w_curr_min:3, 
-	vdd_w_curr_max:3, 
-	c_size_mult:3, 
-	sector_size:5, 
-	erase_grp_size:5, 
-	wp_grp_size:5, 
-	wp_grp_enable:1, default_ecc:2, r2w_factor:3, write_bl_len:4, write_bl_partial:1, rsvd3:5; 
-	u8	file_format_grp:1, copy:1, perm_write_protect:1, tmp_write_protect:1, file_format:2, ecc:2; 
-	u8	crc:7; 
-	u8	one:1; 
-} mmc_csd_t;
-
 
 struct sd_cid {
 	char		pnm_0;	/* product name */

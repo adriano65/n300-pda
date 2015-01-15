@@ -52,7 +52,6 @@ typedef	struct	global_data {
 	unsigned long	reset_status;	/* reset status register at boot */
 #endif
 	void		**jt;		/* jump table */
-	//char    env_buf[32];            /* buffer for getenv() before reloc. */
 } gd_t;
 
 /*

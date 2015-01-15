@@ -23,10 +23,7 @@ i2c.o: i2c.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
-  /opt/N310/u-boot4n300/include/s3c2440.h \
-  /opt/N310/u-boot4n300/include/s3c24x0.h \
-  /opt/N310/u-boot4n300/include/i2c.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
 interrupts.o: interrupts.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -137,12 +134,7 @@ usb_ohci.o: usb_ohci.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
-  /opt/N310/u-boot4n300/include/s3c2440.h \
-  /opt/N310/u-boot4n300/include/s3c24x0.h \
-  /opt/N310/u-boot4n300/include/malloc.h \
-  /opt/N310/u-boot4n300/include/usb.h \
-  /opt/N310/u-boot4n300/include/usb_defs.h usb_ohci.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
 gpio.o: gpio.c /opt/N310/u-boot4n300/include/asm/arch/regs-gpio.h
 mmc.o: mmc.c /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \

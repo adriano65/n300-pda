@@ -78,11 +78,11 @@ extern void dataflash_print_info(void);
 #endif
 
 #ifndef CONFIG_IDENT_STRING
-#define CONFIG_IDENT_STRING "cxlabs"
+#define CONFIG_IDENT_STRING ""
 #endif
 
 const char version_string[] =
-	U_BOOT_VERSION" (" __DATE__ " - " __TIME__ ") @ "CONFIG_IDENT_STRING;
+	U_BOOT_VERSION" (" __DATE__ " - " __TIME__ ")"CONFIG_IDENT_STRING;
 
 #ifdef CONFIG_DRIVER_CS8900
 extern void cs8900_get_enetaddr (uchar * addr);
@@ -176,7 +176,6 @@ static int display_dram_config (void)
 {
 	int i;
 
-#define DEBUG
 #ifdef DEBUG
 	puts ("RAM Configuration:\n");
 
@@ -331,8 +330,8 @@ void start_armboot (void) {
 #endif
 
 	/* initialize environment */
-	env_relocate ();				// see env_relocate_spec in env_nand.c
-    puts("--\n");
+	env_relocate ();
+    puts("\n");
 
 #ifdef CONFIG_VFD
 	/* must do this after the framebuffer is allocated */
