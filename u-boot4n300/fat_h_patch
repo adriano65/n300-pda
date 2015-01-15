@@ -1,0 +1,40 @@
+diff --git a/include/fat.h b/include/fat.h
+index 59de3fb..dad2e3d 100644
+--- a/include/fat.h
++++ b/include/fat.h
+@@ -31,20 +31,12 @@
+ 
+ #define CONFIG_SUPPORT_VFAT
+ 
+-#define SECTOR_SIZE FS_BLOCK_SIZE
+-
+-#define FS_BLOCK_SIZE 512
+-
+-#if FS_BLOCK_SIZE != SECTOR_SIZE
+-#error FS_BLOCK_SIZE != SECTOR_SIZE - This code needs to be fixed!
+-#endif
+-
+ #define MAX_CLUSTSIZE	65536
+-#define DIRENTSPERBLOCK	(FS_BLOCK_SIZE/sizeof(dir_entry))
+-#define DIRENTSPERCLUST ((mydata->clust_size*SECTOR_SIZE)/sizeof(dir_entry))
++#define DIRENTSPERBLOCK	(mydata->sector_size/sizeof(dir_entry))
++#define DIRENTSPERCLUST ((mydata->clust_size*mydata->sector_size)/sizeof(dir_entry))
+ 
+ #define FATBUFBLOCKS	6
+-#define FATBUFSIZE	(FS_BLOCK_SIZE*FATBUFBLOCKS)
++#define FATBUFSIZE	    (mydata->sector_size*FATBUFBLOCKS)
+ #define FAT12BUFSIZE	((FATBUFSIZE*2)/3)
+ #define FAT16BUFSIZE	(FATBUFSIZE/2)
+ #define FAT32BUFSIZE	(FATBUFSIZE/4)
+@@ -182,8 +174,9 @@ typedef struct dir_slot {
+  * (see FAT32 accesses)
+  */
+ typedef struct {
+-	__u8	fatbuf[FATBUFSIZE]; /* Current FAT buffer */
++	__u8	*fatbuf; /* Current FAT buffer */
+ 	int	fatsize;	/* Size of FAT in bits */
++	__u16	sector_size;	/* Sector size */
+ 	__u16	fatlength;	/* Length of FAT in sectors */
+ 	__u16	fat_sect;	/* Starting sector of the FAT */
+ 	__u16	rootdir_sect;	/* Start sector of root directory */
+
