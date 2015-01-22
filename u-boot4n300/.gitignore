@@ -1,8 +1,0 @@
-/mtd.dd
-/.*project
-/.settings
-/.autotools
-*.lbm
-*.a
-*.o
-/doc
