@@ -1,0 +1,13 @@
+#source [find interface/ftdi/neodb.cfg]
+source [find target/samsung_s3c2440.cfg]
+
+adapter_khz 1000
+
+reset_config trst_and_srst
+
+init
+reset run
+sleep 5000
+halt
+
+
