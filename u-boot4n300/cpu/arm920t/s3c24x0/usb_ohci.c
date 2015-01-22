@@ -1595,7 +1595,7 @@ static char ohci_inited = 0;
 int usb_lowlevel_init(void)
 {
 	S3C24X0_CLOCK_POWER * const clk_power = S3C24X0_GetBase_CLOCK_POWER();
-	S3C24X0_GPIO * const gpio = S3C24X0_GetBase_GPIO();
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
 
 	/*
 	 * Set the 48 MHz UPLL clocking. Values are taken from

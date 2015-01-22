@@ -288,7 +288,7 @@ int do_help (cmd_tbl_t * cmdtp, int flag, int argc, char *argv[])
 	 */
 	for (i = 1; i < argc; ++i) {
 		if ((cmdtp = find_cmd (argv[i])) != NULL) {
-#ifdef	CFG_LONGHELP
+#ifdef	CONFIG_LONGHELP
 			/* found - print (long) help info */
 			puts (cmdtp->name);
 			putc (' ');
@@ -326,8 +326,8 @@ U_BOOT_CMD(
   "'help' with one or more command names as arguments.\n"
 );
 
-/* This do not ust the U_BOOT_CMD macro as ? can't be used in symbol names */
-#ifdef  CFG_LONGHELP
+/* This do not use the U_BOOT_CMD macro as ? can't be used in symbol names */
+#ifdef  CONFIG_LONGHELP
 cmd_tbl_t __u_boot_cmd_question_mark Struct_Section = {
 	"?",	CFG_MAXARGS,	1,	do_help,
  	"?       - alias for 'help'\n",

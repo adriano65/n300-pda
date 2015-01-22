@@ -25,8 +25,8 @@ include $(TOPDIR)/config.mk
 
 LIB	= lib$(BOARD).a
 
-#OBJS	:= n300.o nand_read.o glamo-mmc.o pcf50633.o
-OBJS	:= n300.o nand_read.o
+OBJS	:= n300.o nand_read.o nand.o
+#OBJS	:= n300.o nand_read.o
 SOBJS	:= lowlevel_init.o
 
 $(LIB):	$(OBJS) $(SOBJS)

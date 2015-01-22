@@ -206,7 +206,6 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_FESTER               191
 #define MACH_TYPE_GPI                  192
 #define MACH_TYPE_SMDK2410             193
-#define MACH_TYPE_SMDK2440             362
 #define MACH_TYPE_I519                 194
 #define MACH_TYPE_NEXIO                195
 #define MACH_TYPE_BITBOX               196
@@ -737,8 +736,11 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_LN2410SBC            725
 #define MACH_TYPE_CB3RUFC              726
 #define MACH_TYPE_MP2USB               727
+#define MACH_TYPE_SMDK2440             362
 //#define MACH_TYPE_N300			0x00007700
-#define MACH_TYPE_N300					1248
+//#define MACH_TYPE_N300					1248
+//#define MACH_TYPE_N300					0x30e
+#define MACH_TYPE_N300					0x4e0
 
 
 #ifdef CONFIG_ARCH_EBSA110

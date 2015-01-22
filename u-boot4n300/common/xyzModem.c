@@ -450,7 +450,7 @@ xyzModem_get_hdr(void)
 int
 xyzModem_stream_open(connection_info_t *info, int *err)
 {
-    int console_chan, stat=0;
+    int stat=0;
     int retries = xyzModem_MAX_RETRIES;
     int crc_retries = xyzModem_MAX_RETRIES_WITH_CRC;
 
@@ -463,6 +463,7 @@ xyzModem_stream_open(connection_info_t *info, int *err)
 #endif
 
 #ifdef REDBOOT
+    int console_chan;
     /* Set up the I/O channel.  Note: this allows for using a different port in the future */
     console_chan = CYGACC_CALL_IF_SET_CONSOLE_COMM(CYGNUM_CALL_IF_SET_COMM_ID_QUERY_CURRENT);
     if (info->chan >= 0) {

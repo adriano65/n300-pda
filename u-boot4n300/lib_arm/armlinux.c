@@ -224,8 +224,7 @@ void do_bootm_linux (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[],
 
 	SHOW_BOOT_PROGRESS (15);
 
-	debug ("## Transferring control to Linux (at address %08lx) ...\n",
-	       (ulong) theKernel);
+	printf ("## Transferring control to Linux (at address %08lx) ...\n", (ulong) theKernel);
 
 #if defined (CONFIG_SETUP_MEMORY_TAGS) || \
     defined (CONFIG_CMDLINE_TAG) || \
@@ -267,7 +266,7 @@ void do_bootm_linux (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[],
 	}
 #endif
 
-	cleanup_before_linux ();
+	cleanup_before_linux ();		// cpu/arm920t/cpu.c
 
 	theKernel (0, bd->bi_arch_number, bd->bi_boot_params);
 }

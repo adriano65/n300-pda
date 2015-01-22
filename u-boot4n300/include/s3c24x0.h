@@ -31,7 +31,7 @@
 #ifndef __S3C24X0_H__
 #define __S3C24X0_H__
 
-typedef volatile u8	S3C24X0_REG8;
+typedef volatile u8		S3C24X0_REG8;
 typedef volatile u16	S3C24X0_REG16;
 typedef volatile u32	S3C24X0_REG32;
 
@@ -171,16 +171,16 @@ typedef struct {
 /* NAND FLASH (see S3C2440 manual chapter 6) */
 typedef struct {
         S3C24X0_REG32   NFCONF;
-        S3C24X0_REG32   NFCONT;
-        S3C24X0_REG32   NFCMD;
-        S3C24X0_REG32   NFADDR;
-        S3C24X0_REG32   NFDATA;
-        S3C24X0_REG32   NFMECCD0;
+        S3C24X0_REG32   NFCONT;			/* 04 */
+        S3C24X0_REG32   NFCMD;			/* 08 */
+        S3C24X0_REG32   NFADDR;			/* 0C */
+        S3C24X0_REG32   NFDATA;			/* 10 */
+        S3C24X0_REG32   NFMECCD0;		
         S3C24X0_REG32   NFMECCD1;
-        S3C24X0_REG32   NFSECCD;
-        S3C24X0_REG32   NFSTAT;
-        S3C24X0_REG32   NFESTAT0;
-        S3C24X0_REG32   NFESTAT1;
+        S3C24X0_REG32   NFSECCD;		/* 1C */
+        S3C24X0_REG32   NFSTAT;			/* 20 */
+        S3C24X0_REG32   NFESTAT0;		/* 24 */
+        S3C24X0_REG32   NFESTAT1;		/* 28 */
         S3C24X0_REG32   NFMECC0;
         S3C24X0_REG32   NFMECC1;
         S3C24X0_REG32   NFSECC;
@@ -426,7 +426,7 @@ typedef struct {
 	S3C24X0_REG32	EXTINT;
 #endif
 
-#if defined(CONFIG_S3C2410)||defined(CONFIG_S3C2440)
+#if defined(CONFIG_S3C2410)
 	S3C24X0_REG32	GPACON;
 	S3C24X0_REG32	GPADAT;
 	S3C24X0_REG32	res1[2];

@@ -62,6 +62,11 @@ void serial_setbrg (void)
 	reg = get_PCLK() / (16 * gd->baudrate) - 1;
 	//reg = 0x19;
 
+#if 0	
+	uart->UFCON = 0x0;
+	uart->UMCON = 0x0;
+	uart->UCON = 0x0005;
+#else
 	/* FIFO enable, Tx/Rx FIFO clear */
 	uart->UFCON = 0x07;
 	uart->UMCON = 0x0;
@@ -72,12 +77,19 @@ void serial_setbrg (void)
 	 * normal,interrupt or polling
 	 */
 	uart->UCON = 0x245;
+#endif
+	
 	uart->UBRDIV = reg;
 
 #ifdef CONFIG_HWFLOW
 	uart->UMCON = 0x1; /* RTS up */
 #endif
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
+	gpio->GPHCON &= ~(3<<16);  							//GPH8(UEXTCLK) input
 	for (i = 0; i < 100; i++);
+	//Delay(1); // about 100us
+	gpio->GPHCON = gpio->GPHCON & ~(3<<16) | (1<<17); 	//GPH8(UEXTCLK) UEXTCLK
+  
 }
 
 /*

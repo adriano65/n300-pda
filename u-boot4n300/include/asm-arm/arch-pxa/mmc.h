@@ -210,12 +210,12 @@ typedef struct mmc_csd
 		write_blk_misalign:1,
 		read_bl_partial:1;
 
-	ushort	read_bl_len:4,
+		ushort	read_bl_len:4,
 		ccc:12;
-	uchar	tran_speed;
-	uchar	nsac;
-	uchar	taac;
-	uchar	rsvd1:2,
+	  uchar	tran_speed;
+	  uchar	nsac;
+	  uchar	taac;
+	  uchar	rsvd1:2,
   		spec_vers:4,
 		csd_structure:2;
 } mmc_csd_t;

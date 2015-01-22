@@ -1,6 +1,10 @@
 environment.o: environment.c ../include/config.h \
  ../include/configs/n300.h ../include/cmd_confdefs.h \
- ../include/environment.h
+ ../include/environment.h \
+ /usr/lib64/gcc/x86_64-slackware-linux/4.7.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h
 img2srec.o: img2srec.c \
  /usr/lib64/gcc/x86_64-slackware-linux/4.7.1/include/stddef.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \

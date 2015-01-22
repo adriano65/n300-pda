@@ -41,13 +41,13 @@
 
 .globl _start
 _start:	b       reset
-	ldr	pc, _undefined_instruction
-	ldr	pc, _software_interrupt
-	ldr	pc, _prefetch_abort
-	ldr	pc, _data_abort
-	ldr	pc, _not_used
-	ldr	pc, _irq
-	ldr	pc, _fiq
+		ldr	pc, _undefined_instruction
+		ldr	pc, _software_interrupt
+		ldr	pc, _prefetch_abort
+		ldr	pc, _data_abort
+		ldr	pc, _not_used
+		ldr	pc, _irq
+		ldr	pc, _fiq
 
 _undefined_instruction:	.word undefined_instruction
 _software_interrupt:	.word software_interrupt
@@ -57,7 +57,7 @@ _not_used:				.word not_used
 _irq:					.word irq
 _fiq:					.word fiq
 
-	.balignl 16,0xdeadbeef
+	.balignl 16,0xbeefceed
 
 
 /*
@@ -119,14 +119,21 @@ reset:
 	msr	cpsr, r0
 
 	ldr r0, =S3C24X0_GPADAT
+	/* runtime value linux-haret-WM6 */
+	@ldr r1, =0x00040800
 	/* original from acer NAND */
 	@mov r1, #0xfe000000
 	/* enable NAND writings */
 	@"GPADAT |= (1 << 11)"
-	ldr r1, =0xfe000800
+	@ldr r1, =0xfe000800
+	ldr r1, =0x00000800
 	STR r1, [r0]
 
 	ldr r0, =S3C24X0_GPACON
+	/* runtime value linux-haret-WM6 */
+	@ldr r1, =0x01fdf7ff		
+	/* runtime value linux-u-boot */
+	@ldr r1, =0x005ca71f		
 	/* original from acer NAND */
 	@ldr r1, =0x005EAF1F
 	/* enable pin output for NAND writings */
@@ -178,7 +185,8 @@ reset:
 	STR r1, [r0]
 
 	ldr r0, =S3C24X0_GPECON
-	ldr r1, =0x05555555
+	ldr r1, =0x05555555		@ superipl (N300 NAND) original val
+	@ldr r1, =0xa02aaaaa	@ N310 linux runtime val
 	STR r1, [r0]
 
 	ldr r0, =S3C24X0_GPFUP
@@ -214,9 +222,9 @@ reset:
 	STR r1, [r0]
 
 	ldr r0, =S3C24X0_GPHCON
-	@ldr r1, =0x00155514				/* N300 NAND original value  */
+	@ldr r1, =0x00155514			/* superipl (N300 NAND) original value  */
 	@ldr r1, =0x0000a0aa			/* N310 linux runtime val  */
-	ldr r1, =0x0016faaa			/* SMDK2440 UARTinit val  */
+	ldr r1, =0x0016faaa				/* SMDK2440 and eboot.nb0 UARTinit val  */
 	STR r1, [r0]
 
 	ldr r0, =S3C24X0_GPJUP
@@ -242,29 +250,77 @@ reset:
 	mov     r1, #0xffffffff
 	str     r1, [r0]
 
-	/* CHECK for hard vs soft reboot ??? */
-	ldr r0, =S3C24X0_GPDDAT
-	LDR r10, [r0]
-	TST r10, #0x40
-	BEQ GPDDAT_notok
-	MOV r1, #0x7
-	B GPDDAT_ok
-GPDDAT_notok:
-	MOV r1, #0x7
-GPDDAT_ok:
-	ldr     r0, =S3C24X0_CLKDIVN
-	#mov     r1, #7
+	ldr r0, =S3C24X0_CLKDIVN
+	mov r1, #0x7
 	str     r1, [r0]
+
+	#if 0
+	/* enable uart */
+	ldr	r0, =0x4c00000c		/* clkcon */
+	ldr	r1, =0x7fff0		/* all clocks on */
+	str	r1, [r0]
+
+	/* gpio UART0 init */
+	ldr	r0, =0x56000070
+	mov	r1, #0xaa
+	str	r1, [r0]
+
+	/* init uart */
+	ldr	r0, =0x50000000
+	mov	r1, #0x03
+	str	r1, [r0]
+	ldr	r1, =0x245
+	str	r1, [r0, #0x04]
+	mov	r1, #0x01
+	str	r1, [r0, #0x08]
+	mov	r1, #0x00
+	str	r1, [r0, #0x0c]
+	mov	r1, #0x1a
+	str	r1, [r0, #0x28]
+	#endif
+
 
 	MRC p15, 0x00, r0, c1, c0, 0x00
 	ORR r0, r0, #0xc0000000
 	MCR p15, 0x00, r0, c1, c0, 0x00
 
+#define USE_TEST_CODE
+#ifdef USE_TEST_CODE
+@ ---------------------------------------- T E S T  C O D E --------------
+test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
+					add	r1, r1, #0x50
+					mov	r2, #0x100						@ set GPF4 as output (Home button)
+					str	r2, [r1]						@ r1==S3C24X0_GPFCON
+					mov	r2, #0xff
+					str	r2, [r1, #8]
+					mov	r2, #0	
+					str	r2, [r1, #4]					@ set GPF4 to zero
+
+					mov	r1, #S3C24X0_GPIO_BASE
+					add	r1, r1, #0x50
+					mov	r2, #0x400          		@ set GPF5 as output (Calendar button)
+					str	r2, [r1]      				@ r1==S3C24X0_GPFCON
+					mov	r2, #0xff
+					str	r2, [r1, #8]
+					mov	r2, #0
+					str	r2, [r1, #4]  				@ set GPF5 to zero
+
+					mov	r1, #S3C24X0_GPIO_BASE
+					add	r1, r1, #0x50              	@ r1==S3C24X0_GPFCON
+					mov	r2, #0x1000                 @ set GPF6 as output (Contacts button)
+					str	r2, [r1]       				@
+					mov	r2, #0xff
+					str	r2, [r1, #8]
+					mov	r2, #0	
+					str	r2, [r1, #4]                @ @ set GPF6 to zero
+@ ---------------------------------------- T E S T  C O D E --------------
+#endif
+
+#ifndef CONFIG_SKIP_LOWLEVEL_INIT
+
 	MOV r0, #S3C24X0_CLOCK_POWER_BASE
 	MVN r1, #0xff000000
 	str     r1, [r0]
-
-#ifndef CONFIG_SKIP_LOWLEVEL_INIT
 
 	ldr     r0, =S3C24X0_UPLLCON
 	ldr     r1, =0x0003C042
@@ -278,15 +334,9 @@ GPDDAT_ok:
 	nop
 	ldr     r0, =S3C24X0_CAMDIVN
 	mov     r1, #0x0
-	ldr     r0, =S3C24X0_GPDDAT
-	LDR r10, [r0]
-	TST r10, #0x40
-	BEQ tmp
-	ldr     r1, =0x00074051
-	B tmp2
-tmp:
-	ldr     r1, =0x00074051
-tmp2:
+
+	@ldr     r1, =0x00074051
+	ldr     r1, =0x0006e031
 	ldr     r0, =S3C24X0_MPLLCON
 	str     r1, [r0]
 	MOV r0, #0x200
@@ -605,8 +655,8 @@ CopyToSdram:
 
         @ copy u-boot to RAM
         ldr   r0, =UBOOT_RAM_BASE
-        mov   r1, #0x0  @address
-        mov   r2, #0x30000  @size
+        mov   r1, #0x0  			@address
+        ldr   r2, =CFG_UBOOT_SIZE  	@size
         bl    nand_read_ll
 
         tst   r0, #0x0

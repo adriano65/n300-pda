@@ -68,8 +68,9 @@ int mmc_init(int verbose) {
 
 	sdi = S3C2440_GetBase_SDI();
 
+	char *s = getenv ("mmc_clk");
 	ulong nPCLK=get_PCLK();
-	pr_debug("mmc_init(PCLK=%u)\n", nPCLK);
+	printf("mmcinit: PCLK=%u mmc_clk=%s\n", nPCLK, s);
 	
 	/*
 	*  pin config
@@ -109,7 +110,7 @@ int mmc_init(int verbose) {
     S3C2440_GPIO_CONFIG (GPECON_, 9, GPIO_FUNCTION);
     S3C2440_GPIO_CONFIG (GPECON_, 10, GPIO_FUNCTION);	
 	
-	S3C24X0_GPIO * const gpio = S3C24X0_GetBase_GPIO();
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
 	gpio->GPADAT &= ~(1<<17);			// 0x56000000
 	//gpio->GPADAT |= (1<<17);
 	gpio->GPACON &= ~(1<<17);			// 0 == output
@@ -121,10 +122,11 @@ int mmc_init(int verbose) {
 	sdi->SDIBSIZE = 512;
 	
 	//sdi->SDIPRE = 0x05;  /* SDCLK = PCLK / (SDIPRE+1) = 11MHz */
-	//int mmc_clk=nPCLK/25000000L - 1;  
-	int mmc_clk=nPCLK/15000000L - 1;  
+	int mmc_clk = nPCLK/( simple_strtol(s, NULL, 10) )-1;
+	//int mmc_clk=nPCLK/25000000L - 1;  	// MAX Value
+	//int mmc_clk=nPCLK/15000000L - 1;  
 	//int mmc_clk=nPCLK/11000000L - 1;  
-	//int mmc_clk=nPCLK/196000L - 1;  
+	//int mmc_clk=nPCLK/196000L - 1;  		// linux value
 	sdi->SDIPRE = mmc_clk;
 	
 	sdi->SDIDTIMER = 0x007fffff;
@@ -259,8 +261,13 @@ int mmc_init(int verbose) {
 			rc = 0;
 			mmc_ready = 1;
 			/* FIXME add verbose printout for csd */
-			printf("READ_BL_LEN=%u, C_SIZE_MULT=%u, C_SIZE=%u\n", csd->read_bl_len, csd->c_size_mult1, csd->c_size);
-			printf("size = %uMB\n", mmc_size(csd)/1024/1024);
+			printf("READ_BL_LEN=%u, C_SIZE_MULT=%u, C_SIZE=%u, CCC=0x%08x, size = %uMB\n"
+					,csd->read_bl_len
+					,csd->c_size_mult
+					,csd->c_size
+					,csd->ccc
+					,mmc_size(csd)/1024/1024);
+			printf("Min Current 0x%01x, Max Current 0x%01x\n", csd->vdd_r_curr_min, csd->vdd_r_curr_max);
 			}
 	}
 
@@ -734,7 +741,7 @@ u_int32_t mmc_size(const struct mmc_csd *csd) {
 	u_int32_t block_len, mult, blocknr;
 
 	block_len = csd->read_bl_len << 12;
-	mult = csd->c_size_mult1 << 8;
+	mult = csd->c_size_mult << 8;
 	blocknr = (csd->c_size+1) * mult;
 
 	return blocknr * block_len;

@@ -374,8 +374,7 @@ cmd_bootm.o: cmd_bootm.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/byteorder.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
-  /opt/N310/u-boot4n300/include/status_led.h
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h
 cmd_cache.o: cmd_cache.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -575,8 +574,7 @@ cmd_doc.o: cmd_doc.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
-  /opt/N310/u-boot4n300/include/asm/memory.h \
-  /opt/N310/u-boot4n300/include/status_led.h
+  /opt/N310/u-boot4n300/include/asm/memory.h
 cmd_dtt.o: cmd_dtt.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -903,8 +901,7 @@ cmd_ide.o: cmd_ide.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
   /opt/N310/u-boot4n300/include/ata.h \
   /opt/N310/u-boot4n300/include/asm/io.h \
-  /opt/N310/u-boot4n300/include/asm/memory.h \
-  /opt/N310/u-boot4n300/include/status_led.h
+  /opt/N310/u-boot4n300/include/asm/memory.h
 cmd_immap.o: cmd_immap.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -1198,17 +1195,21 @@ cmd_nand.o: cmd_nand.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
   /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
+  /opt/N310/u-boot4n300/include/linux/mtd/mtd.h \
+  /opt/N310/u-boot4n300/include/linux/mtd/mtd-abi.h \
+  /opt/N310/u-boot4n300/include/linux/mtd/compat.h \
   /opt/N310/u-boot4n300/include/command.h \
+  /opt/N310/u-boot4n300/include/watchdog.h \
   /opt/N310/u-boot4n300/include/malloc.h \
-  /opt/N310/u-boot4n300/include/asm/io.h \
   /opt/N310/u-boot4n300/include/asm/byteorder.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
-  /opt/N310/u-boot4n300/include/asm/memory.h \
-  /opt/N310/u-boot4n300/include/watchdog.h \
-  /opt/N310/u-boot4n300/include/status_led.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/nand_legacy.h
+  /opt/N310/u-boot4n300/include/jffs2/jffs2.h \
+  /opt/N310/u-boot4n300/include/jffs2/load_kernel.h \
+  /opt/N310/u-boot4n300/include/linux/list.h \
+  /opt/N310/u-boot4n300/include/nand.h \
+  /opt/N310/u-boot4n300/include/linux/mtd/nand.h
 cmd_net.o: cmd_net.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -1545,7 +1546,9 @@ cmd_usb.o: cmd_usb.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/byteorder.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
+  /opt/N310/u-boot4n300/include/usb.h \
+  /opt/N310/u-boot4n300/include/usb_defs.h
 cmd_vfd.o: cmd_vfd.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -1661,7 +1664,8 @@ devices.o: devices.c /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/malloc.h \
   /opt/N310/u-boot4n300/include/devices.h \
   /opt/N310/u-boot4n300/include/lists.h \
-  /opt/N310/u-boot4n300/include/serial.h
+  /opt/N310/u-boot4n300/include/serial.h \
+  /opt/N310/u-boot4n300/include/i2c.h
 dlmalloc.o: dlmalloc.c /opt/N310/u-boot4n300/include/malloc.h \
   /opt/N310/u-boot4n300/include/linux/stddef.h \
   /opt/N310/u-boot4n300/include/linux/types.h \
@@ -1719,7 +1723,13 @@ docecc.o: docecc.c /opt/N310/u-boot4n300/include/config.h \
 environment.o: environment.c /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
   /opt/N310/u-boot4n300/include/cmd_confdefs.h \
-  /opt/N310/u-boot4n300/include/environment.h
+  /opt/N310/u-boot4n300/include/environment.h \
+  /opt/N310/u-boot4n300/include/linux/types.h \
+  /opt/N310/u-boot4n300/include/linux/config.h \
+  /opt/N310/u-boot4n300/include/linux/posix_types.h \
+  /opt/N310/u-boot4n300/include/linux/stddef.h \
+  /opt/N310/u-boot4n300/include/asm/posix_types.h \
+  /opt/N310/u-boot4n300/include/asm/types.h
 env_common.o: env_common.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -1748,8 +1758,7 @@ env_common.o: env_common.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
   /opt/N310/u-boot4n300/include/command.h \
   /opt/N310/u-boot4n300/include/environment.h \
-  /opt/N310/u-boot4n300/include/malloc.h \
-  /opt/N310/u-boot4n300/include/status_led.h
+  /opt/N310/u-boot4n300/include/malloc.h
 env_nand.o: env_nand.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -2437,7 +2446,9 @@ usb.o: usb.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/proc/system.h \
   /opt/N310/u-boot4n300/include/asm/proc/processor.h \
   /opt/N310/u-boot4n300/include/asm/proc/domain.h \
-  /opt/N310/u-boot4n300/include/linux/ctype.h
+  /opt/N310/u-boot4n300/include/linux/ctype.h \
+  /opt/N310/u-boot4n300/include/usb.h \
+  /opt/N310/u-boot4n300/include/usb_defs.h
 usb_kbd.o: usb_kbd.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -2497,7 +2508,10 @@ usb_storage.o: usb_storage.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/atomic.h \
   /opt/N310/u-boot4n300/include/asm/proc/system.h \
   /opt/N310/u-boot4n300/include/asm/proc/processor.h \
-  /opt/N310/u-boot4n300/include/asm/proc/domain.h
+  /opt/N310/u-boot4n300/include/asm/proc/domain.h \
+  /opt/N310/u-boot4n300/include/usb.h \
+  /opt/N310/u-boot4n300/include/usb_defs.h \
+  /opt/N310/u-boot4n300/include/scsi.h
 virtex2.o: virtex2.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \

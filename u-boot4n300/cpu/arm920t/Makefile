@@ -26,6 +26,7 @@ include $(TOPDIR)/config.mk
 LIB	= lib$(CPU).a
 
 START	= start.o
+#START	= start.o superipl.o
 OBJS	= cpu.o interrupts.o
 
 all:	.depend $(START) $(LIB)
