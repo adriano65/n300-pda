@@ -1,0 +1,6 @@
+/.*project
+/.settings
+/.autotools
+*.lbm
+*.o
+/doc

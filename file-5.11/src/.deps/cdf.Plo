@@ -1,0 +1,209 @@
+cdf.lo: cdf.c file.h ../config.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/stdio.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/features.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/predefs.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/cdefs.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wordsize.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs.h \
+ /opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include/stddef.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/types.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/typesizes.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/libio.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/_G_config.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/wchar.h \
+ /opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include/stdarg.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio_lim.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sys_errlist.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/errno.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/errno.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/errno.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm/errno.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm-generic/errno.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm-generic/errno-base.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/fcntl.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/fcntl.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/types.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/time.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/endian.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/endian.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/byteswap.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/select.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/select.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sigset.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/time.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/sysmacros.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/pthreadtypes.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/uio.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/stat.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stat.h \
+ /opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include/stdint.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/stdint.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wchar.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/inttypes.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/regex.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/option-groups.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/param.h \
+ /opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include-fixed/limits.h \
+ /opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include-fixed/syslimits.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/limits.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix1_lim.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/local_lim.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/limits.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix2_lim.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/xopen_lim.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/param.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm/param.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/assert.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/stdlib.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitflags.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitstatus.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/xlocale.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/alloca.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/unistd.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix_opt.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/environments.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/confname.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/getopt.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/string.h \
+ /opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/ctype.h \
+ cdf.h
+
+file.h:
+
+../config.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/stdio.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/features.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/predefs.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/cdefs.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wordsize.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include/stddef.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/types.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/typesizes.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/libio.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/_G_config.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/wchar.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include/stdarg.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio_lim.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sys_errlist.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/errno.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/errno.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/errno.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm/errno.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm-generic/errno.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm-generic/errno-base.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/fcntl.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/fcntl.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/types.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/time.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/endian.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/endian.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/byteswap.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/select.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/select.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sigset.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/time.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/sysmacros.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/pthreadtypes.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/uio.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/stat.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stat.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include/stdint.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/stdint.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wchar.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/inttypes.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/regex.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/option-groups.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/param.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include-fixed/limits.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../lib/gcc/arm-none-linux-gnueabi/4.5.1/include-fixed/syslimits.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/limits.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix1_lim.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/local_lim.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/limits.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix2_lim.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/xopen_lim.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/param.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/asm/param.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/assert.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/stdlib.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitflags.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitstatus.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/xlocale.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/alloca.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/unistd.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix_opt.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/environments.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/confname.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/getopt.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/string.h:
+
+/opt/N310/Linux/arm-2010.09/bin/../arm-none-linux-gnueabi/libc/usr/include/ctype.h:
+
+cdf.h:

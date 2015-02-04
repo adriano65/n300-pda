@@ -1,0 +1,32 @@
+RH_PATCH (in Makefile)
+Version: 0.01
+
+E-mail: filipg@paranoia.com       (best)
+        fmgst+@pitt.edu           (so so)
+
+----------------------------------------------------------------------------------
+
+Intro:
+        This patch remaps the Function keys (F1-F12) such that macros work
+	until RedHat Linux 4.1 (and possibly others). It is very small.
+
+Do I
+Need
+It:
+	If you run Linux and your macros _have_ worked before and do not
+	work after upgrading to a RedHat release of Linux, try this patch.
+	You can apply it and disable it via the "-D_RH_FIX" in the OPFLAGS
+	in the Makefile... so if you do upgrade, making it work will only
+	involve a recompile.
+	NOTE: With RedHat 5.0, the F-key seem to work better without this
+	option than with it. (JL)
+
+Bugs:
+	The change is insubstancial enough to not present new bugs. Famous
+	last words... I hear :-)
+
+----------------------------------------------------------------------------------
+
+Change Log:
+----------------
+// fmg 8/22/97 - Added ReadHat Linux patch

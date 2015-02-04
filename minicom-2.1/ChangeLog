@@ -1,0 +1,589 @@
+2003-05-18  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* Release version 2.1.
+
+	* NEWS: update, new {maintainer, homepage, lists}
+
+2003-04-30  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* src/Makefile.am: Don't overwrite CFLAGS, add options (sigh...).
+
+2003-04-29  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* configure.in: add /var/spool/lock as a possible lock directory as
+	               it seems to be the choice of FreeBSD right now.
+
+2003-04-26  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* man/minicom.1, src/minicom.h, src/minicom.c, src/main.c
+	               Add the "-T"/"--disabletime option to disable
+	               the display of the online time in the status bar.
+
+2003-04-22  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* src/minicom.h, src/rcsid.h, src/main.c, src/file.c, src/windiv.c, src/window.h, src/window.c, src/config.c, src/dial.c, src/minicom.c, src/Makefile.am:
+	               The minicom binary now compiles without warnings with
+	               the -W switch, add that to Makefile.am now too
+
+2003-04-19  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* configure.in: Remove verboseness at the end of the configure run.
+
+	* configure.in: Add check for libsocket for Solaris
+
+	* lib/snprintf.c: Add sys/types.h and strings.h to make it compilable
+	                on Solaris.
+
+	* configure.in, src/Makefile.am, lib/Makefile.am:
+	                We need getopt.o in libport.a if we need to compile
+	                getopt_long (_internal_getopt), so we need to
+	                pull that in. If anyone knows a better way how to
+	                do this, please let me know.
+
+	* src/ipc.c, src/wkeys.c, src/ascii-xfr.c:
+	                Add strings.h because some unices implement
+	                FD_ZERO using bzero without pulling in the header files
+	                themselves, it seems.
+
+	* src/sysdep.h: Change include path from sys/termios.h to
+	                termios.h as this seems more portable.
+
+	* Makefile.am: For aux/ only add [a-z] files (i.e. exclude CVS files)
+
+	* src/minicom.c: Make 8bit whitelist code a bit more generic, maybe
+	                 overdesigned as it's a hack nevertheless. Should
+	                 we generally switch to 8bit and add a 7bit option?
+
+2003-04-12  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* src/minicom.c: Add ru to the 8bit list (as ja and ko already are)
+	                 this is probably a workaround and needs better fixing
+
+	* man/minicom.1: Add -L
+
+2003-04-06  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* Makefile.am: Rename tags target to ctags, as standard automake
+	               does etags by default, but I want ctags. 
+
+	* src/dial.c, src/file.c, src/ipc.c, src/minicom.h, src/wkeys.c, src/common.c: Cleanups.
+
+	* Makefile.am, src/Makefile.am: Remove no-dependencies
+	               Add tags generation.
+
+2003-04-04  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* src/vt100.c: Initialize savetrans[2],
+	               patch by Pavel Roskin <proski@gnu.org>
+
+	* src/Makefile.am: Add CFLAGS to add -Wall
+
+2003-04-03  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* configure.in: Remove ja_JP.SJIS from ALL_LINGUAS because it
+	             doesn't build (right now). And according to
+	             the Debian-ChangeLog to 1.83.1-4.1 it should be
+	             removed as well.
+
+	* acconfig.h, configure.in, src/config.c, src/ipc.c, src/minicom.c:
+	             Rename LIBDIR to CONFDIR and
+	             MINICOM_LIBDIR to MINICOM_CONFDIR
+	             to fix name clashes, and libdir was the wrong name (IMHO)
+	             anyway.
+
+	* src/minicom.c: I didn't understand a sentence of the help screen.
+
+	* src/ipc.c: Fix typo in check_io which caused minicom to fully
+	             use CPU in certain circumstances.
+
+2003-04-02  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* acconfig.h, src/Makefile.am, src/dial.c, src/ipc.c, src/main.c, src/minicom.h, src/sysdep1.c, src/sysdep1_s.c:
+	        Socket support, patch initially for minicom 1.82.1 by
+	        Jork Löser <jork.loeser@inf.tu-dresden.de>
+
+2003-03-31  Martin Godisch <martin@godisch.de>
+
+	* src/rwconf.c:
+		Added verbose error reporting for invalid config files.
+	* src/window.c:
+		Extended character input range (Debian #44795).
+	* src/main.c:
+		Fixed (?) escape key label for xminicom (Debian #110833).
+	* src/xminicom:
+		Added x-terminal-emulator.
+	* src/minicom.c, src/dial.c, src/file.c, src/ascii-xfr.c:
+		Fixed compiler warnings.
+
+2003-03-30  Adam Lackorzynski  <adam@os.inf.tu-dresden.de>
+
+	* po/hu.po: add hungarian translation,
+	            thanks Márton Németh <nm127@hszk.bme.hu>
+
+2003-03-30  Martin Godisch <martin@godisch.de>
+
+	* configure.in, src/dial.c, src/main.c, src/minicom.c, src/port.h, src/rwconf.c, src/sysdep.h:
+		Applied patches for GNU/Hurd, provided by Robert Millan.
+	* src/sysdep1.c:
+		Applied TIOCFLUSH patch, avoids segfaults,
+		provided by Robert Millan.
+	* src/config.c, src/main.c, src/minicom.h:
+		Applied mbasename() patch for lock files (Debian #153933),
+		provided by Jordi Mallach and Gergely Nagy.
+	* src/config.c:
+		Added ~ to $HOME expansion for pathname config (Debian #54946).
+	* src/script.c:
+		Fixed (?) endless loop (Debian #54944).
+	* po/cs_CZ.po, po/cs.po, configure.in, doc/Locales:
+		Changed cs_CZ to cs.
+	* po/ja.po:
+		Changed charset from euc-japanese to euc-jp (Debian #185541).
+	* man/xminicom.1 man/Makefile.am:
+		Added manual page for xminicom.
+
+2002-05-18  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/minicom.1, man/runscript.1, po/fi.po, AUTHORS, README, configure.in, doc/Locales, doc/Todo, doc/suomeksi, man/ascii-xfr.1, minicom.spec.in:
+	Changed my netmail address, and changed the version number to 2.00.1.
+
+2002-03-09  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/runscript.1, src/script.c:
+	Use '^' as a control character prefix in scripts
+
+2002-03-02  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/main.c, src/updown.c:
+	- fix for a bug that may overwrite TERMINFO environment variable (Bryan
+	Henderson)
+	- fix for setcbreak() calls (Peter Kundrat)
+
+2002-01-27  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/rwconf.c:
+	Fixed a bug that sometimes caused "public" settings to be marked "private".
+
+2001-12-29  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/main.c: NO_CTTY flag added to the open parameters for portfd
+	(Topi Maurola, tm@TopiSoft.fi)
+
+	* src/rwconf.c: SYSV / BSD43 fix by Griff Miller (miller@positron.com)
+
+2001-12-21  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po, po/fi.po, doc/Locales, configure.in, minicom.spec.in:
+	Changed the Finnish locale from fi_FI to fi. Updated the instructions for
+	adding new languages in doc/Locales to match the procedure with autoconf.
+
+2001-11-11  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* configure.in:
+	Use default port /dev/modem if no serial ports found in the build machine.
+
+2001-10-01  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* doc/Announce-2.00: 2.00.0 released
+
+2001-10-01  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* src/Makefile.am, src/minicom.h: fixed build outside source tree
+
+2001-09-30  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po, man/minicom.1, configure.in:
+	changed version number to 2.00.0
+
+2001-09-28  Gaël Quéri  <gael@pld.org.pl>
+
+	* po/fr.po: updated the translation for minicom 1.90
+
+2001-07-07  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/file.c:
+	Fixed parentheses mismatching after the previous 'fix' of the 4th of July.
+
+2001-07-04  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* src/dial.c, src/file.c, src/minicom.c, src/updown.c:
+	fixes format string abuses.
+
+	* man/minicom.1: s/windows-based/window based/
+
+2001-05-30  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* po/pl.po: fixed fuzzy translation
+
+2001-05-28  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/ru.po: The Russian translations checked.
+
+2001-05-26  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po, po/fr.po, po/ja.po, po/pl.po, po/pt_BR.po, po/ru.po, po/cs_CZ.po, po/es.po:
+	I run 'make update-po'. Check the 'fuzzy' parts.
+
+2001-05-25  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* minicom.spec.in:
+	added Finnish description, removed lang(ko) and added lang(ru)
+
+2001-05-04  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* src/dial.c, src/minicom.c, src/updown.c:
+	fixes buffer overflow at logging cmdline and other (I don't know who is real
+	author this fix but patch was added to PLD resources by Sebastian Zagrodzki
+	<zagrodzki@pld.org.pl>). IMHO it will be good make regular release now :)
+
+2001-04-19  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/ko.po, doc/Locales: Outdated Korean translations removed
+
+	* configure.in:
+	Korean removed from ALL_LINGUAS until somebody updates the translations
+
+2001-04-18  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* intl/Attic/ChangeLog, intl/Attic/Makefile.in, intl/Attic/VERSION, intl/Attic/bindtextdom.c, intl/Attic/cat-compat.c, intl/Attic/dcgettext.c, intl/Attic/dgettext.c, intl/Attic/explodename.c, intl/Attic/finddomain.c, intl/Attic/gettext.c, intl/Attic/gettext.h, intl/Attic/gettextP.h, intl/Attic/hash-string.h, intl/Attic/intl-compat.c, intl/Attic/l10nflist.c, intl/Attic/libgettext.h, intl/Attic/linux-msg.sed, intl/Attic/loadinfo.h, intl/Attic/loadmsgcat.c, intl/Attic/localealias.c, intl/Attic/po2tbl.sed.in, intl/Attic/textdomain.c, intl/Attic/xopen-msg.sed:
+	intl directory is filled at autogen.sh call
+
+2001-04-17  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/cs_CZ.po: Updated Czech translations
+
+2001-03-28  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/minicom.1: Updated the arguments of -p parameter in the manpage
+
+	* src/minicom.c:
+	Added support for devices /dev/ptyp[0-f] as the argument for -p
+
+2001-03-25  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/dial.c: check for entry number validity with the -d option
+
+	* po/ru.po, doc/Locales, doc/russian, extras/tables/mc.rus, AUTHORS, configure.in:
+	Added translations for Russian
+
+2001-02-22  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* README:
+	- fixed browseable cvs web interface on http://cvs.pld.org.pl/.
+
+2001-02-21  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* src/common.c, src/dial.c, src/port.h:
+	include time.h on all systems. Patch by Adam J. Richter <adam@yggdrasil.com>.
+
+2001-02-13  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/minicom.1: Command line option -w documented
+
+2001-02-07  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* configure.in: - added cs_CZ to ALL_LINGUAS.
+
+2001-02-06  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/cs_CZ.po: Czech translations added to the po directory
+
+2001-02-06  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* po/Attic/Makefile.in.in:
+	- removed Makefile.in.in (this file is autogenerated by
+	  gettextize --copy --force called in autogen.sh).
+
+	* man/Makefile.am:
+	- small simplification: pass $(man_MANS) to EXTRA_DIST.
+
+	* po/es.po, configure.in:
+	- added es translation from Conectiva resources.
+
+2001-01-05  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* doc/minicom.FAQ: A minor change to the FAQ
+
+2001-01-05  Tomohiro Kubota  <kubota@pld.org.pl>
+
+	* po/ja.po:  Updated translations.
+
+2000-11-24  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* doc/minicom.FAQ: Added text about "winmodems" to the FAQ
+
+2000-11-17  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/ascii-xfr.1, src/ascii-xfr.c:
+	Ascii upload fix for Linux, and -e option to ascii-xfr (Bob Hauck,
+	hauck@codem.com)
+
+2000-10-28  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/config.c:
+	a fix for the character conversion table load/save filename prompting
+
+2000-10-27  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/main.c:
+	Command line option -o now bypasses lockfile handling, as the manual says
+
+2000-09-19  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/ascii-xfr.c, src/dial.c, src/script.c:
+	Changed #ifdef __linux__ to #ifdef HAVE_USLEEP around usleep() calls
+
+2000-07-30  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po:
+	Fixed column alignments in the 'minicom -h' Finnish output
+
+2000-07-24  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po, src/main.c, src/minicom.c, src/minicom.h:
+	Command line option -w to make linewrap default on (Steffen Rheinhold
+	<steffen.rheinhold@to.com>)
+
+2000-06-24  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/port.h, src/sysdep.h, src/sysdep1.c, src/sysdep2.c, configure.in, acconfig.h:
+	DCD fixes by Gael, changed version in configure.in to 1.90
+
+2000-06-16  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* man/minicom.1, AUTHORS, doc/ChangeLog.old, doc/pl-translation.txt, minicom.spec.in:
+	- unify my email
+
+2000-06-07  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/config.c, src/file.c, src/minicom.h:
+	Upload/download directory changed in config menus will affect file
+	selection window next time it is shown.
+
+2000-06-02  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/rwconf.c: Fixed a bug when compiled with LOGFILE undefined
+
+2000-04-17  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/rwconf.c:
+	Fixed logfile default name to use the one defined in LOGFILE macro
+
+2000-04-16  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/minicom.1:
+	Removed Michael Johnson's email address, it turn out to be somebody else's
+
+2000-04-14  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* README: - added information about anoncvs
+
+	* src/minicom.c: - merged warning string
+
+2000-04-12  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* src/config.c, src/dial.c:
+	Added an #if directive to fix compile errors when compiled without HAVE_MACROS
+
+2000-03-29  Gaël Quéri  <gael@pld.org.pl>
+
+	* AUTHORS: fixed some typos
+
+2000-03-27  Gaël Quéri  <gael@pld.org.pl>
+
+	* minicom.spec.in: - LINGUAS has to be unset to make rpm work
+	- replaced --sysconf by --sysconfdir for %configure
+
+2000-03-16  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po, src/getsdir.c, src/main.c, src/minicom.c, src/sysdep.h, src/sysdep1.c:
+	- SVR4 locking patches by Chaim Frenkel (chaimf@pobox.com)
+	- updated translation file for Finnish, some messages seemed to be missing
+
+2000-02-17  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* src/Makefile.am, configure.in:
+	- add -I../lib only when system getopt.h is missing
+
+2000-02-16  Gaël Quéri  <gael@pld.org.pl>
+
+	* acconfig.h: added _HISTORY
+
+	* src/minicom.c:
+	fixed the reporting of the MINICOM environment variable when it is unset
+
+	* po/fr.po:
+	updated the translation of the command-line help and the serial port
+	setup dialog
+
+2000-02-14  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* po/Attic/ko.po, po/pl.po, po/pt_BR.po, po/Attic/fi_FI.po, po/fr.po, po/ja.po:
+	- fixed pl.po
+	- make update-po
+
+2000-02-13  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po, src/help.c:
+	- changed \263 or whatever it was to | in help.c
+	- updated the Finnish translations.
+
+2000-02-11  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* man/minicom.1, src/main.c, src/minicom.c, src/minicom.h, src/rwconf.c, src/sysdep1.c, src/config.c, src/configsym.h, src/dial.c:
+	- Fix for the eternal loop when killed by certain signals, provided by
+	Michael Deutschmann <michael@talamasca.ocis.net>
+
+	- Configuration setting for two stopbits. This change will increase the
+	size of a phone directory entry, so the dialdir will be converted to the
+	new record size. However, the old version will be backed up before that, in
+	case you still want to use an earlier program version.
+	NOTICE: This also brings some more strings to be translated.
+
+	- Changed characters \263 to | on the status line. (As non-ascii characters
+	should be avoided in i18n strings.)
+
+	I have earlier sent the signal handling fix and the two-stopbit setting to
+	the mailing list as diffs to 1.83.0, but noticed that they had not been
+	applied to the cvs directory yet.
+
+2000-02-10  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* src/minicom.c: - always use getopt_long()
+
+	* man/Attic/modemu.1, man/Makefile.am, man/ascii-xfr.1, man/minicom.1, man/runscript.1:
+	- removed modemu man page
+	- added Date CVS keyword to man pages
+
+	* src/minicom.c, src/minicom.h: - getopt_long() support
+	- allow to specifiy /dev/pts/* as pseudo terminal
+
+	* acconfig.h, configure.in: - getopt checking
+	- cleanups
+
+	* lib/Makefile.am, lib/getopt.c, lib/getopt.h, lib/getopt_long.c:
+	- added getopt() and getopt_long() replacement
+
+	* src/Makefile.am: - added missing rcsid.h
+
+	* src/file.c: - added few casts to avoid warnings
+
+2000-02-09  Gaël Quéri  <gael@pld.org.pl>
+
+	* minicom.spec.in: Fixed typos in French description
+
+2000-02-09  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* doc/Attic/Porting, doc/Makefile.am: - removed obsolete file
+
+	* src/help.c, src/ipc.c, src/minicom.c, src/minicom.h, src/port.h, src/sysdep.h, src/vt100.c, src/wkeys.c, src/dial.c:
+	- changed _SELECT -> HAVE_SELECT and _NO_TERMIOS -> !HAVE_TERMIOS_H
+	  (fixes problem with hanging minicom on start)
+
+2000-02-02  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* configure.in:
+	- try to link with tinfo library before ncurses and other *curses
+
+2000-01-27  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* src/rcsid.h: - RCSID() macro definition
+
+	* src/ascii-xfr.c, src/common.c, src/config.c, src/dial.c, src/file.c, src/functions.c, src/getsdir.c, src/help.c, src/ipc.c, src/keyserv.c, src/main.c, src/minicom.c, src/rwconf.c, src/script.c, src/sysdep1.c, src/sysdep2.c, src/updown.c, src/util.c, src/vt100.c, src/wildmat.c, src/windiv.c, src/window.c, src/wkeys.c, lib/error.c, lib/snprintf.c, lib/usleep.c:
+	- use RCSID() macro where possible for better version control
+
+	* src/dial.c: - don't declare dial_user and dial_pass as static
+
+2000-01-18  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* src/config.c: - don't declare J_col[] as static
+
+	* src/common.c, src/dial.c: - include time.h on AIX
+
+2000-01-03  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* minicom.spec.in: - fixed Japanese locale
+
+1999-12-30  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* autogen.sh, configure.in, po/Attic/ja_JP.ujis.po, po/ja.po:
+	- fixed Japanese locale
+
+1999-12-22  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* doc/ChangeLog.old, doc/Makefile.am:
+	- moved ChangeLog to doc/ChangeLog.old. There will be new
+	  autogenerated ChangeLog (after xmas).
+
+1999-12-22  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/Attic/fi_FI.po:
+	Added some msgstr strings that were missing. This version is also included
+	in the newer 1.83.0 packet that was sent to sunsite today.
+
+1999-12-21  Jukka Lahtinen  <walker@pld.org.pl>
+
+	* po/pt_BR.po: Updated translation file for Portuguese.
+
+1999-12-20  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* Makefile.am, configure.in, minicom.spec.in: - first try to `make rpm'
+
+	* extras/terminfo/Makefile.am, extras/termcap/Makefile.am, extras/tables/Makefile.am, extras/linux/Makefile.am, extras/Makefile.am:
+	- few Makefiles to avoid CVS in dist tar.gz
+
+	* configure.in, src/sysdep.h:
+	- include features.h only if available (to define _POSIX_SOURCE)
+
+	* lib/usleep.c: - added cvs keyword
+
+	* doc/Announce-1.83: - added announce from 1.83 version
+
+	* src/xminicom, src/Makefile.am, src/file.c, src/getsdir.c, src/intl.h, src/main.c, src/minicom.c, src/minicom.h, src/port.h, src/rwconf.c, src/script.c, src/sysdep.h, src/sysdep1.c, src/updown.c, src/util.c, src/window.c, src/wkeys.c, po/Attic/ko.po, po/pl.po, po/pt_BR.po, po/Attic/ja_JP.ujis.po, po/Attic/Makefile.in.in, po/Attic/fi_FI.po, po/POTFILES.in, po/fr.po, lib/Makefile.am, lib/error.c, lib/error.h, lib/libport.h, lib/snprintf.c, man/Makefile.am, extras/Makefile.am, doc/Attic/developers, doc/Makefile.am, doc/Todo, AUTHORS, FILE_ID.DIZ, Makefile.am, acconfig.h, acinclude.m4, configure.in:
+	- AUTHORS instead of doc/developers
+	- fixed compilation on libc5 systems (Slackware 4.0)
+	- added few more string to translate
+
+1999-12-18  Arkadiusz Mi¶kiewicz  <misiek@pld.org.pl>
+
+	* lib/libport.h: - cleanups
+
+	* lib/libport.h, lib/usleep.c:
+	- added replacement of usleep() for systems without this function
+
+	* src/port.h: - include termcap.h only if HAVE_TERMCAP_H is defined
+
+	* README: - fixed url to CVS->WEB
+
+	* po/Attic/Makefile.in.in: - added few missing files
+
+	* src/window.h: - imported new updated sources
+
+	* src/window.c, src/wkeys.c, src/xminicom: New file.
+
+	* src/vt100.h: - imported new updated sources
+
+	* src/sysdep1.c, src/sysdep2.c, src/updown.c, src/util.c, src/vt100.c, src/wildmat.c, src/windiv.c, src/minicom.c, src/minicom.h, src/port.h, src/rwconf.c, src/script.c, src/sysdep.h:
+	New file.
+
+	* src/getsdir.h, src/keyboard.h: - imported new updated sources
+
+	* src/file.c, src/functions.c, src/getsdir.c, src/help.c, src/intl.h, src/ipc.c, src/keyserv.c, src/main.c:
+	New file.
+
+	* po/ujis2sjis.c, src/charmap.h, src/defmap.h:
+	- imported new updated sources
+
+	* po/pt_BR.po, src/Makefile.am, src/ascii-xfr.c, src/common.c, src/config.c, src/configsym.h, src/dial.c, po/Attic/ja_JP.ujis.po, po/Attic/ko.po, po/pl.po, po/Attic/fi_FI.po, po/fr.po:
+	New file.
+
+	* po/ChangeLog: - imported new updated sources
+
+	* intl/Attic/cat-compat.c, intl/Attic/dcgettext.c, intl/Attic/dgettext.c, intl/Attic/explodename.c, intl/Attic/finddomain.c, intl/Attic/gettext.c, intl/Attic/gettext.h, intl/Attic/gettextP.h, intl/Attic/hash-string.h, intl/Attic/intl-compat.c, intl/Attic/l10nflist.c, intl/Attic/libgettext.h, intl/Attic/linux-msg.sed, intl/Attic/loadinfo.h, intl/Attic/loadmsgcat.c, intl/Attic/localealias.c, intl/Attic/po2tbl.sed.in, intl/Attic/textdomain.c, intl/Attic/xopen-msg.sed, lib/Makefile.am, lib/error.c, lib/error.h, lib/libport.h, lib/snprintf.c, lib/usleep.c, man/Attic/modemu.1, man/Makefile.am, man/ascii-xfr.1, man/minicom.1, man/runscript.1, po/POTFILES.in:
+	New file.
+
+	* ABOUT-NLS, COPYING, INSTALL, NEWS, doc/Announce-1.78, doc/Announce-1.82, doc/Announce-1.82.1, doc/COMPATABILITY.lrzsz, doc/HistSearch, doc/Macros, doc/QuickStart.modemu, doc/README.lrzsz, doc/RedHat, doc/TODO.lrzsz, doc/Todo.175, doc/Todo.Irix.dif, doc/Todo.emacskey.dif, doc/Todo.fsel, doc/copyright.modemu, doc/fselector.txt, doc/japanese, doc/minicom.users, doc/minirc.dfl, doc/modemu.README, doc/portugues-brasil, extras/htsalogin, extras/linux/INSTALL, extras/linux/README-FIRST, extras/linux/mtelnet, extras/saralogin, extras/scriptdemo, extras/tables/mc.iso, extras/tables/mc.noconv, extras/tables/mc.pc8, extras/tables/mc.sf7, extras/termcap/README, extras/termcap/termcap.long, extras/termcap/termcap.short, extras/terminfo/README, extras/terminfo/minicom, extras/unixlogin:
+	- imported new updated sources
+
+	* AUTHORS, FILE_ID.DIZ, Makefile.am, README, acconfig.h, acinclude.m4, autogen.sh, configure.in, doc/Attic/Porting, doc/Attic/developers, doc/Locales, doc/Makefile.am, doc/Todo, doc/minicom.FAQ, doc/pl-translation.txt, doc/suomeksi, extras/Makefile.am, intl/Attic/ChangeLog, intl/Attic/Makefile.in, intl/Attic/VERSION, intl/Attic/bindtextdom.c:
+	New file.
+

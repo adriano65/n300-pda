@@ -1,0 +1,23 @@
+minicom TODO list
+-----------------
+
+important:
+
+* update/complete existing translations, see also [1]
+
+normal:
+
+* sync AUTHORS with man/minicom.1
+* merge ChangeLog with */ChangeLog*
+* update to gettext 0.11
+* fix Debian BTS bugs
+* documentation cleanup
+* minicom homepage
+
+wishlist:
+
+* incorporate outstanding patches from debian/patches
+* make minicom.1 an .in file using @sysconfdir@ etc.
+
+
+[1] http://www.iro.umontreal.ca/contrib/po/HTML/matrix.html
