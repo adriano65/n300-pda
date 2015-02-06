@@ -14,7 +14,7 @@ nand.o: nand.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -23,12 +23,7 @@ nand.o: nand.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
-  /opt/N310/u-boot4n300/include/nand.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/compat.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/mtd.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/mtd-abi.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/nand.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
 nand_base.o: nand_base.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -45,7 +40,7 @@ nand_base.o: nand_base.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -86,7 +81,7 @@ nand_ids.o: nand_ids.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -99,8 +94,7 @@ nand_ids.o: nand_ids.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/linux/mtd/nand.h \
   /opt/N310/u-boot4n300/include/linux/mtd/compat.h \
   /opt/N310/u-boot4n300/include/linux/mtd/mtd.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/mtd-abi.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/compat.h
+  /opt/N310/u-boot4n300/include/linux/mtd/mtd-abi.h
 nand_ecc.o: nand_ecc.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -117,7 +111,7 @@ nand_ecc.o: nand_ecc.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -146,7 +140,7 @@ nand_bbt.o: nand_bbt.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -178,7 +172,7 @@ nand_util.o: nand_util.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -187,17 +181,4 @@ nand_util.o: nand_util.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
-  /opt/N310/u-boot4n300/include/command.h \
-  /opt/N310/u-boot4n300/include/watchdog.h \
-  /opt/N310/u-boot4n300/include/malloc.h \
-  /opt/N310/u-boot4n300/include/div64.h \
-  /opt/N310/u-boot4n300/include/asm/errno.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/mtd.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/mtd-abi.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/compat.h \
-  /opt/N310/u-boot4n300/include/nand.h \
-  /opt/N310/u-boot4n300/include/linux/mtd/nand.h \
-  /opt/N310/u-boot4n300/include/jffs2/jffs2.h \
-  /opt/N310/u-boot4n300/include/jffs2/load_kernel.h \
-  /opt/N310/u-boot4n300/include/linux/list.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h

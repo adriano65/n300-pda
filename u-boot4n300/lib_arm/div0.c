@@ -22,9 +22,11 @@
  */
 
 /* Replacement (=dummy) for GNU/Linux division-by zero handler */
-void __div0 (void)
-{
+/* for EABI remove whole function */
+/*
+void __div0 (void) {
 	extern void hang (void);
 
 	hang();
 }
+*/

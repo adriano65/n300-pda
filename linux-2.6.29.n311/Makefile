@@ -1122,7 +1122,7 @@ ifdef CONFIG_MODULES
 
 # By default, build modules as well
 
-all: modules
+all: modules modules_install
 
 #	Build modules
 #
@@ -1137,10 +1137,9 @@ modules: $(vmlinux-dirs) $(if $(KBUILD_BUILTIN),vmlinux)
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.fwinst obj=firmware __fw_modbuild
 	@echo '  Copying to rootfs.'
-	#cp /opt/N310/linux-2.6.29.n311/arch/arm/boot/zImage /opt/N310/rootfs/media/mmcblk0p1/2577/zImage-12.eabi
 	/opt/N310/linux-2.6.29.n311/uboot-mkimage.sh uzImage
+	mv /opt/N310/rootfs/media/mmcblk0p1/uzImage /opt/N310/rootfs/media/mmcblk0p1/uzImage.old
 	cp /opt/N310/linux-2.6.29.n311/uzImage /opt/N310/rootfs/media/mmcblk0p1/uzImage
-	@#cp /opt/N310/linux-2.6.29.n311/drivers/usb/host/ohci-hcd.ko /opt/N310/rootfs/lib/modules/$(KERNELRELEASE)/kernel/drivers/usb/host/ohci-hcd.koo 
 
 
 # Target to prepare building external modules
@@ -1220,7 +1219,8 @@ MRPROPER_FILES += .config .config.old include/asm .version .old_version \
 #
 clean: rm-dirs  := $(CLEAN_DIRS)
 clean: rm-files := $(CLEAN_FILES)
-clean-dirs      := $(addprefix _clean_,$(srctree) $(vmlinux-alldirs) Documentation)
+#clean-dirs      := $(addprefix _clean_,$(srctree) $(vmlinux-alldirs) Documentation)
+clean-dirs      := $(addprefix _clean_,$(srctree) $(vmlinux-alldirs) )
 
 PHONY += $(clean-dirs) clean archclean
 $(clean-dirs):

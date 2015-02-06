@@ -218,7 +218,7 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 		set = S3C2440_NFCONF_TACLS(tacls - 1);
 		set |= S3C2440_NFCONF_TWRPH0(twrph0 - 1);
 		set |= S3C2440_NFCONF_TWRPH1(twrph1 - 1);
-		pr_debug("TYPE_S3C2440\n");
+		//pr_debug("TYPE_S3C2440\n");
 		break;
 
 	default:
@@ -1026,7 +1026,7 @@ static struct platform_driver s3c2412_nand_driver = {
 		.owner	= THIS_MODULE,
 	},
 };
-
+/*
 int S3C24XX_NAND_register_driver(struct s3c2440_nand_driver *driver)
 {
 	return 0;
@@ -1036,7 +1036,7 @@ int S3C24XX_NAND_unregister_driver(struct s3c2440_nand_driver *driver)
 {
 	return 0;
 }
-
+*/
 
 static int __init s3c2410_nand_init(void)
 {
@@ -1053,10 +1053,10 @@ static void __exit s3c2410_nand_exit(void)
 	platform_driver_unregister(&s3c2440_nand_driver);
 	platform_driver_unregister(&s3c2410_nand_driver);
 }
-
+/*
 EXPORT_SYMBOL(S3C24XX_NAND_register_driver);
 EXPORT_SYMBOL(S3C24XX_NAND_unregister_driver);
-
+*/
 module_init(s3c2410_nand_init);
 module_exit(s3c2410_nand_exit);
 

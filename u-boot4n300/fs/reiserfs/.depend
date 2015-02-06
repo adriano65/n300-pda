@@ -14,7 +14,7 @@ reiserfs.o: reiserfs.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -40,7 +40,7 @@ dev.o: dev.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -66,7 +66,7 @@ mode_string.o: mode_string.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \

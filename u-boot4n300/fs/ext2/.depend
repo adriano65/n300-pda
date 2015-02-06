@@ -14,7 +14,7 @@ ext2fs.o: ext2fs.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -23,7 +23,13 @@ ext2fs.o: ext2fs.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
+  /opt/N310/u-boot4n300/include/ext2fs.h \
+  /opt/N310/u-boot4n300/include/malloc.h \
+  /opt/N310/u-boot4n300/include/asm/byteorder.h \
+  /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
+  /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h
 dev.o: dev.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -40,7 +46,7 @@ dev.o: dev.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -49,4 +55,5 @@ dev.o: dev.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
+  /opt/N310/u-boot4n300/include/ext2fs.h

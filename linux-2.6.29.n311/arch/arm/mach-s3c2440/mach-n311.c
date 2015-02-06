@@ -137,10 +137,8 @@ static struct s3c2410_uartcfg n300_uartcfgs[] = {
 	}
 };
 
-static void n300_nand_select_chip(struct s3c2410_nand_set *set, int slot)
-{
+static void n300_nand_select_chip(struct s3c2410_nand_set *set, int slot) {
 	//unsigned long nS3C2440_CLKCON;
-
 	//slot = set->nr_map[slot] & 3;		// nr_map[slot] is null!
 	//printk("n300_nand_select_chip: selecting slot %d (set %p)\n", slot, set);
 	
@@ -154,15 +152,20 @@ static void n300_nand_select_chip(struct s3c2410_nand_set *set, int slot)
 	#define NF_nCE_LOW  	(NFCONT &= ~(1<<1))
 	#define NF_nCE_HIGH		(NFCONT |=  (1<<1))
 	*/
+	
 	unsigned long nS3C2440_NFCONT;
 	
 	nS3C2440_NFCONT =__raw_readl(S3C2440_NFCONT);
+	/*
 	__raw_writel((nS3C2440_NFCONT &= ~(1<<1)), S3C2440_NFCONT);
 	//writel(S3C2440_NFCONT, (nS3C2440_NFCONT &= ~(1<<1)));
+	//nS3C2440_NFCONT =__raw_readl(S3C2440_NFCONT);
+	//__raw_writel(nS3C2440_NFCONT |= 1, S3C2440_NFCONT);
 	nS3C2440_NFCONT =__raw_readl(S3C2440_NFCONT);
-	__raw_writel(nS3C2440_NFCONT |= 1, S3C2440_NFCONT);
-	
+	*/
+	printk("n300_nand_select_chip: S3C2440_NFCONT==0x%04X\n", nS3C2440_NFCONT);
 }
+
 static struct mtd_partition n300_nand_part[] = {
 	[0] = {
 		.name		= "u-boot",

@@ -14,7 +14,7 @@
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -50,7 +50,7 @@ bcm570x.o: bcm570x.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -77,7 +77,7 @@ cfb_console.o: cfb_console.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -103,7 +103,7 @@ cfi_flash.o: cfi_flash.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -139,7 +139,7 @@ cs8900.o: cs8900.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -171,7 +171,7 @@ ct69000.o: ct69000.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -197,7 +197,7 @@ dataflash.o: dataflash.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -223,7 +223,7 @@ dc2114x.o: dc2114x.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -249,7 +249,7 @@ dm9000x.o: dm9000x.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -283,7 +283,7 @@ e1000.o: e1000.c e1000.h /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -319,7 +319,7 @@ eepro100.o: eepro100.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -356,7 +356,7 @@ i8042.o: i8042.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -382,7 +382,7 @@ i82365.o: i82365.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -408,7 +408,7 @@ inca-ip_sw.o: inca-ip_sw.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -434,7 +434,7 @@ keyboard.o: keyboard.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -460,7 +460,7 @@ lan91c96.o: lan91c96.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -494,7 +494,7 @@ natsemi.o: natsemi.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -530,7 +530,7 @@ ne2000.o: ne2000.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -563,7 +563,7 @@ netarm_eth.o: netarm_eth.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -589,7 +589,7 @@ netconsole.o: netconsole.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -618,7 +618,7 @@ ns8382x.o: ns8382x.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -657,7 +657,7 @@ ns7520_eth.o: ns7520_eth.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -683,7 +683,7 @@ omap1510_i2c.o: omap1510_i2c.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -709,7 +709,7 @@ omap24xx_i2c.o: omap24xx_i2c.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -735,7 +735,7 @@ pci.o: pci.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -761,7 +761,7 @@ pci_auto.o: pci_auto.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -787,7 +787,7 @@ pci_indirect.o: pci_indirect.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -813,7 +813,7 @@ pcnet.o: pcnet.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -849,7 +849,7 @@ plb2800_eth.o: plb2800_eth.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -875,7 +875,7 @@ ps2ser.o: ps2ser.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -901,7 +901,7 @@ ps2mult.o: ps2mult.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -927,7 +927,7 @@ pc_keyb.o: pc_keyb.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -953,7 +953,7 @@ rtl8019.o: rtl8019.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -985,7 +985,7 @@ rtl8139.o: rtl8139.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1021,7 +1021,7 @@ rtl8169.o: rtl8169.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1057,7 +1057,7 @@ s3c4510b_eth.o: s3c4510b_eth.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1083,7 +1083,7 @@ s3c4510b_uart.o: s3c4510b_uart.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1109,7 +1109,7 @@ sed13806.o: sed13806.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1135,7 +1135,7 @@ sed156x.o: sed156x.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1163,7 +1163,7 @@ serial.o: serial.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1189,7 +1189,7 @@ serial_max3100.o: serial_max3100.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1216,7 +1216,7 @@ serial_pl010.o: serial_pl010.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1242,7 +1242,7 @@ serial_pl011.o: serial_pl011.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1272,7 +1272,7 @@ sl811_usb.o: sl811_usb.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1298,7 +1298,7 @@ sm501.o: sm501.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1324,7 +1324,7 @@ smc91111.o: smc91111.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1356,7 +1356,7 @@ smiLynxEM.o: smiLynxEM.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1382,7 +1382,7 @@ status_led.o: status_led.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1409,7 +1409,7 @@ sym53c8xx.o: sym53c8xx.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1435,7 +1435,7 @@ ti_pci1410a.o: ti_pci1410a.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1471,7 +1471,7 @@ tigon3.o: tigon3.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1498,7 +1498,7 @@ tsec.o: tsec.c /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1533,7 +1533,7 @@ usbdcore.o: usbdcore.c /opt/N310/u-boot4n300/include/malloc.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1560,7 +1560,7 @@ usbdcore_ep0.o: usbdcore_ep0.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1587,7 +1587,7 @@ usbdcore_omap1510.o: usbdcore_omap1510.c \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1613,7 +1613,7 @@ usbtty.o: usbtty.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1639,7 +1639,7 @@ videomodes.o: videomodes.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1665,7 +1665,7 @@ w83c553f.o: w83c553f.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1691,7 +1691,7 @@ ks8695eth.o: ks8695eth.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \
@@ -1717,7 +1717,7 @@ ts1620.o: ts1620.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/string.h \
   /opt/N310/u-boot4n300/include/asm/ptrace.h \
   /opt/N310/u-boot4n300/include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   /opt/N310/u-boot4n300/include/part.h \
   /opt/N310/u-boot4n300/include/ide.h \
   /opt/N310/u-boot4n300/include/flash.h \

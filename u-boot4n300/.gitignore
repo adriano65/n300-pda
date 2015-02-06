@@ -1,8 +1,9 @@
+*.a
+*.o
 /mtd.dd
 /.*project
 /.settings
+/.depend
 /.autotools
 *.lbm
-*.a
-*.o
 /doc

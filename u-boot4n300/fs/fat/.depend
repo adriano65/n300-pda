@@ -6,7 +6,7 @@ fat.o: fat.c ../..//include/common.h ../..//include/config.h \
   ../..//include/asm/posix_types.h ../..//include/asm/types.h \
   ../..//include/linux/string.h ../..//include/asm/string.h \
   ../..//include/asm/ptrace.h ../..//include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   ../..//include/part.h ../..//include/ide.h ../..//include/flash.h \
   ../..//include/image.h ../..//include/asm/u-boot.h \
   ../..//include/asm/global_data.h ../..//include/asm/mach-types.h \
@@ -23,7 +23,7 @@ file.o: file.c ../..//include/common.h ../..//include/config.h \
   ../..//include/asm/posix_types.h ../..//include/asm/types.h \
   ../..//include/linux/string.h ../..//include/asm/string.h \
   ../..//include/asm/ptrace.h ../..//include/asm/proc/ptrace.h \
-  /opt/N310/cross-compiler-armv4l/bin/../gcc/include/stdarg.h \
+  /usr/local/angstrom/arm/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdarg.h \
   ../..//include/part.h ../..//include/ide.h ../..//include/flash.h \
   ../..//include/image.h ../..//include/asm/u-boot.h \
   ../..//include/asm/global_data.h ../..//include/asm/mach-types.h \

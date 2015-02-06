@@ -84,6 +84,11 @@
  nand erase 0 0 0x20000 (2 times better)
  nand write 0 /opt/N310/u-boot4n300/u-boot.nand 0
  nand dump 0 /opt/N310/u-boot4n300/dump 0x40000 0x1000
+ 
+ -------------------------------------- ext2 commands -> Not working on 3rd partition (test on first one)
+ ext2ls mmc 0 /
+ ext2ls mmc 0:2 /
+ ext2load mmc 0:3 0x31000000 /boot/uzImage
  */
 
 #ifndef __CONFIG_H
@@ -186,6 +191,7 @@
 			CFG_CMD_NAND	| \
 			CFG_CMD_MMC	 	| \
 			CFG_CMD_FAT	 	| \
+			CFG_CMD_EXT2	| \
 			CFG_CMD_REGINFO)
 
 /*			
@@ -193,7 +199,6 @@
        		G_CMD_FLASH  | \
 			CFG_CMD_EEPROM | \
 			CFG_CMD_ELF		| \
-			CFG_CMD_EXT2	| \
 */
 
 /* this must be included AFTER the definition of CONFIG_COMMANDS (if any) */

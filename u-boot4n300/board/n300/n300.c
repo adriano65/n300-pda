@@ -75,6 +75,9 @@ static inline void MMU_SetFastBusMode() {
 /*
  * Miscellaneous platform dependent initialisations
  */
+void raise() {}
+
+void abort() {}
 
 int board_init (void) {
 
