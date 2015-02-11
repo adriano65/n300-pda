@@ -56,6 +56,12 @@ static int clock_stop = 1;
 static const int clock_stop = 0;
 #endif
 
+#if defined(DEBUG)
+        #define DPRINTK(ARGS...)  printk(KERN_INFO "<%s>: ",__FUNCTION__);printk(ARGS)
+#else
+        #define DPRINTK( x... )
+#endif
+
 /* new oob placement block for use with hardware ecc generation
  */
 
@@ -147,7 +153,7 @@ static int s3c_nand_calc_rate(int wanted, unsigned long clk, int max)
 	result = (wanted * clk) / NS_IN_KHZ;
 	result++;
 
-	pr_debug("result %d from %ld, %d\n", result, clk, wanted);
+	DPRINTK("result %d from %ld, %d\n", result, clk, wanted);
 
 	if (result > max) {
 		printk("%d ns is too big for current clock rate %ld\n", wanted, clk);
@@ -184,7 +190,7 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 		twrph1 = s3c_nand_calc_rate(plat->twrph1, clkrate, 8);
 		} 
 	else {
-		pr_debug("default timings\n");
+		DPRINTK("default timings\n");
 		tacls = tacls_max;
 		twrph0 = 8;
 		twrph1 = 8;
@@ -212,13 +218,13 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 	case TYPE_S3C2440:
 	case TYPE_S3C2412:
 		mask = (S3C2410_NFCONF_TACLS(tacls_max - 1) |
-			S3C2410_NFCONF_TWRPH0(7) |
-			S3C2410_NFCONF_TWRPH1(7));
+			S3C2440_NFCONF_TWRPH0(7) |
+			S3C2440_NFCONF_TWRPH1(7));
 
 		set = S3C2440_NFCONF_TACLS(tacls - 1);
 		set |= S3C2440_NFCONF_TWRPH0(twrph0 - 1);
 		set |= S3C2440_NFCONF_TWRPH1(twrph1 - 1);
-		//pr_debug("TYPE_S3C2440\n");
+		//DPRINTK("TYPE_S3C2440\n");
 		break;
 
 	default:
@@ -236,7 +242,7 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 	writel(cfg, info->regs + S3C2410_NFCONF);
 	local_irq_restore(flags);
 
-	dev_dbg(info->device, "NF_CONF is 0x%lx\n", cfg);
+	DPRINTK("NF_CONF is 0x%08lX\n", cfg);
 
 	return 0;
 }
@@ -257,8 +263,8 @@ static int s3c2410_nand_inithw(struct s3c2410_nand_info *info)
  	case TYPE_S3C2440:
  	case TYPE_S3C2412:
 		/* enable the controller and de-assert nFCE */
-
 		writel(S3C2440_NFCONT_ENABLE, info->regs + S3C2440_NFCONT);
+		DPRINTK("S3C2440_NFCONT is 0x%08lX\n", readl(info->regs + S3C2440_NFCONT));
 	}
 
 	return 0;
@@ -276,10 +282,13 @@ static void s3c2410_nand_select_chip(struct mtd_info *mtd, int chip)
 	nmtd = this->priv;
 	info = nmtd->info;
 
-	if (chip != -1 && allow_clk_stop(info))
+	if (chip != -1 && allow_clk_stop(info)) {
+		DPRINTK("clk_enable\n");
 		clk_enable(info->clk);
+		}
 
 	cur = readl(info->sel_reg);
+	DPRINTK("info->sel_reg 0x%08lX, cur is 0x%08lX\n", info->sel_reg, cur);
 
 	if (chip == -1) {
 		cur |= info->sel_bit;
@@ -290,17 +299,22 @@ static void s3c2410_nand_select_chip(struct mtd_info *mtd, int chip)
 		}
 
 		if (info->platform != NULL) {
-			if (info->platform->select_chip != NULL)
+			if (info->platform->select_chip != NULL) {
+				DPRINTK("select_chip\n");
 				(info->platform->select_chip) (nmtd->set, chip);
+				}
 		}
 
 		cur &= ~info->sel_bit;
 	}
 
 	writel(cur, info->sel_reg);
+	DPRINTK("info->sel_reg 0x%08lX, cur is 0x%08lX\n", info->sel_reg, cur);
 
-	if (chip == -1 && allow_clk_stop(info))
+	if (chip == -1 && allow_clk_stop(info)) {
+		DPRINTK("clk_disable\n");
 		clk_disable(info->clk);
+		}
 }
 
 /* s3c2410_nand_hwcontrol
@@ -329,13 +343,19 @@ static void s3c2440_nand_hwcontrol(struct mtd_info *mtd, int cmd,
 {
 	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
 
-	if (cmd == NAND_CMD_NONE)
+	if (cmd == NAND_CMD_NONE) {
+		DPRINTK("NAND_CMD_NONE\n");
 		return;
+		}
 
-	if (ctrl & NAND_CLE)
+	if (ctrl & NAND_CLE) {
+		DPRINTK("ctrl & NAND_CLE, cmd is 0x%04X\n", cmd);
 		writeb(cmd, info->regs + S3C2440_NFCMD);
-	else
+		}
+	else {
+		DPRINTK("cmd (address) is 0x%04X\n", cmd);
 		writeb(cmd, info->regs + S3C2440_NFADDR);
+		}
 }
 
 /* s3c2410_nand_devready()
@@ -370,13 +390,13 @@ static int s3c2410_nand_correct_data(struct mtd_info *mtd, u_char *dat,
 	unsigned int diff0, diff1, diff2;
 	unsigned int bit, byte;
 
-	pr_debug("%s(%p,%p,%p,%p)\n", __func__, mtd, dat, read_ecc, calc_ecc);
+	DPRINTK("(%p,%p,%p,%p)\n", mtd, dat, read_ecc, calc_ecc);
 
 	diff0 = read_ecc[0] ^ calc_ecc[0];
 	diff1 = read_ecc[1] ^ calc_ecc[1];
 	diff2 = read_ecc[2] ^ calc_ecc[2];
 
-	pr_debug("%s: rd %02x%02x%02x calc %02x%02x%02x diff %02x%02x%02x\n",
+	DPRINTK("%s: rd %02x%02x%02x calc %02x%02x%02x diff %02x%02x%02x\n",
 		 __func__,
 		 read_ecc[0], read_ecc[1], read_ecc[2],
 		 calc_ecc[0], calc_ecc[1], calc_ecc[2],
@@ -417,8 +437,7 @@ static int s3c2410_nand_correct_data(struct mtd_info *mtd, u_char *dat,
 		       ((diff0 >> 2) & 0x02)  |
 		       ((diff0 >> 1) & 0x01);
 
-		dev_dbg(info->device, "correcting error bit %d, byte %d\n",
-			bit, byte);
+		DPRINTK("correcting error bit %d, byte %d\n", bit, byte);
 
 		dat[byte] ^= (1 << bit);
 		return 1;
@@ -479,8 +498,7 @@ static int s3c2410_nand_calculate_ecc(struct mtd_info *mtd, const u_char *dat, u
 	ecc_code[1] = readb(info->regs + S3C2410_NFECC + 1);
 	ecc_code[2] = readb(info->regs + S3C2410_NFECC + 2);
 
-	pr_debug("%s: returning ecc %02x%02x%02x\n", __func__,
-		 ecc_code[0], ecc_code[1], ecc_code[2]);
+	DPRINTK("returning ecc %02x%02x%02x\n", ecc_code[0], ecc_code[1], ecc_code[2]);
 
 	return 0;
 }
@@ -494,7 +512,7 @@ static int s3c2412_nand_calculate_ecc(struct mtd_info *mtd, const u_char *dat, u
 	ecc_code[1] = ecc >> 8;
 	ecc_code[2] = ecc >> 16;
 
-	pr_debug("calculate_ecc: returning ecc %02x,%02x,%02x\n", ecc_code[0], ecc_code[1], ecc_code[2]);
+	DPRINTK("calculate_ecc: returning ecc %02x,%02x,%02x\n", ecc_code[0], ecc_code[1], ecc_code[2]);
 
 	return 0;
 }
@@ -508,7 +526,7 @@ static int s3c2440_nand_calculate_ecc(struct mtd_info *mtd, const u_char *dat, u
 	ecc_code[1] = ecc >> 8;
 	ecc_code[2] = ecc >> 16;
 
-	pr_debug("%s: returning ecc %06lx\n", __func__, ecc & 0xffffff);
+	DPRINTK("%s: returning ecc %06lx\n", __func__, ecc & 0xffffff);
 
 	return 0;
 }
@@ -609,7 +627,7 @@ static int s3c2410_nand_remove(struct platform_device *pdev)
 		int mtdno;
 
 		for (mtdno = 0; mtdno < info->mtd_count; mtdno++, ptr++) {
-			pr_debug("releasing mtd %d (%p)\n", mtdno, ptr);
+			DPRINTK("releasing mtd %d (%p)\n", mtdno, ptr);
 			nand_release(&ptr->mtd);
 		}
 
@@ -722,8 +740,11 @@ static void s3c2410_nand_init_chip(struct s3c2410_nand_info *info,
 	nmtd->mtd.owner    = THIS_MODULE;
 	nmtd->set	   = set;
 
-	if (hardware_ecc) {
-		chip->ecc.calculate = s3c2410_nand_calculate_ecc;
+	//if (hardware_ecc) {
+	if (!(info->platform && info->platform->software_ecc) && hardware_ecc) {
+	  	DPRINTK("hardware_ecc\n");
+
+		//chip->ecc.calculate = s3c2410_nand_calculate_ecc;
 		chip->ecc.correct   = s3c2410_nand_correct_data;
 		chip->ecc.mode	    = NAND_ECC_HW;
 
@@ -745,6 +766,7 @@ static void s3c2410_nand_init_chip(struct s3c2410_nand_info *info,
 
 		}
 	} else {
+	  	DPRINTK("NAND_ECC_SOFT\n");
 		chip->ecc.mode	    = NAND_ECC_SOFT;
 	}
 
@@ -766,7 +788,7 @@ static void s3c2410_nand_update_chip(struct s3c2410_nand_info *info,
 {
 	struct nand_chip *chip = &nmtd->chip;
 
-	dev_dbg(info->device, "chip %p => page shift %d\n",
+	DPRINTK("chip %p => page shift %d\n",
 		chip, chip->page_shift);
 
 	if (hardware_ecc) {
@@ -805,7 +827,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 	int nr_sets;
 	int setno;
 
-	pr_debug("s3c24xx_nand_probe(%p)\n", pdev);
+	DPRINTK("dev pointer %p\n", pdev);
 
 	info = kmalloc(sizeof(*info), GFP_KERNEL);
 	if (info == NULL) {
@@ -856,7 +878,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 		goto exit_error;
 	}
 
-	dev_dbg(&pdev->dev, "mapped registers at %p\n", info->regs);
+	DPRINTK("ioremap registers at %p\n", info->regs);
 
 	/* initialise the hardware */
 
@@ -886,7 +908,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 	nmtd = info->mtds;
 
 	for (setno = 0; setno < nr_sets; setno++, nmtd++) {
-		pr_debug("initialising set %d (%p, info %p)\n", setno, nmtd, info);
+		DPRINTK("initialising set %d (%p, info %p)\n", setno, nmtd, info);
 
 		s3c2410_nand_init_chip(info, nmtd, sets);
 
@@ -898,6 +920,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 			nand_scan_tail(&nmtd->mtd);
 			s3c2410_nand_add_partition(info, nmtd, sets);
 		}
+		else goto exit_error;
 
 		if (sets != NULL)
 			sets++;
@@ -914,7 +937,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 		clk_disable(info->clk);
 	}
 
-	pr_debug("initialised ok\n");
+	DPRINTK("initialised ok\n");
 	return 0;
 
  exit_error:
@@ -926,7 +949,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 }
 
 /* PM Support */
-#ifdef CONFIG_PM
+#ifdef CONFIG_PM___________
 
 static int s3c24xx_nand_suspend(struct platform_device *dev, pm_message_t pm)
 {
@@ -959,7 +982,6 @@ static int s3c24xx_nand_resume(struct platform_device *dev)
 		s3c2410_nand_inithw(info);
 
 		/* Restore the state of the nFCE line. */
-
 		sel = readl(info->sel_reg);
 		sel &= ~info->sel_bit;
 		sel |= info->save_sel & info->sel_bit;
@@ -1026,17 +1048,6 @@ static struct platform_driver s3c2412_nand_driver = {
 		.owner	= THIS_MODULE,
 	},
 };
-/*
-int S3C24XX_NAND_register_driver(struct s3c2440_nand_driver *driver)
-{
-	return 0;
-}
-
-int S3C24XX_NAND_unregister_driver(struct s3c2440_nand_driver *driver)
-{
-	return 0;
-}
-*/
 
 static int __init s3c2410_nand_init(void)
 {
@@ -1053,10 +1064,7 @@ static void __exit s3c2410_nand_exit(void)
 	platform_driver_unregister(&s3c2440_nand_driver);
 	platform_driver_unregister(&s3c2410_nand_driver);
 }
-/*
-EXPORT_SYMBOL(S3C24XX_NAND_register_driver);
-EXPORT_SYMBOL(S3C24XX_NAND_unregister_driver);
-*/
+
 module_init(s3c2410_nand_init);
 module_exit(s3c2410_nand_exit);
 

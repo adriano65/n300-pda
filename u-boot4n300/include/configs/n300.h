@@ -219,6 +219,7 @@
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=2 console=tty0 console=ttySAC0,115200n8 panic=3'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=5 console=tty0 console=ttySAC0,115200n8 panic=30'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3'
+// setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3'
 // ------ android -----------------------------
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 init=/init rootdelay=2 console=ttySAC0,115200n8'
 #define CONFIG_CMDLINE_TAG

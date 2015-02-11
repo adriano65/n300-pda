@@ -137,35 +137,6 @@ static struct s3c2410_uartcfg n300_uartcfgs[] = {
 	}
 };
 
-static void n300_nand_select_chip(struct s3c2410_nand_set *set, int slot) {
-	//unsigned long nS3C2440_CLKCON;
-	//slot = set->nr_map[slot] & 3;		// nr_map[slot] is null!
-	//printk("n300_nand_select_chip: selecting slot %d (set %p)\n", slot, set);
-	
-	// Does nothing
-	//nS3C2440_CLKCON =__raw_readl(S3C2410_CLKCON);
-	//__raw_writel(nS3C2440_CLKCON | S3C2410_CLKCON_NAND, S3C2410_CLKCON);
-	
-	/*
-	#define NFCONT          __REGi(S3C2440_NAND_BASE + 0x4)
-	
-	#define NF_nCE_LOW  	(NFCONT &= ~(1<<1))
-	#define NF_nCE_HIGH		(NFCONT |=  (1<<1))
-	*/
-	
-	unsigned long nS3C2440_NFCONT;
-	
-	nS3C2440_NFCONT =__raw_readl(S3C2440_NFCONT);
-	/*
-	__raw_writel((nS3C2440_NFCONT &= ~(1<<1)), S3C2440_NFCONT);
-	//writel(S3C2440_NFCONT, (nS3C2440_NFCONT &= ~(1<<1)));
-	//nS3C2440_NFCONT =__raw_readl(S3C2440_NFCONT);
-	//__raw_writel(nS3C2440_NFCONT |= 1, S3C2440_NFCONT);
-	nS3C2440_NFCONT =__raw_readl(S3C2440_NFCONT);
-	*/
-	printk("n300_nand_select_chip: S3C2440_NFCONT==0x%04X\n", nS3C2440_NFCONT);
-}
-
 static struct mtd_partition n300_nand_part[] = {
 	[0] = {
 		.name		= "u-boot",
@@ -207,29 +178,35 @@ static struct s3c2410_nand_set n300_nand_sets[] = {
 
 
 /* original */
-static struct s3c2410_platform_nand n311_nand_info = {
-//	.tacls		= 40,
-//	.twrph0		= 140,
-//	.twrph1		= 40,
+static struct s3c2410_platform_nand n300_nand_info = {
+	/* Considering quicker clock */
+	//.tacls		= 40,
+	//.twrph0		= 120,
+	//.twrph1		= 40,
+	
+	//.tacls		= 30,
+	//.twrph0		= 60,
+	//.twrph1		= 30,
 
 	/* from u-boot
 	#define TACLS 0
 	#define TWRPH0 4
 	#define TWRPH1 2	
 	*/
- 	//.tacls		= 0,
- 	//.twrph0		= 30,
- 	//.twrph1		= 15,
-// values from running linux-haret
-	.tacls		= 20,
-	.twrph0		= 60,
-	.twrph1		= 20,
-//	.tacls		= 25,
-//	.twrph0		= 50,
-//	.twrph1		= 15
+ 	.tacls		= 1,
+ 	.twrph0		= 30,
+ 	.twrph1		= 10,
+	// values from running linux-haret (remember the lower clock)
+	//.tacls		= 20,
+	//.twrph0		= 60,
+	//.twrph1		= 20,
+	// values from mini2440
+	//.tacls		= 3,
+	//.twrph0		= 7,
+	//.twrph1		= 3,
 	.nr_sets	= ARRAY_SIZE(n300_nand_sets),
 	.sets		= n300_nand_sets,
-	.select_chip = n300_nand_select_chip 
+//	.select_chip = n300_nand_select_chip 
 };
 
 static struct s3c2410_ts_mach_info n311_ts_cfg = {
@@ -604,7 +581,10 @@ static void n311_hw_init(void) {
 		}
 	iounmap(HcRevisionAddr);
 	*/
-
+	
+	/* Disable Unused Clocks to peripherals*/
+	//__raw_writel(0xf7ffd0, 0x4C00000C);		// !! BAD !!
+	
 }
 
 static struct platform_device *n311_devices[] __initdata = {
@@ -624,9 +604,9 @@ static struct platform_device *n311_devices[] __initdata = {
 	&n311_device_bl,
 };
 
-static void __init n311_map_io(void)
+static void __init n300_map_io(void)
 {
-	s3c_device_nand.dev.platform_data = &n311_nand_info;
+	s3c_device_nand.dev.platform_data = &n300_nand_info;
 	s3c24xx_init_io(n311_iodesc, ARRAY_SIZE(n311_iodesc));
   	n311_hw_init();
 	s3c24xx_init_clocks(16934000);
@@ -657,7 +637,7 @@ MACHINE_START(N311, "N311")
 	.timer			= &s3c24xx_timer,
 	.init_machine	= n311_init_machine,
 	.init_irq		= n311_init_irq,
-	.map_io			= n311_map_io,
+	.map_io			= n300_map_io,
 MACHINE_END
 
 /*

@@ -1,1 +1,0 @@
-libopenocd_la-startup_tcl.lo: startup_tcl.c
