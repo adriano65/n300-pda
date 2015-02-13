@@ -193,9 +193,9 @@ static struct s3c2410_platform_nand n300_nand_info = {
 	#define TWRPH0 4
 	#define TWRPH1 2	
 	*/
- 	.tacls		= 1,
- 	.twrph0		= 30,
- 	.twrph1		= 10,
+ 	//.tacls		= 1,
+ 	//.twrph0		= 30,
+ 	//.twrph1		= 10,
 	// values from running linux-haret (remember the lower clock)
 	//.tacls		= 20,
 	//.twrph0		= 60,
@@ -204,6 +204,9 @@ static struct s3c2410_platform_nand n300_nand_info = {
 	//.tacls		= 3,
 	//.twrph0		= 7,
 	//.twrph1		= 3,
+	.tacls		= 40,
+	.twrph0		= 69,
+	.twrph1		= 69,
 	.nr_sets	= ARRAY_SIZE(n300_nand_sets),
 	.sets		= n300_nand_sets,
 //	.select_chip = n300_nand_select_chip 
@@ -247,6 +250,7 @@ static struct gpio_keys_button n311_buttons[] = {
 	{KEY_DOWN, S3C2410_GPG5, 1, "Down button",EV_KEY},
 	{KEY_UP, S3C2410_GPG6, 1, "Up button",EV_KEY},
 	{KEY_RIGHT, S3C2410_GPG7, 1, "Right button",EV_KEY},
+	//{KEY_E, S3C2410_GPG11, 1, "Case open button?", EV_KEY},
 	//{KEY_PAUSE, S3C2410_GPD1, 0, "Case open pin", EV_PWR}, // irq 92 not allowed ??
 };
 
@@ -542,49 +546,15 @@ static void n311_hw_init(void) {
 	*/
 	s3c2440_set_dsc(S3C2440_DSC1_NFC, S3C2440_DSC1_NFC_8mA);
 	
+	/* Case opened switch */
 	/*
-	void __iomem *HcRevisionAddr;
-	unsigned long HcControlAddr, HcCommandStatusAddr, HcFmIntervalAddr;
-	unsigned int HcControlReg, HcCommandStatusReg, HcFmIntervalReg;
-
-	HcRevisionAddr=ioremap(0x49000000, 0x60);
-	if(!HcRevisionAddr) {
-		printk("ioremap failed\n");
-		return;
-		}
- 	else {
-		HcControlAddr=HcRevisionAddr+0x04;	//0x49000004 HcControl
-		HcControlReg=__raw_readl(HcControlAddr);
-		printk("HcControlReg 0x%x\n", HcControlReg);
-
-		HcCommandStatusAddr=HcRevisionAddr+0x08;
-		HcCommandStatusReg=__raw_readl(HcCommandStatusAddr);
-		printk("HcCommandStatusReg 0x%x\n", HcCommandStatusReg);
-
-		HcFmIntervalAddr=HcRevisionAddr+0x34;
-		HcFmIntervalReg=__raw_readl(HcFmIntervalAddr);
-		printk("HcFmIntervalReg 0x%x\n", HcFmIntervalReg);
-		--
-		__raw_writel(HcControlReg | 0x00000100, HcControlAddr);
-		msleep(1);
-		__raw_writel(HcControlReg & !(0x00000100), HcControlAddr);
-		HcControlReg=__raw_readl(HcControlAddr);
-		printk("HcControlReg 0x%x\n", HcControlReg);
-
-		//__raw_writel(0x97, HcControlAddr);		// irq storm again
-		__raw_writel(0x197, HcControlAddr);
-		--
-		// send HostControllerReset command
-		__raw_writel(HcCommandStatusReg | 0x00000001, HcCommandStatusAddr);
-		msleep(1);
-		__raw_writel(HcFmIntervalReg, HcFmIntervalAddr);
-		}
-	iounmap(HcRevisionAddr);
+	s3c2410_gpio_setpin(S3C2410_GPG11, 0);
+	s3c2410_gpio_pullup(S3C2410_GPG11, 1);
+	s3c2410_gpio_cfgpin(S3C2410_GPG11, S3C2410_GPIO_INPUT);
 	*/
-	
+
 	/* Disable Unused Clocks to peripherals*/
 	//__raw_writel(0xf7ffd0, 0x4C00000C);		// !! BAD !!
-	
 }
 
 static struct platform_device *n311_devices[] __initdata = {
@@ -677,7 +647,7 @@ TBD
 		Enable Speaker Output
 				TBD
 						TBD
-												TBD
+												switch
 																		enable green led
 																				enable blue led
 

@@ -196,7 +196,7 @@ b_1a8:			ldr	r0, .clkdivn_add
 				ldr	r1, .clock_val2
 				b	b_218
 
-b_214:			ldr	r1, .clock_val1
+b_214:			ldr	r1, .mpllcon_400Mhz
 b_218:	 		ldr r0, .mpllcon
 				str	r1, [r0]
 				mov	r0, #0x200
@@ -426,7 +426,7 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 .upllcon_val:		.word 0x0003c042
 .camdivn:			.word S3C24X0_CAMDIVN
 .clock_val2:		.word 0x00074051			@ 0x560
-.clock_val1:		.word 0x0006e031 	
+.mpllcon_400Mhz:	.word 0x0006e031 	
 .mpllcon:			.word S3C24X0_MPLLCON 		
 .gstatus3:			.word S3C24X0_GSTATUS3 		
 .rtc_con:			.word S3C24X0_RTCCON 	   	

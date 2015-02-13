@@ -250,35 +250,34 @@ reset:
 	mov     r1, #0xffffffff
 	str     r1, [r0]
 
+	/*
+	root@n310ingresso:~# getCLKDIVN 
+	data register 4c000014:  00000005
+	0000(07,06,05,04) 0101(03,02,01,00)
+	bit 3 -> UCLK select register(UCLK must be 48MHz for USB)
+			0: UCLK = UPLL clock
+			1: UCLK = UPLL clock / 2 
+	bit 2.1 ->      00 : HCLK = FCLK/1.
+					01 : HCLK = FCLK/2.
+					10 : HCLK = FCLK/4 when CAMDIVN[9] = 0.
+						HCLK= FCLK/8 when CAMDIVN[9] = 1.
+					11 : HCLK = FCLK/3 when CAMDIVN[8] = 0.
+						HCLK = FCLK/6 when CAMDIVN[8] = 1.
+	bit 0 -> 0: PCLK has the clock same as the HCLK/1.
+			1: PCLK has the clock same as the HCLK/2.
+	*/
 	ldr r0, =S3C24X0_CLKDIVN
-	mov r1, #0x7
+	@mov r1, #0x7
+	@mov r1, #0x5
+	mov r1, #0x4		@HCLK= FCLK/8 when CAMDIVN[9] = 1
+	@mov r1, #0x2
 	str     r1, [r0]
 
-	#if 0
-	/* enable uart */
-	ldr	r0, =0x4c00000c		/* clkcon */
-	ldr	r1, =0x7fff0		/* all clocks on */
+	ldr	r0, =S3C24X0_CLKCON		/* clkcon */
+	ldr	r1, =0xf2ffd0		/* no camera, no lcdc */
 	str	r1, [r0]
 
-	/* gpio UART0 init */
-	ldr	r0, =0x56000070
-	mov	r1, #0xaa
-	str	r1, [r0]
-
-	/* init uart */
-	ldr	r0, =0x50000000
-	mov	r1, #0x03
-	str	r1, [r0]
-	ldr	r1, =0x245
-	str	r1, [r0, #0x04]
-	mov	r1, #0x01
-	str	r1, [r0, #0x08]
-	mov	r1, #0x00
-	str	r1, [r0, #0x0c]
-	mov	r1, #0x1a
-	str	r1, [r0, #0x28]
-	#endif
-
+	/* init uart --> done in cpu/arm920t/s3c24x0/serial.c (serial_setbrg)  */
 
 	MRC p15, 0x00, r0, c1, c0, 0x00
 	ORR r0, r0, #0xc0000000
@@ -317,13 +316,15 @@ test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
 #endif
 
 #ifndef CONFIG_SKIP_LOWLEVEL_INIT
+#define oNFCONF                 0x00
 
-	MOV r0, #S3C24X0_CLOCK_POWER_BASE
-	MVN r1, #0xff000000
+	ldr r0, =S3C24X0_CLOCK_LOCKTIME
+	@MVN r1, #0xff000000
+	ldr r1, =S3C24X0_CLKLCKTIM_VAL
 	str     r1, [r0]
 
-	ldr     r0, =S3C24X0_UPLLCON
-	ldr     r1, =0x0003C042
+	ldr     r0, =S3C24X0_UPLLCON		@=0x0003C042	
+	ldr     r1, =UPLLCON_VALUE
 	str     r1, [r0]
 	nop
 	nop
@@ -333,13 +334,18 @@ test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
 	nop
 	nop
 	ldr     r0, =S3C24X0_CAMDIVN
-	mov     r1, #0x0
-
-	@ldr     r1, =0x00074051
-	ldr     r1, =0x0006e031
-	ldr     r0, =S3C24X0_MPLLCON
+	@mov     r1, #0x0
+	@mov     r1, #0x100
+	mov     r1, #0x200
 	str     r1, [r0]
-	MOV r0, #0x200
+
+	ldr     r0, =S3C24X0_MPLLCON
+	@ldr     r1, =0x00096030	@ RESET Value
+	@ldr     r1, =0x00074051	@ ? power down value
+	@ldr     r1, =S3C24X0_MPLLCON_266MHz			@ see include/linux/s3c2440.h
+	ldr     r1, =S3C24X0_MPLLCON_400MHz			@ see include/linux/s3c2440.h
+	str     r1, [r0]
+	mov r0, #0x200
 lo:	SUBS r0, r0, #0x1
 	bne lo
 	ldr     r0, =S3C24X0_GPCDAT

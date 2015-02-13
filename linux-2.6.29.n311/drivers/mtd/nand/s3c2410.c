@@ -949,7 +949,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 }
 
 /* PM Support */
-#ifdef CONFIG_PM___________
+#ifdef CONFIG_PM
 
 static int s3c24xx_nand_suspend(struct platform_device *dev, pm_message_t pm)
 {

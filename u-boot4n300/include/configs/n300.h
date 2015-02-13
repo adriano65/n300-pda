@@ -98,7 +98,7 @@
 
 #ifdef _BOOT_FROM_DRAM
   /* If we want to start u-boot downloaded from JTAG in DRAM 
-  * JTAG has already initializaed DRAM access, refresh ecc ecc.
+  * JTAG has already initialized DRAM access, refresh ecc ecc.
   * Same configuration when u-boot downloaded from usb bootloader 
   * (like lowlevel_foo.bin) in DRAM 
   */
@@ -191,10 +191,10 @@
 			CFG_CMD_NAND	| \
 			CFG_CMD_MMC	 	| \
 			CFG_CMD_FAT	 	| \
-			CFG_CMD_EXT2	| \
 			CFG_CMD_REGINFO)
 
 /*			
+			CFG_CMD_EXT2	| \
             CFG_CMD_LOADS   | \
        		G_CMD_FLASH  | \
 			CFG_CMD_EEPROM | \

@@ -182,9 +182,13 @@ int dram_init_new(void)
 }
 */
 int print_cpuinfo (void) {
-	puts ("cpuinfo: TBD\n");
+	//puts ("cpuinfo: TBD\n");
+	printf("cpuinfo: FCLK %3.3d Mhz (arm920t core)\n", get_FCLK()/1000/1000);
+	printf("         HCLK %3.3d Mhz (AHB Bus -> USB Host, NAND, ...)\n", get_HCLK()/1000/1000);
+	printf("         PCLK %3.3d Mhz (AHB Bus -> WDT, MMC, ...)\n", get_PCLK()/1000/1000);
+	printf("         UCLK %3.3d Mhz (USB Host and Device)\n", get_UCLK()/1000/1000);
 	return (0);
-  }
+}
 
 void get_board_serial(struct tag_serialnr *serialnr) {
   serialnr->high=1;

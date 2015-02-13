@@ -91,8 +91,7 @@ ulong get_FCLK(void)
 }
 
 /* return HCLK frequency */
-ulong get_HCLK(void)
-{
+ulong get_HCLK(void) {
     S3C24X0_CLOCK_POWER * const clk_power = S3C24X0_GetBase_CLOCK_POWER();
     ulong ret=0;
 
@@ -101,20 +100,25 @@ ulong get_HCLK(void)
 #endif
 
 #ifdef CONFIG_S3C2440
-    switch(clk_power->CLKDIVN & 0x6)
-    {
+    switch(clk_power->CLKDIVN & 0x6) {
 	case 0:
 		ret=get_FCLK();
-	break;
+		break;	
 	case 2:
 		ret=get_FCLK()/2;
-	break;
+		break;
 	case 4:
-		ret=get_FCLK()/4;
-	break;
+		if (clk_power->CAMDIVN & (1<<9))
+		  ret=get_FCLK()/8;
+		else
+		  ret=get_FCLK()/4;
+		break;
 	case 6:
-		ret=get_FCLK()/3;
-	break;
+		if (clk_power->CAMDIVN & (1<<8))
+		  ret=get_FCLK()/3;
+		else
+		  ret=get_FCLK()/6;
+		break;
     }
 #endif
 

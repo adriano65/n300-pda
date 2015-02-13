@@ -120,7 +120,7 @@
 /* REFRESH parameter */
 #define REFEN		 	0x1	/* Refresh enable */
 #define TREFMD		 	0x0	/* CBR(CAS before RAS)/Auto refresh */
-#define Trp		 	0x1	/* 2clk */
+#define Trp		 		0x1	/* 2clk */
 #define Tsrc		 	0x1	/* 7clk */
 #define Tchr		 	0x2	/* 3clk */
 #define REFCNT		 	1346	
