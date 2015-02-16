@@ -268,13 +268,13 @@ reset:
 	*/
 	ldr r0, =S3C24X0_CLKDIVN
 	@mov r1, #0x7
-	@mov r1, #0x5
-	mov r1, #0x4		@HCLK= FCLK/8 when CAMDIVN[9] = 1
-	@mov r1, #0x2
+	@ldr r1, =S3C24X0_CLKDIVN_HCLK50MHZ			@HCLK= FCLK/8 when CAMDIVN[9] = 1
+	@ldr r1, =S3C24X0_CLKDIVN_WINZ
+	ldr r1, =S3C24X0_CLKDIVN_HCLK100M_P50		@HCLK= FCLK/4 when CAMDIVN[9] = 0
 	str     r1, [r0]
 
 	ldr	r0, =S3C24X0_CLKCON		/* clkcon */
-	ldr	r1, =0xf2ffd0		/* no camera, no lcdc */
+	ldr	r1, =0xf2ffd0			/* no camera, no lcdc */
 	str	r1, [r0]
 
 	/* init uart --> done in cpu/arm920t/s3c24x0/serial.c (serial_setbrg)  */
@@ -286,8 +286,7 @@ reset:
 #define USE_TEST_CODE
 #ifdef USE_TEST_CODE
 @ ---------------------------------------- T E S T  C O D E --------------
-test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
-					add	r1, r1, #0x50
+test_code_start:	ldr	r1, #S3C24X0_GPFCON
 					mov	r2, #0x100						@ set GPF4 as output (Home button)
 					str	r2, [r1]						@ r1==S3C24X0_GPFCON
 					mov	r2, #0xff
@@ -295,8 +294,7 @@ test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
 					mov	r2, #0	
 					str	r2, [r1, #4]					@ set GPF4 to zero
 
-					mov	r1, #S3C24X0_GPIO_BASE
-					add	r1, r1, #0x50
+					mov	r1, #S3C24X0_GPFCON
 					mov	r2, #0x400          		@ set GPF5 as output (Calendar button)
 					str	r2, [r1]      				@ r1==S3C24X0_GPFCON
 					mov	r2, #0xff
@@ -304,8 +302,7 @@ test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
 					mov	r2, #0
 					str	r2, [r1, #4]  				@ set GPF5 to zero
 
-					mov	r1, #S3C24X0_GPIO_BASE
-					add	r1, r1, #0x50              	@ r1==S3C24X0_GPFCON
+					mov	r1, #S3C24X0_GPFCON
 					mov	r2, #0x1000                 @ set GPF6 as output (Contacts button)
 					str	r2, [r1]       				@
 					mov	r2, #0xff
@@ -336,7 +333,9 @@ test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
 	ldr     r0, =S3C24X0_CAMDIVN
 	@mov     r1, #0x0
 	@mov     r1, #0x100
-	mov     r1, #0x200
+	@mov     r1, #0x200
+	@ldr     r1, =S3C24X0_CAMDIVN_WINZ
+	ldr     r1, =S3C24X0_CAMDIVN_HCLK100MHZ
 	str     r1, [r0]
 
 	ldr     r0, =S3C24X0_MPLLCON
@@ -344,6 +343,7 @@ test_code_start:	mov	r1, #S3C24X0_GPIO_BASE
 	@ldr     r1, =0x00074051	@ ? power down value
 	@ldr     r1, =S3C24X0_MPLLCON_266MHz			@ see include/linux/s3c2440.h
 	ldr     r1, =S3C24X0_MPLLCON_400MHz			@ see include/linux/s3c2440.h
+	@ldr     r1, =S3C24X0_MPLLCON_WINZ			@ FCLK -> 300 MHz, HCLK -> 100 MHz
 	str     r1, [r0]
 	mov r0, #0x200
 lo:	SUBS r0, r0, #0x1

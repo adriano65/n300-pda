@@ -382,17 +382,17 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 
 @.align 8
 .gpadat:			.word S3C24X0_GPADAT		@ 0x4b0
-					.word 0x005eaf1f 	
-					.word 0x56000018 	
+					.word 0x005eaf1f 			@ 0x4b4
+					.word S3C24X0_GPBUP			@ 0x4b8
 					.word 0x00001fff 	
-					.word 0x56000014 	
+					.word S3C24X0_GPBDAT 	
 					.word 0x00000146 	
-					.word 0x56000010 	
+					.word S3C24X0_GPBCON 	
 					.word 0x00155455 	
-					.word 0x56000028 	
+					.word S3C24X0_GPCUP 	
 					.word 0x0000ffff 	
 .gpcdat:			.word S3C24X0_GPCDAT 	
-					.word 0x56000020 	
+					.word S3C24X0_GPCCON 	
 					.word 0x55551515 	
 					.word 0x56000038 	
 					.word 0x0000efff 	
@@ -408,7 +408,7 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 					.word 0x56000050 	
 					.word 0x56000068 	
 .gpgdat_add:		.word S3C24X0_GPGDAT 	@  0x518
-					.word 0x56000060 	
+					.word S3C24X0_GPGCON 	
 					.word 0x01150010 	
 					.word 0x56000078 	
 					.word 0x000007ff 	
@@ -417,10 +417,10 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 					.word 0x00155514 	
 					.word 0x560000d8 	
 					.word 0x560000d4 	
-					.word 0x560000d0 	
-					.word 0x55555555 			@  0x544
-.int_mask:			.word S3C24X0_INTERRUPT_MASK 	
-					.word 0x4a00001c 	
+					.word S3C24X0_GPJCON 	
+					.word 0x55555555 				@  0x544
+.int_mask:			.word S3C24X0_INTERRUPT_MASK 	@  0x548
+					.word S3C24X0_INTERRUPT_SUBMASK @  0x54C
 .clkdivn_add:		.word S3C24X0_CLKDIVN	
 .upllcon_add:		.word S3C24X0_UPLLCON		@ 0x554
 .upllcon_val:		.word 0x0003c042
@@ -448,7 +448,7 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 .home_btn_stat:		.word 0x30020110 		@ 0x5b0
 .stack_pointer:		.word 0x33ff5800 	
 					.word 0x000005bc 	
-					.word 0x22121120 	
+					.word 0x22121120 		@ 0x5bc
 					.word 0x00000700 		@ 0x5c0
 					.word 0x00000700 	
 					.word 0x00000700 	

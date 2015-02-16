@@ -197,16 +197,16 @@ static struct s3c2410_platform_nand n300_nand_info = {
  	//.twrph0		= 30,
  	//.twrph1		= 10,
 	// values from running linux-haret (remember the lower clock)
-	//.tacls		= 20,
-	//.twrph0		= 60,
-	//.twrph1		= 20,
+	.tacls		= 20,
+	.twrph0		= 60,
+	.twrph1		= 20,
 	// values from mini2440
 	//.tacls		= 3,
 	//.twrph0		= 7,
 	//.twrph1		= 3,
-	.tacls		= 40,
-	.twrph0		= 69,
-	.twrph1		= 69,
+	//.tacls		= 40,
+	//.twrph0		= 69,
+	//.twrph1		= 69,
 	.nr_sets	= ARRAY_SIZE(n300_nand_sets),
 	.sets		= n300_nand_sets,
 //	.select_chip = n300_nand_select_chip 
@@ -503,6 +503,18 @@ static void n311_hw_init(void) {
 	s3c2410_gpio_setpin(S3C2410_GPA11, 1);		// switch on (note GPA pins haven't pullups mode)
  	s3c2410_gpio_cfgpin(S3C2410_GPA11, S3C2410_GPIO_OUTPUT);
 	//GPADAT |= (1 << 11);
+	
+	/* set NAND controller pin as input*/
+	s3c2410_gpio_setpin(S3C2410_GPG13, 0);
+	s3c2410_gpio_pullup(S3C2410_GPG13, 1);
+	s3c2410_gpio_cfgpin(S3C2410_GPG13, S3C2410_GPIO_INPUT);
+	s3c2410_gpio_setpin(S3C2410_GPG14, 0);
+	s3c2410_gpio_pullup(S3C2410_GPG14, 1);
+	s3c2410_gpio_cfgpin(S3C2410_GPG14, S3C2410_GPIO_INPUT);
+	s3c2410_gpio_setpin(S3C2410_GPG15, 0);
+	s3c2410_gpio_pullup(S3C2410_GPG15, 1);
+	s3c2410_gpio_cfgpin(S3C2410_GPG15, S3C2410_GPIO_INPUT);
+	
 
 	/* N30 output 0=BlueTooth chip disabled, 1=enabled */
 	/* GPH6/7  N30 BlueTooth serial port */

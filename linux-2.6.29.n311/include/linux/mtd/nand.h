@@ -367,20 +367,24 @@ struct nand_chip {
 	void  __iomem	*IO_ADDR_R;
 	void  __iomem	*IO_ADDR_W;
 
-	uint8_t		(*read_byte)(struct mtd_info *mtd);
+	uint8_t	(*read_byte)(struct mtd_info *mtd);
 	u16		(*read_word)(struct mtd_info *mtd);
-	void		(*write_buf)(struct mtd_info *mtd, const uint8_t *buf, int len);
-	void		(*read_buf)(struct mtd_info *mtd, uint8_t *buf, int len);
+	void	(*write_buf)(struct mtd_info *mtd, const uint8_t *buf, int len);
+	void	(*read_buf)(struct mtd_info *mtd, uint8_t *buf, int len);
 	int		(*verify_buf)(struct mtd_info *mtd, const uint8_t *buf, int len);
-	void		(*select_chip)(struct mtd_info *mtd, int chip);
+	void	(*select_chip)(struct mtd_info *mtd, int chip);
 	int		(*block_bad)(struct mtd_info *mtd, loff_t ofs, int getchip);
 	int		(*block_markbad)(struct mtd_info *mtd, loff_t ofs);
-	void		(*cmd_ctrl)(struct mtd_info *mtd, int dat,
-				    unsigned int ctrl);
+	void	(*cmd_ctrl)(struct mtd_info *mtd, int dat, unsigned int ctrl);
 	int		(*dev_ready)(struct mtd_info *mtd);
-	void		(*cmdfunc)(struct mtd_info *mtd, unsigned command, int column, int page_addr);
+	
+#ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+	void	(*wait_ready)(struct mtd_info *mtd);
+#endif
+	
+	void	(*cmdfunc)(struct mtd_info *mtd, unsigned command, int column, int page_addr);
 	int		(*waitfunc)(struct mtd_info *mtd, struct nand_chip *this);
-	void		(*erase_cmd)(struct mtd_info *mtd, int page);
+	void	(*erase_cmd)(struct mtd_info *mtd, int page);
 	int		(*scan_bbt)(struct mtd_info *mtd);
 	int		(*errstat)(struct mtd_info *mtd, struct nand_chip *this, int state, int status, int page);
 	int		(*write_page)(struct mtd_info *mtd, struct nand_chip *chip,
@@ -590,10 +594,9 @@ struct platform_nand_chip {
  */
 struct platform_nand_ctrl {
 	void		(*hwcontrol)(struct mtd_info *mtd, int cmd);
-	int		(*dev_ready)(struct mtd_info *mtd);
+	int			(*dev_ready)(struct mtd_info *mtd);
 	void		(*select_chip)(struct mtd_info *mtd, int chip);
-	void		(*cmd_ctrl)(struct mtd_info *mtd, int dat,
-				    unsigned int ctrl);
+	void		(*cmd_ctrl)(struct mtd_info *mtd, int dat, unsigned int ctrl);
 	void		*priv;
 };
 

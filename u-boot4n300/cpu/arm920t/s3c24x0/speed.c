@@ -74,8 +74,9 @@ static ulong get_PLLCLK(int pllreg)
     ret=((CONFIG_SYS_CLK_FREQ * m) / (p << s));
 #elif CONFIG_S3C2440
     if(pllreg == MPLL)
-        //ret=((CONFIG_SYS_CLK_FREQ * m * 2) / (p << s));    //for s3c2440
-    	return ( 2 * m * (CONFIG_SYS_CLK_FREQ / (p << s )) );
+        ret=((CONFIG_SYS_CLK_FREQ * m * 2) / (p << s));    //newer u-boots for s3c2440
+    	//return ( 2 * m * (CONFIG_SYS_CLK_FREQ / (p << s )) );
+		//return((CONFIG_SYS_CLK_FREQ * m) / (p << s));
 
     if(pllreg == UPLL)
         ret=((CONFIG_SYS_CLK_FREQ * m) / (p << s));
@@ -115,9 +116,9 @@ ulong get_HCLK(void) {
 		break;
 	case 6:
 		if (clk_power->CAMDIVN & (1<<8))
-		  ret=get_FCLK()/3;
-		else
 		  ret=get_FCLK()/6;
+		else
+		  ret=get_FCLK()/3;
 		break;
     }
 #endif

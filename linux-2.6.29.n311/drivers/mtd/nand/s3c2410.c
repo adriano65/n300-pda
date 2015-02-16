@@ -33,8 +33,13 @@
 #include <linux/slab.h>
 #include <linux/clk.h>
 #include <linux/cpufreq.h>
+#include <linux/interrupt.h>
+#include <linux/completion.h>
 
 #include <linux/mtd/mtd.h>
+
+//#define CONFIG_MTD_NAND_S3C2440_USE_IRQ
+
 #include <linux/mtd/nand.h>
 #include <linux/mtd/nand_ecc.h>
 #include <linux/mtd/partitions.h>
@@ -76,11 +81,11 @@ static struct nand_ecclayout nand_hw_eccoob = {
 struct s3c2410_nand_info;
 
 struct s3c2410_nand_mtd {
-	struct mtd_info			mtd;
-	struct nand_chip		chip;
-	struct s3c2410_nand_set		*set;
-	struct s3c2410_nand_info	*info;
-	int				scan_res;
+	struct mtd_info				mtd;
+	struct nand_chip			chip;
+	struct s3c2410_nand_set *	set;
+	struct s3c2410_nand_info *	info;
+	int							scan_res;
 };
 
 enum s3c_cpu_type {
@@ -105,6 +110,7 @@ struct s3c2410_nand_info {
 	void __iomem			*sel_reg;
 	int						sel_bit;
 	int						mtd_count;
+	struct completion		rnb_completion;
 	unsigned long			save_sel;
 	unsigned long			clk_rate;
 
@@ -153,7 +159,7 @@ static int s3c_nand_calc_rate(int wanted, unsigned long clk, int max)
 	result = (wanted * clk) / NS_IN_KHZ;
 	result++;
 
-	DPRINTK("result %d from %ld, %d\n", result, clk, wanted);
+	//DPRINTK("result %d from %ld, %d\n", result, clk, wanted);
 
 	if (result > max) {
 		printk("%d ns is too big for current clock rate %ld\n", wanted, clk);
@@ -169,6 +175,18 @@ static int s3c_nand_calc_rate(int wanted, unsigned long clk, int max)
 #define to_ns(ticks,clk) (((ticks) * NS_IN_KHZ) / (unsigned int)(clk))
 
 /* controller setup */
+static int s3c2440_nand_clear_rb(struct mtd_info *mtd) {
+	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
+	unsigned long nS3C2440_NFSTAT;
+
+	nS3C2440_NFSTAT=readl(info->regs + S3C2440_NFSTAT);
+	/* see define S3C2440_NFSTAT_RnB_CHANGE */
+	writel(nS3C2440_NFSTAT | (1<<2), info->regs + S3C2440_NFSTAT);
+	
+	nS3C2440_NFSTAT=readl(info->regs + S3C2440_NFSTAT);
+	DPRINTK("S3C2440_NFSTAT is 0x%08lX\n", nS3C2440_NFSTAT);
+}
+
 
 static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 {
@@ -247,9 +265,9 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 	return 0;
 }
 
-static int s3c2410_nand_inithw(struct s3c2410_nand_info *info)
-{
+static int s3c2410_nand_inithw(struct s3c2410_nand_info *info) {
 	int ret;
+	unsigned long nfstat;
 
 	ret = s3c2410_nand_setrate(info);
 	if (ret < 0)
@@ -262,9 +280,15 @@ static int s3c2410_nand_inithw(struct s3c2410_nand_info *info)
 
  	case TYPE_S3C2440:
  	case TYPE_S3C2412:
-		/* enable the controller and de-assert nFCE */
+#ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+		/* enable the controller, enable RnB IRQ and de-assert nFCE */
+		writel(S3C2440_NFCONT_ENABLE | S3C2440_NFCONT_RNBINT_EN, info->regs + S3C2440_NFCONT);
+#else		/* enable the controller and de-assert nFCE */
 		writel(S3C2440_NFCONT_ENABLE, info->regs + S3C2440_NFCONT);
 		DPRINTK("S3C2440_NFCONT is 0x%08lX\n", readl(info->regs + S3C2440_NFCONT));
+		
+		//s3c2440_nand_clear_rb(info);
+#endif		
 	}
 
 	return 0;
@@ -322,8 +346,7 @@ static void s3c2410_nand_select_chip(struct mtd_info *mtd, int chip)
  * Issue command and address cycles to the chip
 */
 
-static void s3c2410_nand_hwcontrol(struct mtd_info *mtd, int cmd,
-				   unsigned int ctrl)
+static void s3c2410_nand_hwcontrol(struct mtd_info *mtd, int cmd, unsigned int ctrl)
 {
 	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
 
@@ -338,8 +361,7 @@ static void s3c2410_nand_hwcontrol(struct mtd_info *mtd, int cmd,
 
 /* command and control functions */
 
-static void s3c2440_nand_hwcontrol(struct mtd_info *mtd, int cmd,
-				   unsigned int ctrl)
+static void s3c2440_nand_hwcontrol(struct mtd_info *mtd, int cmd, unsigned int ctrl)
 {
 	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
 
@@ -372,6 +394,7 @@ static int s3c2410_nand_devready(struct mtd_info *mtd)
 static int s3c2440_nand_devready(struct mtd_info *mtd)
 {
 	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
+	DPRINTK("info->regs + S3C2440_NFSTAT is 0x%04X\n", info->regs + S3C2440_NFSTAT);
 	return readb(info->regs + S3C2440_NFSTAT) & S3C2440_NFSTAT_READY;
 }
 
@@ -559,6 +582,39 @@ static void s3c2440_nand_write_buf(struct mtd_info *mtd, const u_char *buf, int 
 	writesl(info->regs + S3C2440_NFDATA, buf, len / 4);
 }
 
+#ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+static irqreturn_t s3c2440_nand_irq(int irq, void *dev_id) {
+	struct s3c2410_nand_info *info = dev_id;
+	u_int8_t stat = readb(info->regs + S3C2440_NFSTAT);
+	
+	if (stat & S3C2440_NFSTAT_RnB_CHANGE) {
+		//dev_err(info->device, "RnB IRQ\n");
+		/* clear the RnB change status */
+		writeb(stat | S3C2440_NFSTAT_RnB_CHANGE, info->regs + S3C2440_NFSTAT);
+		/* FIXME: should we check RnB status ? */
+		complete(&info->rnb_completion);
+	}
+
+	return IRQ_HANDLED;
+}
+
+static void s3c2440_nand_wait_ready(struct mtd_info *mtd)
+{
+	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
+
+	/* FIXME: do we have a race condition? How to solve it? */
+	if (s3c2440_nand_devready(mtd)) {
+		dev_err(info->device, "immediately ready\n");
+		return;
+	}
+
+	//dev_err(info->device, "waiting for completion\n");
+	wait_for_completion(&info->rnb_completion);
+	//dev_err(info->device, "completed\n");
+}
+#endif /* CONFIG_MTD_NAND_S3C2440_USE_IRQ */
+
+
 /* cpufreq driver support */
 
 #ifdef CONFIG_CPU_FREQ
@@ -611,6 +667,16 @@ static int s3c2410_nand_remove(struct platform_device *pdev)
 {
 	struct s3c2410_nand_info *info = to_nand_info(pdev);
 
+	switch (info->cpu_type) {
+	case TYPE_S3C2440:
+#ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+		free_irq(IRQ_NFCON, s3c2440_nand_irq);
+#endif
+		break;
+	default:
+		break;
+	}
+	
 	platform_set_drvdata(pdev, NULL);
 
 	if (info == NULL)
@@ -716,6 +782,9 @@ static void s3c2410_nand_init_chip(struct s3c2410_nand_info *info,
 		info->sel_bit	= S3C2440_NFCONT_nFCE;
 		chip->cmd_ctrl  = s3c2440_nand_hwcontrol;
 		chip->dev_ready = s3c2440_nand_devready;
+#ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+		chip->wait_ready= s3c2440_nand_wait_ready;
+#endif
 		chip->read_buf  = s3c2440_nand_read_buf;
 		chip->write_buf	= s3c2440_nand_write_buf;
 		break;
@@ -788,8 +857,7 @@ static void s3c2410_nand_update_chip(struct s3c2410_nand_info *info,
 {
 	struct nand_chip *chip = &nmtd->chip;
 
-	DPRINTK("chip %p => page shift %d\n",
-		chip, chip->page_shift);
+	DPRINTK("chip %p => page shift %d\n", chip, chip->page_shift);
 
 	if (hardware_ecc) {
 		/* change the behaviour depending on wether we are using
@@ -814,8 +882,7 @@ static void s3c2410_nand_update_chip(struct s3c2410_nand_info *info,
  * nand layer to look for devices
 */
 
-static int s3c24xx_nand_probe(struct platform_device *pdev,
-			      enum s3c_cpu_type cpu_type)
+static int s3c24xx_nand_probe(struct platform_device *pdev, enum s3c_cpu_type cpu_type)
 {
 	struct s3c2410_platform_nand *plat = to_nand_plat(pdev);
 	struct s3c2410_nand_info *info;
@@ -862,7 +929,7 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 	info->area = request_mem_region(res->start, size, pdev->name);
 
 	if (info->area == NULL) {
-		dev_err(&pdev->dev, "cannot reserve register region\n");
+		dev_err(&pdev->dev, "cannot reserve area region\n");
 		err = -ENOENT;
 		goto exit_error;
 	}
@@ -871,16 +938,31 @@ static int s3c24xx_nand_probe(struct platform_device *pdev,
 	info->platform   = plat;
 	info->regs       = ioremap(res->start, size);
 	info->cpu_type   = cpu_type;
-
+	
+	init_completion(&info->rnb_completion);
+ 
 	if (info->regs == NULL) {
 		dev_err(&pdev->dev, "cannot reserve register region\n");
 		err = -EIO;
 		goto exit_error;
 	}
+	DPRINTK("ioremap registers at %p, size %i\n", info->regs, size);
 
-	DPRINTK("ioremap registers at %p\n", info->regs);
-
-	/* initialise the hardware */
+	switch (cpu_type) {
+	case TYPE_S3C2440:
+#ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+		if (request_irq(IRQ_NFCON, s3c2440_nand_irq, 0, "s3c2440_nand", info)) {
+			dev_err(&pdev->dev, "cannot request interrupt\n");
+			err = -EIO;
+			goto exit_error;
+		}
+#endif
+		break;
+	default:
+		break;
+	}
+	
+	/* initialize the hardware */
 
 	err = s3c2410_nand_inithw(info);
 	if (err != 0)
