@@ -277,8 +277,9 @@ reset:
 	ldr	r1, =0xf2ffd0			/* no camera, no lcdc */
 	str	r1, [r0]
 
-	/* init uart --> done in cpu/arm920t/s3c24x0/serial.c (serial_setbrg)  */
+	/* NOTE init uart --> done in cpu/arm920t/s3c24x0/serial.c (serial_setbrg)  */
 
+	/* Set Async BusMode */
 	MRC p15, 0x00, r0, c1, c0, 0x00
 	ORR r0, r0, #0xc0000000
 	MCR p15, 0x00, r0, c1, c0, 0x00
