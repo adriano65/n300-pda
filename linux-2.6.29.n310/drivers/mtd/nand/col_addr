@@ -1,0 +1,180 @@
+mxc_nand.c:	tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:	wake_up(&host->irq_waitq);
+mxc_nand.c:		if ((readw(host->regs + NFC_CONFIG2) & NFC_INT) == 0) {
+mxc_nand.c:			tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:			writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:			wait_event(host->irq_waitq,
+mxc_nand.c:				readw(host->regs + NFC_CONFIG2) & NFC_INT);
+mxc_nand.c:			tmp = readw(host->regs + NFC_CONFIG2);
+mxc_nand.c:			writew(tmp, host->regs + NFC_CONFIG2);
+mxc_nand.c:			if (readw(host->regs + NFC_CONFIG2) & NFC_INT) {
+mxc_nand.c:				tmp = readw(host->regs + NFC_CONFIG2);
+mxc_nand.c:				writew(tmp, host->regs + NFC_CONFIG2);
+mxc_nand.c:	writew(cmd, host->regs + NFC_FLASH_CMD);
+mxc_nand.c:	writew(NFC_CMD, host->regs + NFC_CONFIG2);
+mxc_nand.c:	writew(addr, host->regs + NFC_FLASH_ADDR);
+mxc_nand.c:	writew(NFC_ADDR, host->regs + NFC_CONFIG2);
+mxc_nand.c:	writew(buf_id, host->regs + NFC_BUF_ADDR);
+mxc_nand.c:	if (!host->pagesize_2k) {
+mxc_nand.c:		uint16_t config1 = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:		writew(config1, host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(NFC_INPUT, host->regs + NFC_CONFIG2);
+mxc_nand.c:	writew(buf_id, host->regs + NFC_BUF_ADDR);
+mxc_nand.c:	if (!host->pagesize_2k) {
+mxc_nand.c:		uint32_t config1 = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:		writew(config1, host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(NFC_OUTPUT, host->regs + NFC_CONFIG2);
+mxc_nand.c:	struct nand_chip *this = &host->nand;
+mxc_nand.c:	writew(0x0, host->regs + NFC_BUF_ADDR);
+mxc_nand.c:	tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(NFC_ID, host->regs + NFC_CONFIG2);
+mxc_nand.c:		void __iomem *main_buf = host->regs + MAIN_AREA0;
+mxc_nand.c:	void __iomem *main_buf = host->regs + MAIN_AREA1;
+mxc_nand.c:	writew(1, host->regs + NFC_BUF_ADDR);
+mxc_nand.c:	tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(NFC_STATUS, host->regs + NFC_CONFIG2);
+mxc_nand.c:	uint16_t ecc_status = readw(host->regs + NFC_ECC_STATUS_RESULT);
+mxc_nand.c:	uint16_t __iomem *main_buf = host->regs + MAIN_AREA0;
+mxc_nand.c:	uint16_t __iomem *spare_buf = host->regs + SPARE_AREA0;
+mxc_nand.c:	if (host->status_request)
+mxc_nand.c:	col = host->col_addr >> 1;
+mxc_nand.c:	if (host->spare_only)
+mxc_nand.c:	if (host->col_addr & 0x1)
+mxc_nand.c:	host->col_addr++;
+mxc_nand.c:	      "mxc_nand_read_word(col = %d)\n", host->col_addr);
+mxc_nand.c:	col = host->col_addr;
+mxc_nand.c:	if (col < mtd->writesize && host->spare_only)
+mxc_nand.c:		p = (host->regs + MAIN_AREA0) + (col >> 1);
+mxc_nand.c:		p = (host->regs + SPARE_AREA0) + ((col - mtd->writesize) >> 1);
+mxc_nand.c:	host->col_addr = col + 2;
+mxc_nand.c:	      "mxc_nand_write_buf(col = %d, len = %d)\n", host->col_addr,
+mxc_nand.c:	col = host->col_addr;
+mxc_nand.c:	if (col < mtd->writesize && host->spare_only)
+mxc_nand.c:			p = host->regs + MAIN_AREA0 + (col & ~3);
+mxc_nand.c:			p = host->regs + SPARE_AREA0 -
+mxc_nand.c:	host->col_addr = col;
+mxc_nand.c:	      "mxc_nand_read_buf(col = %d, len = %d)\n", host->col_addr, len);
+mxc_nand.c:	col = host->col_addr;
+mxc_nand.c:	if (col < mtd->writesize && host->spare_only)
+mxc_nand.c:			p = host->regs + MAIN_AREA0 + (col & ~3);
+mxc_nand.c:			p = host->regs + SPARE_AREA0 -
+mxc_nand.c:	host->col_addr = col;
+mxc_nand.c:		writew(readw(host->regs + NFC_CONFIG1) & ~NFC_CE,
+mxc_nand.c:				host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(readw(host->regs + NFC_CONFIG1) | NFC_CE,
+mxc_nand.c:			host->regs + NFC_CONFIG1);
+mxc_nand.c:		if (host->clk_act) {
+mxc_nand.c:			clk_disable(host->clk);
+mxc_nand.c:			host->clk_act = 0;
+mxc_nand.c:		if (!host->clk_act) {
+mxc_nand.c:			clk_enable(host->clk);
+mxc_nand.c:			host->clk_act = 1;
+mxc_nand.c:	host->status_request = false;
+mxc_nand.c:		host->col_addr = 0;
+mxc_nand.c:		host->status_request = true;
+mxc_nand.c:		host->col_addr = column;
+mxc_nand.c:		host->spare_only = false;
+mxc_nand.c:		host->col_addr = column;
+mxc_nand.c:		host->spare_only = true;
+mxc_nand.c:		if (host->pagesize_2k)
+mxc_nand.c:			if (host->pagesize_2k)
+mxc_nand.c:			host->col_addr = column - mtd->writesize;
+mxc_nand.c:			host->spare_only = true;
+mxc_nand.c:			if (!host->pagesize_2k)
+mxc_nand.c:			host->spare_only = false;
+mxc_nand.c:			host->col_addr = column;
+mxc_nand.c:			if (!host->pagesize_2k)
+mxc_nand.c:		send_prog_page(host, 0, host->spare_only);
+mxc_nand.c:		if (host->pagesize_2k) {
+mxc_nand.c:			send_prog_page(host, 1, host->spare_only);
+mxc_nand.c:			send_prog_page(host, 2, host->spare_only);
+mxc_nand.c:			send_prog_page(host, 3, host->spare_only);
+mxc_nand.c:		if (host->pagesize_2k)
+mxc_nand.c:		if (host->pagesize_2k) {
+mxc_nand.c:		if (host->pagesize_2k) {
+mxc_nand.c:			send_read_page(host, 0, host->spare_only);
+mxc_nand.c:			send_read_page(host, 1, host->spare_only);
+mxc_nand.c:			send_read_page(host, 2, host->spare_only);
+mxc_nand.c:			send_read_page(host, 3, host->spare_only);
+mxc_nand.c:			send_read_page(host, 0, host->spare_only);
+mxc_nand.c:	host->dev = &pdev->dev;
+mxc_nand.c:	this = &host->nand;
+mxc_nand.c:	mtd = &host->mtd;
+mxc_nand.c:	host->clk = clk_get(&pdev->dev, "nfc_clk");
+mxc_nand.c:	if (IS_ERR(host->clk))
+mxc_nand.c:	clk_enable(host->clk);
+mxc_nand.c:	host->clk_act = 1;
+mxc_nand.c:	host->regs = ioremap(res->start, res->end - res->start + 1);
+mxc_nand.c:	if (!host->regs) {
+mxc_nand.c:	tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:	init_waitqueue_head(&host->irq_waitq);
+mxc_nand.c:	host->irq = platform_get_irq(pdev, 0);
+mxc_nand.c:	err = request_irq(host->irq, mxc_nfc_irq, 0, "mxc_nd", host);
+mxc_nand.c:		tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:		writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:		tmp = readw(host->regs + NFC_CONFIG1);
+mxc_nand.c:		writew(tmp, host->regs + NFC_CONFIG1);
+mxc_nand.c:	writew(0x2, host->regs + NFC_CONFIG);
+mxc_nand.c:	writew(0x0, host->regs + NFC_UNLOCKSTART_BLKADDR);
+mxc_nand.c:	writew(0x4000, host->regs + NFC_UNLOCKEND_BLKADDR);
+mxc_nand.c:	writew(0x4, host->regs + NFC_WRPROT);
+mxc_nand.c:	host->pagesize_2k = 0;
+mxc_nand.c:	    parse_mtd_partitions(mtd, part_probes, &host->parts, 0);
+mxc_nand.c:		add_mtd_partitions(mtd, host->parts, nr_parts);
+mxc_nand.c:	free_irq(host->irq, NULL);
+mxc_nand.c:	iounmap(host->regs);
+mxc_nand.c:	clk_put(host->clk);
+mxc_nand.c:	clk_put(host->clk);
+mxc_nand.c:	nand_release(&host->mtd);
+mxc_nand.c:	free_irq(host->irq, NULL);
+mxc_nand.c:	iounmap(host->regs);
+atmel_nand.c:	if (host->board->enable_pin)
+atmel_nand.c:		gpio_set_value(host->board->enable_pin, 0);
+atmel_nand.c:	if (host->board->enable_pin)
+atmel_nand.c:		gpio_set_value(host->board->enable_pin, 1);
+atmel_nand.c:		writeb(cmd, host->io_base + (1 << host->board->cle));
+atmel_nand.c:		writeb(cmd, host->io_base + (1 << host->board->ale));
+atmel_nand.c:	return gpio_get_value(host->board->rdy_pin) ^
+atmel_nand.c:                !!host->board->rdy_pin_active_low;
+atmel_nand.c:	ecc_value = ecc_readl(host->ecc, PR);
+atmel_nand.c:	ecc_value = ecc_readl(host->ecc, NPR) & ATMEL_ECC_NPARITY;
+atmel_nand.c:		ecc_writel(host->ecc, CR, ATMEL_ECC_RST);
+atmel_nand.c:	ecc_status = ecc_readl(host->ecc, SR);
+atmel_nand.c:	ecc_bit = ecc_readl(host->ecc, PR) & ATMEL_ECC_BITADDR;
+atmel_nand.c:	ecc_word = ecc_readl(host->ecc, PR) & ATMEL_ECC_WORDADDR;
+atmel_nand.c:		dev_dbg(host->dev, "atmel_nand : multiple errors detected."
+atmel_nand.c:		dev_dbg(host->dev, "atmel_nand : one bit error on ECC code."
+atmel_nand.c:	dev_dbg(host->dev, "atmel_nand : one bit error on data."
+atmel_nand.c:	dev_dbg(host->dev, "atmel_nand : error corrected\n");
+atmel_nand.c:		ecc_writel(host->ecc, CR, ATMEL_ECC_RST);
+atmel_nand.c:	host->io_base = ioremap(mem->start, mem->end - mem->start + 1);
+atmel_nand.c:	if (host->io_base == NULL) {
+atmel_nand.c:	mtd = &host->mtd;
+atmel_nand.c:	nand_chip = &host->nand_chip;
+atmel_nand.c:	host->board = pdev->dev.platform_data;
+atmel_nand.c:	host->dev = &pdev->dev;
+atmel_nand.c:	nand_chip->IO_ADDR_R = host->io_base;
+atmel_nand.c:	nand_chip->IO_ADDR_W = host->io_base;
+atmel_nand.c:	if (host->board->rdy_pin)
+atmel_nand.c:		host->ecc = ioremap(regs->start, regs->end - regs->start + 1);
+atmel_nand.c:		if (host->ecc == NULL) {
+atmel_nand.c:	if (host->board->bus_width_16) {	/* 16-bit bus width */
+atmel_nand.c:	if (host->board->det_pin) {
+atmel_nand.c:		if (gpio_get_value(host->board->det_pin)) {
+atmel_nand.c:			ecc_writel(host->ecc, MR, ATMEL_ECC_PAGESIZE_528);
+atmel_nand.c:			ecc_writel(host->ecc, MR, ATMEL_ECC_PAGESIZE_1056);
+atmel_nand.c:			ecc_writel(host->ecc, MR, ATMEL_ECC_PAGESIZE_2112);
+atmel_nand.c:			ecc_writel(host->ecc, MR, ATMEL_ECC_PAGESIZE_4224);
+atmel_nand.c:	if (num_partitions <= 0 && host->board->partition_info)
+atmel_nand.c:		partitions = host->board->partition_info(mtd->size,
+atmel_nand.c:	if (host->ecc)
+atmel_nand.c:		iounmap(host->ecc);
+atmel_nand.c:	iounmap(host->io_base);
+atmel_nand.c:	struct mtd_info *mtd = &host->mtd;
+atmel_nand.c:	if (host->ecc)
+atmel_nand.c:		iounmap(host->ecc);
+atmel_nand.c:	iounmap(host->io_base);
