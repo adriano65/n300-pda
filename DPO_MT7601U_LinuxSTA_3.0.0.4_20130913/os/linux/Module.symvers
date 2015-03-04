@@ -1,0 +1,2 @@
+0x00000000	rausb_autopm_put_interface	/opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta	EXPORT_SYMBOL
+0x00000000	rausb_autopm_get_interface	/opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta	EXPORT_SYMBOL

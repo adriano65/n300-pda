@@ -1,0 +1,1 @@
+cmd_/opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta.ko := arm-angstrom-linux-gnueabi-ld -r   --build-id -o /opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta.ko /opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta.o /opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta.mod.o

@@ -3088,15 +3088,12 @@ BOOLEAN GetDesiredTssiAndCurrentTssi(
 
 	DBGPRINT(RT_DEBUG_INFO, ("---> %s\n", __FUNCTION__));
 
-	if (IS_RT5390F(pAd))
-	{
+	if (IS_RT5390F(pAd)) {
 		RTMP_BBP_IO_READ8_BY_REG_ID(pAd, BBP_R47, &BbpR47);
-		if ((BbpR47 & 0x04) == 0x04) /* The TSSI INFO is not ready. */
-		{
-			DBGPRINT(RT_DEBUG_ERROR, ("%s: BBP TSSI INFO is not ready. (BbpR47 = 0x%X)\n", __FUNCTION__, BbpR47));
-
+		if ((BbpR47 & 0x04) == 0x04) { /* The TSSI INFO is not ready. */
+			//DBGPRINT(RT_DEBUG_ERROR, ("%s: BBP TSSI INFO is not ready. (BbpR47 = 0x%X)\n", __FUNCTION__, BbpR47));
 			return FALSE;
-		}
+			}
 		
 		
 		/* Get TSSI */

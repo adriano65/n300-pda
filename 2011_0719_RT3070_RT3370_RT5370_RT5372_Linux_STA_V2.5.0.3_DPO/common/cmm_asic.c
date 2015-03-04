@@ -1688,31 +1688,22 @@ VOID AsicAdjustTxPower(
 	
 	/* Locate the internal Tx ALC tuning entry */
 	
-	if ((pAd->TxPowerCtrl.bInternalTxALC == TRUE) && (IS_RT5390(pAd)))
-	{
-		if ((pAd->Mlme.OneSecPeriodicRound % 4 == 0) && (DeltaPowerByBbpR1 == 0))
-		{
-			if (GetDesiredTssiAndCurrentTssi(pAd, &desiredTssi, &currentTssi) == FALSE)
-			{
-				DBGPRINT(RT_DEBUG_ERROR, ("%s: Incorrect desired TSSI or current TSSI\n", __FUNCTION__));
+	if ((pAd->TxPowerCtrl.bInternalTxALC == TRUE) && (IS_RT5390(pAd))) {
+		if ((pAd->Mlme.OneSecPeriodicRound % 4 == 0) && (DeltaPowerByBbpR1 == 0)) {
+			if (GetDesiredTssiAndCurrentTssi(pAd, &desiredTssi, &currentTssi) == FALSE) {
+				//DBGPRINT(RT_DEBUG_ERROR, ("%s: Incorrect desired TSSI or current TSSI\n", __FUNCTION__));
 				
 				/* Tx power adjustment over RF */
-				
-
-					RT30xxReadRFRegister(pAd, RF_R49, (PUCHAR)(&RFValue));
-					RFValue = ((RFValue & ~0x3F) | pAd->TxPowerCtrl.RF_R12_Value);
-					if ((RFValue & 0x3F) > 0x27) /* The valid range of the RF R49 (<5:0>tx0_alc<5:0>) is 0x00~0x27 */
-					{
-						RFValue = ((RFValue & ~0x3F) | 0x27);
-					}
-					RT30xxWriteRFRegister(pAd, RF_R49, (UCHAR)(RFValue));
-
+				RT30xxReadRFRegister(pAd, RF_R49, (PUCHAR)(&RFValue));
+				RFValue = ((RFValue & ~0x3F) | pAd->TxPowerCtrl.RF_R12_Value);
+				if ((RFValue & 0x3F) > 0x27) /* The valid range of the RF R49 (<5:0>tx0_alc<5:0>) is 0x00~0x27 */
+				{
+					RFValue = ((RFValue & ~0x3F) | 0x27);
+				}
+				RT30xxWriteRFRegister(pAd, RF_R49, (UCHAR)(RFValue));
 				
 				/* Tx power adjustment over MAC */
-				
 				TotalDeltaPower += pAd->TxPowerCtrl.MAC_PowerDelta;
-
-
 			}
 			else
 			{
