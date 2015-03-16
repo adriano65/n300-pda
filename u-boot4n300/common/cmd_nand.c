@@ -788,6 +788,7 @@ int do_nand (cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]) {
 	case 0:
 	case 1:
 		printf ("Usage:\n%s\n", cmdtp->usage);
+		puts (cmdtp->help);		// no printf!! buffer overrun
 		return 1;
 	case 2:
 		if (strcmp (argv[1], "info") == 0) {
@@ -826,6 +827,7 @@ int do_nand (cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]) {
 
 		}
 		printf ("Usage:\n%s\n", cmdtp->usage);
+		puts (cmdtp->help);		// no printf!! buffer overrun
 		return 1;
 	case 3:
 		if (strcmp (argv[1], "device") == 0) {
@@ -865,6 +867,7 @@ int do_nand (cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]) {
 		}
 
 		printf ("Usage:\n%s\n", cmdtp->usage);
+		puts (cmdtp->help);		// no printf!! buffer overrun
 		return 1;
 	default:
 		/* at least 4 args */
@@ -951,15 +954,26 @@ int do_nand (cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]) {
 			return ret;
 		} else {
 			printf ("Usage:\n%s\n", cmdtp->usage);
+			puts (cmdtp->help);		// no printf!! buffer overrun
 			rcode = 1;
 		}
 
 		return rcode;
 	}
 }
+/*
+U_BOOT_CMD(name,maxargs,repeatable,command,"usage","help")
+
+name:	 is the name of the commad. THIS IS NOT a string.
+maxargs: the maximumn numbers of arguments this function takes
+repeatable: 
+command: Function pointer (*cmd)(struct cmd_tbl_s *, int, int, char *[]);
+usage:	 Short description. This is a string
+help:	 long description. This is a string
+*/
 
 U_BOOT_CMD(
-	nand,	10,	1,	do_nand,
+	nand,	10,	0,	do_nand,
 	"nand    - legacy NAND sub-system\n",
 	"info  - show available NAND devices\n"
 	"nand device [dev] - show or set current device\n"

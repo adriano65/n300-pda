@@ -1139,6 +1139,8 @@ modules: $(vmlinux-dirs) $(if $(KBUILD_BUILTIN),vmlinux)
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.fwinst obj=firmware __fw_modbuild
 	@echo '  Copying to rootfs.'
 	/opt/N310/linux-2.6.29.n310/uboot-mkimage.sh uzImage
+	mkdir -p $(INSTALL_MOD_PATH)/media
+	mkdir -p $(INSTALL_MOD_PATH)/media/mmcblk0p1
 	mv $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage.old
 	cp /opt/N310/linux-2.6.29.n310/uzImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage
 	cp /opt/N310/linux-2.6.29.n310/arch/arm/boot/zImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/2577/zImage-12.eabi

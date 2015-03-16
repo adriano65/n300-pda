@@ -689,16 +689,7 @@ cmd_ext2.o: cmd_ext2.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
-  /opt/N310/u-boot4n300/include/command.h \
-  /opt/N310/u-boot4n300/include/linux/ctype.h \
-  /opt/N310/u-boot4n300/include/asm/byteorder.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
-  /opt/N310/u-boot4n300/include/ext2fs.h \
-  /opt/N310/u-boot4n300/include/usb.h \
-  /opt/N310/u-boot4n300/include/usb_defs.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
 cmd_fat.o: cmd_fat.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \

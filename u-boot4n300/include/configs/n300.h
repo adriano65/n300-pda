@@ -40,7 +40,12 @@
   
  -------------------------------------- LOAD uImage from u-boot from SD CArd
  fatload mmc 0:1 30008000 uimage
-  
+
+ -------------------------------------- LOAD linux (uzImage) from nand - 64M)
+ nand read 0x31000000 0x24000 0x300000
+ --> from serialconsole --> bootm 0x31000000
+ (nand erase 0x30000 0x300000)
+ 
  -------------------------------------- LOAD u-boot into nand (from original bootloader of N300)
  1. create a 256k file with dd
 	dd if=/dev/zero ibs=1k count=256 | tr "\000" "\377" >superipl.bin (NOT .nb0!!)
@@ -61,6 +66,9 @@
  load_image /opt/N310/u-boot4n300/superipl.bin 0x33F80000
  resume 0x33F80000
 
+ -------------------------------------- dump assembler 
+ arm-angstrom-linux-gnueabi-objdump -b binary --adjust-vma=0x00000000 -m arm920t -D nand.dump | less
+ 
  -------------------------------------- kernel entry point ?
  CONFIG_PAGE_OFFSET in .config -> change on kernel memory vs user memory (3G/1G == 0xc0000000)
  then is compiled in arch/arm/boot/compressed/vmlinux.lds

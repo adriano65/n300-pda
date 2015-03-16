@@ -245,8 +245,8 @@ supply_present:	ldr	r0, .gpgdat_add		@ 0x518
 				orr	r3, r3, #0x60000
 				bic	r3, r3, #0x700000
 				orr	r3, r3, #0x600000
-				ldr	r4, [pc, #684]	@ 0x584
-				ldr	r5, [pc, #688]	@ 0x58c
+				ldr	r4, .clkcon
+				ldr	r5, .clkcon_val
 				str	r1, [r0]
 				str	r3, [r2]
 				str	r5, [r4]
@@ -270,7 +270,7 @@ no_ACsupply:	ldr	r1, .gstatus2
 				mov	r1, #S3C24X0_WATCHDOG_BASE
 				ldr	r0, [pc, #612]	@ 0x594
 				str	r0, [r1]
-				ldr	r1, [pc, #608]	@ 0x598
+				ldr	r1, .watchdogData
 				mov	r0, #1	
 				str	r0, [r1]
 				ldr	r1, [pc, #600]	@ 0x59c
@@ -406,7 +406,7 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 					.word 0x56000058 	
 					.word 0x56000054 	
 					.word 0x56000050 	
-					.word 0x56000068 	
+					.word S3C24X0_GPGUP 	
 .gpgdat_add:		.word S3C24X0_GPGDAT 	@  0x518
 					.word S3C24X0_GPGCON 	
 					.word 0x01150010 	
@@ -423,25 +423,25 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 					.word S3C24X0_INTERRUPT_SUBMASK @  0x54C
 .clkdivn_add:		.word S3C24X0_CLKDIVN	
 .upllcon_add:		.word S3C24X0_UPLLCON		@ 0x554
-.upllcon_val:		.word 0x0003c042
-.camdivn:			.word S3C24X0_CAMDIVN
+.upllcon_val:		.word 0x0003c042			@ 0x558
+.camdivn:			.word S3C24X0_CAMDIVN		@ 0x55C
 .clock_val2:		.word 0x00074051			@ 0x560
-.mpllcon_400Mhz:	.word 0x0006e031 	
-.mpllcon:			.word S3C24X0_MPLLCON 		
-.gstatus3:			.word S3C24X0_GSTATUS3 		
-.rtc_con:			.word S3C24X0_RTCCON 	   	
+.mpllcon_400Mhz:	.word 0x0006e031 			@ 0x564
+.mpllcon:			.word S3C24X0_MPLLCON 		@ 0x568
+.gstatus3:			.word S3C24X0_GSTATUS3 		@ 0x56C
+.rtc_con:			.word S3C24X0_RTCCON 	   	@ 0x570
 .adcbase_val:		.word 0x00003fc4 	   		@ 0x574
-.misccr:			.word S3C2440_MISCCR 		
-.misccr_mask:		.word 0x008ffffb 			
-					.word 0x560000cc 	
-					.word 0x4c00000c 	
-					.word 0x48000024 	
-					.word 0x0007fff8 			@ 0x590	
-.gstatus2:			.word S3C24X0_GSTATUS2		@ 0x594	
-					.word 0x00000101 	
-					.word 0x53000004 	
-					.word 0x53000008 	
-.x5a0:				.word 0x00201000 	
+.misccr:			.word S3C2440_MISCCR 		@ 0x578
+.misccr_mask:		.word 0x008ffffb 			@ 0x57C
+					.word 0x560000cc 			@ 0x580
+.clkcon:			.word S3C24X0_CLKCON		@ 0x584
+					.word S3C24X0_MEMCTL_REFRESH	@ 0x588
+.clkcon_val			.word 0x0007fff8 			@ 0x58C	
+.gstatus2:			.word S3C24X0_GSTATUS2		@ 0x590	
+					.word 0x00000101 			@ 0x594
+.watchdogData		.word S3C24X0_WATCHDOG_DAT	@ 0x598
+					.word 0x53000008 			@ 0x59C
+.x5a0:				.word 0x00201000 			@ 0x5A0
 .gstatus3_val:		.word 0x12345678 	
 					.word 0x30020048 	
 .x30020044:			.word 0x30020044 	

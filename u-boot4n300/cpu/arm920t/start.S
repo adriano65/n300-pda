@@ -287,7 +287,7 @@ reset:
 #define USE_TEST_CODE
 #ifdef USE_TEST_CODE
 @ ---------------------------------------- T E S T  C O D E --------------
-test_code_start:	ldr	r1, #S3C24X0_GPFCON
+test_code_start:	ldr	r1, =S3C24X0_GPFCON
 					mov	r2, #0x100						@ set GPF4 as output (Home button)
 					str	r2, [r1]						@ r1==S3C24X0_GPFCON
 					mov	r2, #0xff
@@ -295,7 +295,7 @@ test_code_start:	ldr	r1, #S3C24X0_GPFCON
 					mov	r2, #0	
 					str	r2, [r1, #4]					@ set GPF4 to zero
 
-					mov	r1, #S3C24X0_GPFCON
+					ldr	r1, =S3C24X0_GPFCON
 					mov	r2, #0x400          		@ set GPF5 as output (Calendar button)
 					str	r2, [r1]      				@ r1==S3C24X0_GPFCON
 					mov	r2, #0xff
@@ -303,7 +303,7 @@ test_code_start:	ldr	r1, #S3C24X0_GPFCON
 					mov	r2, #0
 					str	r2, [r1, #4]  				@ set GPF5 to zero
 
-					mov	r1, #S3C24X0_GPFCON
+					ldr	r1, =S3C24X0_GPFCON
 					mov	r2, #0x1000                 @ set GPF6 as output (Contacts button)
 					str	r2, [r1]       				@
 					mov	r2, #0xff

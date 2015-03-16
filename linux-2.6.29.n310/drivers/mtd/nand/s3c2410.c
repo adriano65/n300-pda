@@ -49,6 +49,8 @@
 #include <plat/regs-nand.h>
 #include <plat/nand.h>
 
+#include <mach/regs-gpio.h>
+
 #ifdef CONFIG_MTD_NAND_S3C2410_HWECC
 static int hardware_ecc = 1;
 #else
@@ -61,6 +63,7 @@ static int clock_stop = 1;
 static const int clock_stop = 0;
 #endif
 
+#undef DEBUG
 #if defined(DEBUG)
         #define DPRINTK(ARGS...)  printk(KERN_INFO "<%s>: ",__FUNCTION__);printk(ARGS)
 #else
@@ -174,19 +177,19 @@ static int s3c_nand_calc_rate(int wanted, unsigned long clk, int max)
 
 #define to_ns(ticks,clk) (((ticks) * NS_IN_KHZ) / (unsigned int)(clk))
 
-/* controller setup */
+/* controller setup
 static int s3c2440_nand_clear_rb(struct mtd_info *mtd) {
 	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
 	unsigned long nS3C2440_NFSTAT;
 
 	nS3C2440_NFSTAT=readl(info->regs + S3C2440_NFSTAT);
-	/* see define S3C2440_NFSTAT_RnB_CHANGE */
+	// see define S3C2440_NFSTAT_RnB_CHANGE
 	writel(nS3C2440_NFSTAT | (1<<2), info->regs + S3C2440_NFSTAT);
 	
 	nS3C2440_NFSTAT=readl(info->regs + S3C2440_NFSTAT);
 	DPRINTK("S3C2440_NFSTAT is 0x%08lX\n", nS3C2440_NFSTAT);
 }
-
+*/
 
 static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 {
@@ -213,13 +216,13 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 		twrph0 = 8;
 		twrph1 = 8;
 	}
-	//tacls = 4;
-	//twrph0 = 8;
-	//twrph1 = 8;
 
 	if (tacls < 0 || twrph0 < 0 || twrph1 < 0) {
-		dev_err(info->device, "cannot get suitable timings\n");
-		return -EINVAL;
+		dev_err(info->device, "using max timings\n");
+		tacls = 4;
+		twrph0 = 8;
+		twrph1 = 8;
+		//return -EINVAL;
 	}
 
 	dev_info(info->device, "Tacls=%d, %dns Twrph0=%d %dns, Twrph1=%d %dns\n",
@@ -245,7 +248,6 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 		set = S3C2440_NFCONF_TACLS(tacls - 1);
 		set |= S3C2440_NFCONF_TWRPH0(twrph0 - 1);
 		set |= S3C2440_NFCONF_TWRPH1(twrph1 - 1);
-		//DPRINTK("TYPE_S3C2440\n");
 		break;
 
 	default:
@@ -270,7 +272,6 @@ static int s3c2410_nand_setrate(struct s3c2410_nand_info *info)
 
 static int s3c24xx_nand_inithw(struct s3c2410_nand_info *info) {
 	int ret;
-	unsigned long nfstat;
 
 	ret = s3c2410_nand_setrate(info);
 	if (ret < 0)
@@ -284,6 +285,7 @@ static int s3c24xx_nand_inithw(struct s3c2410_nand_info *info) {
  	case TYPE_S3C2440:
  	case TYPE_S3C2412:
 #ifdef CONFIG_MTD_NAND_S3C2440_USE_IRQ
+		unsigned long nfstat;
 		/* enable the controller, enable RnB IRQ and de-assert nFCE */
 		writel(S3C2440_NFCONT_ENABLE | S3C2440_NFCONT_RNBINT_EN, info->regs + S3C2440_NFCONT);
 #else		/* enable the controller and de-assert nFCE */
@@ -291,6 +293,9 @@ static int s3c24xx_nand_inithw(struct s3c2410_nand_info *info) {
 		DPRINTK("S3C2440_NFCONT is 0x%08lX\n", readl(info->regs + S3C2440_NFCONT));
 		
 		//s3c2440_nand_clear_rb(info);
+		/* give GPA pins to NAND controller*/
+		s3c2410_gpio_cfgpin(S3C2410_GPA17, S3C2410_GPA17_CLE);
+		s3c2410_gpio_cfgpin(S3C2410_GPA18, S3C2410_GPA18_ALE);
 #endif		
 	}
 
@@ -602,8 +607,7 @@ static irqreturn_t s3c2440_nand_irq(int irq, void *dev_id) {
 	return IRQ_HANDLED;
 }
 
-static void s3c2440_nand_wait_ready(struct mtd_info *mtd)
-{
+static void s3c2440_nand_wait_ready(struct mtd_info *mtd) {
 	struct s3c2410_nand_info *info = s3c2410_nand_mtd_toinfo(mtd);
 
 	/* FIXME: do we have a race condition? How to solve it? */
@@ -622,7 +626,7 @@ static void s3c2440_nand_wait_ready(struct mtd_info *mtd)
 /* cpufreq driver support */
 
 #ifdef CONFIG_CPU_FREQ
-
+#error CONFIG_CPU_FREQ
 static int s3c2410_nand_cpufreq_transition(struct notifier_block *nb,
 					  unsigned long val, void *data)
 {
@@ -1035,10 +1039,10 @@ static int s3c24xx_nand_probe(struct platform_device *pdev, enum s3c_cpu_type cp
 }
 
 /* PM Support */
+//#undef CONFIG_PM
 #ifdef CONFIG_PM
-
-static int s3c24xx_nand_suspend(struct platform_device *dev, pm_message_t pm)
-{
+//#error CONFIG_PM
+static int s3c24xx_nand_suspend(struct platform_device *dev, pm_message_t pm) {
 	struct s3c2410_nand_info *info = platform_get_drvdata(dev);
 
 	DPRINTK(" - \n");

@@ -93,26 +93,13 @@
         #define info(format, arg...)
         #define dbg(format, arg...)
 #endif
+
+static struct map_desc n310_iodesc[] __initdata = {
+  
+};
 /*
 static struct map_desc n310_iodesc[] __initdata = {
-  {
-	.virtual	= (u32)ANUBIS_VA_CTRL1,
-	.pfn		= __phys_to_pfn(ANUBIS_PA_CTRL1),
-	.length		= SZ_4K,
-	.type		= MT_DEVICE,
-  }, 
-  {
-	.virtual	= (u32)S3C_VA_IRQ,
-	.pfn		= __phys_to_pfn(ANUBIS_PA_CTRL1),
-	.length		= SZ_4K,
-	.type		= MT_DEVICE,
-  }, 
-  
-  
-}
-*/
-static struct map_desc n310_iodesc[] __initdata = {
-	/* ISA IO Space map (memory space selected by A24) */
+	// ISA IO Space map (memory space selected by A24)
 
 	{
 		.virtual	= (u32)S3C24XX_VA_ISA_WORD,
@@ -136,7 +123,7 @@ static struct map_desc n310_iodesc[] __initdata = {
 		.type		= MT_DEVICE,
 	}
 };
-
+*/
 
 /*
 static struct s3c24xx_uart_clksrc n311_serial_clocks[] = {
@@ -182,7 +169,7 @@ static struct mtd_partition n300_nand_part[] = {
 		.name		= "u-boot",
 		.offset		= 0,
 		.size		= 0x20000,			// 128 kB
-		.mask_flags	= MTD_WRITEABLE,		//write protected
+		.mask_flags	= 0, //if MTD_WRITEABLE then is write protected 
 		},
 	[1] = {
 		.name		= "environ",
@@ -216,26 +203,6 @@ static struct s3c2410_nand_set n300_nand_sets[] = {
 	},
 };
 
-static void n300_nand_select_chip(struct s3c2410_nand_set *set, int slot)
-{
-	unsigned int tmp;
-
-	slot = set->nr_map[slot] & 3;
-
-	pr_debug("n300_nand_select_chip: selecting slot %d (set %p,%p)\n",
-		 slot, set, set->nr_map);
-return;
-/*
-	tmp = __raw_readb(ANUBIS_VA_CTRL1);
-	tmp &= ~ANUBIS_CTRL1_NANDSEL;
-	tmp |= slot;
-
-	pr_debug("anubis_nand: ctrl1 now %02x\n", tmp);
-
-	__raw_writeb(tmp, ANUBIS_VA_CTRL1);
-	*/
-}
-
 /* original */
 static struct s3c2410_platform_nand n300_nand_info = {
 	/* Considering quicker clock */
@@ -256,19 +223,18 @@ static struct s3c2410_platform_nand n300_nand_info = {
  	//.twrph0		= 30,
  	//.twrph1		= 10,
 	// values from running linux-haret (remember the lower clock)
-	.tacls		= 20,
-	.twrph0		= 60,
-	.twrph1		= 20,
+	//.tacls		= 20,
+	//.twrph0		= 60,
+	//.twrph1		= 20,
 	// values from mini2440
 	//.tacls		= 3,
 	//.twrph0		= 7,
 	//.twrph1		= 3,
-	//.tacls		= 40,
-	//.twrph0		= 69,
-	//.twrph1		= 69,
+	.tacls		= 30,
+	.twrph0		= 60,
+	.twrph1		= 30,
 	.nr_sets	= ARRAY_SIZE(n300_nand_sets),
 	.sets		= n300_nand_sets,
-	.select_chip = n300_nand_select_chip 
 };
 
 static struct s3c2410_ts_mach_info n311_ts_cfg = {
@@ -278,8 +244,8 @@ static struct s3c2410_ts_mach_info n311_ts_cfg = {
 
 static void s3c2410_mmc_def_setpower(unsigned char to, unsigned short vdd)
 {
-	s3c2410_gpio_cfgpin(S3C2410_GPA17, S3C2410_GPIO_OUTPUT);
-	s3c2410_gpio_setpin(S3C2410_GPA17, (int)to);
+	//s3c2410_gpio_cfgpin(S3C2410_GPA17, S3C2410_GPIO_OUTPUT);
+	//s3c2410_gpio_setpin(S3C2410_GPA17, (int)to);
 }
 
 static struct s3c24xx_mci_pdata n311_mmc_cfg = {
@@ -574,6 +540,10 @@ static void n311_hw_init(void) {
 	s3c2410_gpio_pullup(S3C2410_GPG15, 1);
 	s3c2410_gpio_cfgpin(S3C2410_GPG15, S3C2410_GPIO_INPUT);
 	
+	/* give GPA pins to NAND controller*/
+	s3c2410_gpio_cfgpin(S3C2410_GPA17, S3C2410_GPA17_CLE);
+	s3c2410_gpio_cfgpin(S3C2410_GPA18, S3C2410_GPA18_ALE);
+	
 
 	/* N30 output 0=BlueTooth chip disabled, 1=enabled */
 	/* GPH6/7  N30 BlueTooth serial port */
@@ -683,7 +653,7 @@ MACHINE_END
 
 /*
 ---------------------------------------------------------------------------
-GPA0	GPA1	GPA2	GPA3	GPA4	GPA5	GPA6	GPA7	GPA8	GPA9	GPA10	GPA11	GPA12	GPA13	GPA14	GPA15	GPA16	GPA17
+GPA0	GPA1	GPA2	GPA3	GPA4	GPA5	GPA6	GPA7	GPA8	GPA9	GPA10	GPA11	GPA12	GPA13	GPA14	GPA15	GPA16	GPA17	GPA18	GPA19
 TBD
 		TBD
 				TBD
@@ -744,7 +714,7 @@ Power button
 												Contacts button
 														Mail button
 
-GPG0	GPG1	GPG2	GPG3	GPG4	GPG5	GPG6	GPG7	GPG8	GPG9	GPG10	GPG11	GPG12	GPG13	GPG14	GPG15	GPG16
+GPG0	GPG1	GPG2	GPG3	GPG4	GPG5	GPG6	GPG7	GPG8	GPG9	GPG10	GPG11	GPG12	GPG13	GPG14	GPG15	
 TBD
 		Key lock
 				TBD

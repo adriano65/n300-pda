@@ -63,8 +63,7 @@
 #define I2C_TIMEOUT 1			/* 1 second */
 
 
-static int GetI2CSDA(void)
-{
+static int GetI2CSDA(void) {
 	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
 
 #ifdef CONFIG_S3C2440
@@ -102,8 +101,7 @@ static void SetI2CSCL(int x)
 }
 
 
-static int WaitForXfer (void)
-{
+static int WaitForXfer (void) {
 	S3C24X0_I2C *const i2c = S3C24X0_GetBase_I2C ();
 	int i, status;
 
@@ -118,8 +116,7 @@ static int WaitForXfer (void)
 	return (status & I2CCON_IRPND) ? I2C_OK : I2C_NOK_TOUT;
 }
 
-static int IsACK (void)
-{
+static int IsACK (void) {
 	S3C24X0_I2C *const i2c = S3C24X0_GetBase_I2C ();
 
 	return (!(i2c->IICSTAT & I2CSTAT_NACK));
