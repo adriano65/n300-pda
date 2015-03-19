@@ -163,7 +163,23 @@ static struct s3c2410_uartcfg n300_uartcfgs[] = {
 		//.umcon	     = 0x01,
 	}
 };
+/* tried to move to cmdline mtdparts, but wasn't able to do it 
+ 
+   use -> make RECOVER_WM=1
+ */
+//#define RECOVER_WM
 
+#ifdef RECOVER_WM
+//#error fangana
+static struct mtd_partition n300_nand_part[] = {
+	[0] = {
+		.name		= "WindowsMob",
+		.offset		= 0,
+		.size		= SZ_64M,			// 128 kB
+		.mask_flags	= 0, 	//then is write protected 
+		},
+};
+#else
 static struct mtd_partition n300_nand_part[] = {
 	[0] = {
 		.name		= "u-boot",
@@ -190,7 +206,7 @@ static struct mtd_partition n300_nand_part[] = {
 		.mask_flags	= 0,
 		},
 };
-
+#endif
 
 static struct s3c2410_nand_set n300_nand_sets[] = {
 	[0] = {

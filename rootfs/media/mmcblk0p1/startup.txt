@@ -1,0 +1,20 @@
+set ramaddr 0x30000000
+set ramsize 0x04000000
+
+set kernel "zImage"
+#set initrd "initrd.img.gz" # Choose it if you use /dev/ram as root (not recommended)
+
+#set machine type 1178 # 1248 for the kernels after Dec 22 2008.
+set mtype 1248
+
+set bootspd 0
+
+# Using SD Card as root
+#set cmdline "root=/dev/mmcblk0ppartitionnumber init=/sbin/init rootdelay=1"
+#set cmdline "root=/dev/mmcblk0p3 rootfstype=ext3 ro console=tty0 console=ttySAC0,115200n8 psplash=false"
+#mtdparts=0:384k(U-Boot),128k(Env1),128k(Env2),128k(ASIC),1M(Linux),4M(Ramdisk),-(User_Data)
+set cmdline "root=/dev/mmcblk0p3 rootfstype=ext3 ro console=tty0 console=ttySAC0,115200n8 mtdparts=0:64M(Winzoz)"
+
+#set cmdline "root=/dev/ram init=/sbin/init" # May not work with big kernels
+
+bootlinux 

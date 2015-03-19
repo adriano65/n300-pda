@@ -342,9 +342,9 @@ test_code_start:	ldr	r1, =S3C24X0_GPFCON
 	ldr     r0, =S3C24X0_MPLLCON
 	@ldr     r1, =0x00096030	@ RESET Value
 	@ldr     r1, =0x00074051	@ ? power down value
-	@ldr     r1, =S3C24X0_MPLLCON_266MHz			@ see include/linux/s3c2440.h
-	ldr     r1, =S3C24X0_MPLLCON_400MHz			@ see include/linux/s3c2440.h
-	@ldr     r1, =S3C24X0_MPLLCON_WINZ			@ FCLK -> 300 MHz, HCLK -> 100 MHz
+	@ldr     r1, =S3C24X0_MPLLCON_266MHz		@ see include/linux/s3c2440.h
+	ldr     r1, =S3C24X0_MPLLCON_WINZ			@ FCLK -> 300 MHz, HCLK -> 100 MHz
+	@ldr     r1, =S3C24X0_MPLLCON_400MHz			@ see include/linux/s3c2440.h
 	str     r1, [r0]
 	mov r0, #0x200
 lo:	SUBS r0, r0, #0x1

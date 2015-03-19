@@ -159,15 +159,15 @@ gpio_init:
 				mvn	r1, #0
 				str	r1, [r0]
 				ldr	r0, [pc, #964]
-				ldr	r1, [pc, #924]
+				ldr	r1, [pc, #924]	@ 0x39c
 				str	r1, [r0]
-				ldr	r0, [pc, #856]
+				ldr	r0, .gpddat
 				ldr	sl, [r0]
-				tst	sl, #64	@ 0x40
-				beq	b_1a4
+				tst	sl, #64		@ 0x40	--> GPD6
+				beq	b_low_power
 				mov	r1, #7
 				b	b_1a8
-b_1a4:			mov	r1, #7
+b_low_power:	mov	r1, #7
 b_1a8:			ldr	r0, .clkdivn_add
 				str	r1, [r0]
 				mrc	15, 0, r0, cr1, cr0, 0
@@ -396,7 +396,7 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 					.word 0x55551515 	
 					.word 0x56000038 	
 					.word 0x0000efff 	
-.gpddat:			.word S3C24X0_GPDDAT 	
+.gpddat:			.word S3C24X0_GPDDAT 		@ 0x4ec
 					.word 0x56000030 	
 					.word 0x05514514 	
 					.word 0x56000048 	
@@ -407,7 +407,7 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 					.word 0x56000054 	
 					.word 0x56000050 	
 					.word S3C24X0_GPGUP 	
-.gpgdat_add:		.word S3C24X0_GPGDAT 	@  0x518
+.gpgdat_add:		.word S3C24X0_GPGDAT 			@  0x518
 					.word S3C24X0_GPGCON 	
 					.word 0x01150010 	
 					.word 0x56000078 	
@@ -422,26 +422,26 @@ load_stack:			ldr	sp, .stack_pointer		@ sp_svc=0x33FF5800
 .int_mask:			.word S3C24X0_INTERRUPT_MASK 	@  0x548
 					.word S3C24X0_INTERRUPT_SUBMASK @  0x54C
 .clkdivn_add:		.word S3C24X0_CLKDIVN	
-.upllcon_add:		.word S3C24X0_UPLLCON		@ 0x554
-.upllcon_val:		.word 0x0003c042			@ 0x558
-.camdivn:			.word S3C24X0_CAMDIVN		@ 0x55C
-.clock_val2:		.word 0x00074051			@ 0x560
-.mpllcon_400Mhz:	.word 0x0006e031 			@ 0x564
-.mpllcon:			.word S3C24X0_MPLLCON 		@ 0x568
-.gstatus3:			.word S3C24X0_GSTATUS3 		@ 0x56C
-.rtc_con:			.word S3C24X0_RTCCON 	   	@ 0x570
-.adcbase_val:		.word 0x00003fc4 	   		@ 0x574
-.misccr:			.word S3C2440_MISCCR 		@ 0x578
-.misccr_mask:		.word 0x008ffffb 			@ 0x57C
-					.word 0x560000cc 			@ 0x580
-.clkcon:			.word S3C24X0_CLKCON		@ 0x584
+.upllcon_add:		.word S3C24X0_UPLLCON			@ 0x554
+.upllcon_val:		.word 0x0003c042				@ 0x558
+.camdivn:			.word S3C24X0_CAMDIVN			@ 0x55C
+.clock_val2:		.word 0x00074051				@ 0x560
+.mpllcon_400Mhz:	.word 0x0006e031 				@ 0x564
+.mpllcon:			.word S3C24X0_MPLLCON 			@ 0x568
+.gstatus3:			.word S3C24X0_GSTATUS3 			@ 0x56C
+.rtc_con:			.word S3C24X0_RTCCON 	   		@ 0x570
+.adcbase_val:		.word 0x00003fc4 	   	   		@ 0x574
+.misccr:			.word S3C2440_MISCCR 			@ 0x578
+.misccr_mask:		.word 0x008ffffb 				@ 0x57C
+					.word 0x560000cc 				@ 0x580     	
+.clkcon:			.word S3C24X0_CLKCON			@ 0x584
 					.word S3C24X0_MEMCTL_REFRESH	@ 0x588
-.clkcon_val			.word 0x0007fff8 			@ 0x58C	
-.gstatus2:			.word S3C24X0_GSTATUS2		@ 0x590	
-					.word 0x00000101 			@ 0x594
-.watchdogData		.word S3C24X0_WATCHDOG_DAT	@ 0x598
-					.word 0x53000008 			@ 0x59C
-.x5a0:				.word 0x00201000 			@ 0x5A0
+.clkcon_val			.word 0x0007fff8 				@ 0x58C	
+.gstatus2:			.word S3C24X0_GSTATUS2			@ 0x590	
+					.word 0x00000101 				@ 0x594
+.watchdogData		.word S3C24X0_WATCHDOG_DAT		@ 0x598
+					.word 0x53000008 				@ 0x59C
+.x5a0:				.word 0x00201000 				@ 0x5A0
 .gstatus3_val:		.word 0x12345678 	
 					.word 0x30020048 	
 .x30020044:			.word 0x30020044 	

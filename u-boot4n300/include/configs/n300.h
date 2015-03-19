@@ -31,7 +31,7 @@
  --> from jtag console
  nand dump 0 /opt/N310/u-boot4n300/dump 0x100000 0x20000
  
- -------------------------------------- LOAD linux (uzImage) into nand (from jtag and u-boot)
+ -------------------------------------- LOAD linux (uzImage) into nand 128MB (from jtag and u-boot)
  load_image /opt/N310/linux-2.6.29.n311/uzImage 0x31000000
  nand erase 0x60000 0x300000
  nand write 0x31000000 0x60000 0x300000
@@ -42,9 +42,9 @@
  fatload mmc 0:1 30008000 uimage
 
  -------------------------------------- LOAD linux (uzImage) from nand - 64M)
+ (nand erase 0x24000 0x300000)
  nand read 0x31000000 0x24000 0x300000
- --> from serialconsole --> bootm 0x31000000
- (nand erase 0x30000 0x300000)
+ bootm 0x31000000
  
  -------------------------------------- LOAD u-boot into nand (from original bootloader of N300)
  1. create a 256k file with dd
@@ -186,15 +186,12 @@
  ***********************************************************/
 #define CONFIG_COMMANDS \
 			(CFG_CMD_AUTOSCRIPT	 | \
-			CFG_CMD_BDI	 	| \
 			CFG_CMD_CONSOLE	| \
 			CFG_CMD_ECHO 	| \
 			CFG_CMD_USB	 	| \
 			CFG_CMD_LOADB   | \
-			CFG_CMD_I2C	 	| \
             CFG_CMD_MEMORY	| \
             CFG_CMD_MISC	| \
-            CFG_CMD_ECHO 	| \
 			CFG_CMD_ENV     | \
 			CFG_CMD_NAND	| \
 			CFG_CMD_MMC	 	| \
@@ -222,11 +219,11 @@
 
 #define CONFIG_BOOTDELAY	10
 //#define CONFIG_BOOTARGS    	"noinitrd root=31:03 init=/linuxrc console=ttySAC0"
-#define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 rootdelay=2 rootfstype=ext3 console=tty0 console=ttySAC0,115200n8 panic=3"
+#define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 ro rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3"
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 earlyprintk=serial,uart0,115200 console=ttySAC0,115200n8'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=2 console=tty0 console=ttySAC0,115200n8 panic=3'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=5 console=tty0 console=ttySAC0,115200n8 panic=30'
-// setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3'
+// setenv bootargs 'root=/dev/mmcblk0p3 ro rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3'
 // ------ android -----------------------------
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 init=/init rootdelay=2 console=ttySAC0,115200n8'
@@ -253,7 +250,8 @@
 #define	CFG_PBSIZE (CFG_CBSIZE+sizeof(CFG_PROMPT)+16) /* Print Buffer Size */
 #define	CFG_MAXARGS		16		/* max number of command args	*/
 #define CFG_BARGSIZE		CFG_CBSIZE	/* Boot Argument Buffer Size	*/
-
+#define CFG_HUSH_PARSER
+#define CFG_PROMPT_HUSH_PS2	"u-boot "
 #define CFG_MEMTEST_START	0x30000000	/* memtest works on	*/
 #define CFG_MEMTEST_END		0x33F00000	/* 63 MB in DRAM	*/
 

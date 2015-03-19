@@ -757,7 +757,7 @@ void archflashwp(void *archdata, int wp);
  * and attempting to program or erase bad blocks can affect
  * the data in _other_ (good) blocks.
  */
-#define	 ALLOW_ERASE_BAD_DEBUG 0
+#define	 ALLOW_ERASE_BAD_DEBUG 1
 
 #define CONFIG_MTD_NAND_ECC  /* enable ECC */
 #define CONFIG_MTD_NAND_ECC_JFFS2

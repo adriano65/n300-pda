@@ -1143,7 +1143,7 @@ modules: $(vmlinux-dirs) $(if $(KBUILD_BUILTIN),vmlinux)
 	mkdir -p $(INSTALL_MOD_PATH)/media/mmcblk0p1
 	mv $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage.old
 	cp /opt/N310/linux-2.6.29.n310/uzImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage
-	cp /opt/N310/linux-2.6.29.n310/arch/arm/boot/zImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/2577/zImage-12.eabi
+	cp /opt/N310/linux-2.6.29.n310/arch/arm/boot/zImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/zImage
 
 
 # Target to prepare building external modules

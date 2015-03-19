@@ -13,6 +13,8 @@
 
 #include <common.h>
 #include <s3c2440.h>
+//#include <gpio.h>
+#include <asm/arch/regs-gpio.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -147,7 +149,7 @@ int board_init (void) {
 #endif
 	
 	sharp_lcd_init();
-
+	
 	n300_set_brightness(50);
 
 	/* arch number of N300-Board for linux */
@@ -168,25 +170,32 @@ int dram_init (void) {
 	return 0;
 }
 
-/*
-int dram_init_new(void)
-{
-	int i;
-	u32 addr;
-
-	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-		addr = CONFIG_SYS_SDRAM_BASE + (i * SDRAM_BANK_SIZE);
-		gd->ram_size += get_ram_size((long *)addr, SDRAM_BANK_SIZE);
-	}
-	return 0;
+#if 0
+int board_late_init(void) {
+	//setenv("stdout", "lcd");
+	//setenv("stderr", "lcd");
+	//setenv("stdout", "serial");
+	//setenv("stderr", "serial");
+	keypad_init(void);
+	
 }
-*/
+
+/* called when looping */
+void show_activity(int arg) {
+	do_poll();
+}
+#endif
+
 int print_cpuinfo (void) {
-	//puts ("cpuinfo: TBD\n");
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
+	
 	printf("cpuinfo: FCLK %3.3d Mhz (arm920t core)\n", get_FCLK()/1000/1000);
 	printf("         HCLK %3.3d Mhz (AHB Bus -> USB Host, NAND, ...)\n", get_HCLK()/1000/1000);
 	printf("         PCLK %3.3d Mhz (AHB Bus -> WDT, MMC, ...)\n", get_PCLK()/1000/1000);
-	printf("         UCLK %3.3d Mhz (USB Host and Device)\n", get_UCLK()/1000/1000);
+	printf("         UCLK %3.3d Mhz (USB Host and Device)\n\n", get_UCLK()/1000/1000);
+	printf("Boot reason: %s \n", (gpio->GSTATUS2 & S3C2410_GSTATUS2_WTRESET) ? "Watchdog" : 
+								 ((gpio->GSTATUS2 & S3C2410_GSTATUS2_OFFRESET) ? "Sleep" :
+								 ((gpio->GSTATUS2 & S3C2410_GSTATUS2_PONRESET) ? "Power ON" : "") ));
 	return (0);
 }
 
@@ -435,28 +444,30 @@ int sharp_lcd_init (void) {
 	return 0;
 }
 
-
+#if 0
+int n311_backlight_power(int on) {
+	if (on) {
+	  s3c2410_gpio_cfgpin(S3C2410_GPB0, S3C2410_GPB0_TOUT0);
+	  s3c2410_gpio_pullup(S3C2410_GPB0, 0);
+	  }
+	else {
+	  s3c2410_gpio_cfgpin(S3C2410_GPB0, S3C2410_GPB0_OUTP);
+	  s3c2410_gpio_pullup(S3C2410_GPB0, 0);
+	  s3c2410_gpio_setpin(S3C2410_GPB0, 0);
+	  }
+	return 0;
+}
+#endif
 
 int n300_backlight_power(int on) {
 	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
 	if (on) {
-	  // -------------------------- switch ON LCD
-	  //s3c2410_gpio_cfgpin(S3C2410_GPB0, S3C2410_GPB0_TOUT0);
-	  S3C2440_GPIO_CONFIG (gpio->GPBCON, 0, GPIO_FUNCTION);
-	  //gpio->GPBCON &= ~0x00000003;
-	  //gpio->GPBCON |= 0x00000002;
-	  
-	  //s3c2410_gpio_setpin(S3C2410_GPC0, on)
-	  S3C2440_GPIO_PULLUP(gpio->GPCUP, 0, 0);
-	  gpio->GPCDAT |= 1;
-	  S3C2440_GPIO_CONFIG (gpio->GPCCON, 0, GPIO_OUTPUT);
-	  
+	  S3C2440_GPIO_CONFIG (gpio->GPBCON, 0, S3C2410_GPB0_TOUT0);
+	  S3C2440_GPIO_PULLUP(gpio->GPBUP, 0,0);
 	  }
 	else {
 	  S3C2440_GPIO_CONFIG (gpio->GPBCON, 0, GPIO_OUTPUT);
-	  
-	  gpio->GPCDAT &= ~1;
-	  
+	  S3C2440_GPIO_PULLUP(gpio->GPBUP, 0,0);
 	  }
 	return 0;
 }
