@@ -148,7 +148,31 @@ typedef struct vidinfo {
 
 extern vidinfo_t panel_info;
 
-#endif /* CONFIG_MPC823 or CONFIG_PXA250 */
+#elif defined CONFIG_N300
+
+/*
+ * LCD controller stucture for Nvidia Goforce4000
+ */
+typedef struct vidinfo {
+	ushort	vl_col;		/* Number of columns (i.e. 640) */
+	ushort	vl_row;		/* Number of rows (i.e. 480) */
+	ushort	vl_width;	/* Width of display area in millimeters */
+	ushort	vl_height;	/* Height of display area in millimeters */
+
+	/* LCD configuration register */
+	u_char	vl_clkp;	/* Clock polarity */
+	u_char	vl_oep;		/* Output Enable polarity */
+	u_char	vl_hsp;		/* Horizontal Sync polarity */
+	u_char	vl_vsp;		/* Vertical Sync polarity */
+	u_char	vl_dp;		/* Data polarity */
+	u_char	vl_bpix;	/* Bits per pixel, 0 = 1, 1 = 2, 2 = 4, 3 = 8 */
+	u_long	screen;		/* physical address of frame buffer */
+	
+} vidinfo_t;
+
+extern vidinfo_t panel_info;
+
+#endif
 
 /* Video functions */
 
@@ -274,6 +298,8 @@ void	lcd_printf	(const char *fmt, ...);
 				 (c) << 4 | (c) << 5 | (c) << 6 | (c) << 7)
 #elif LCD_BPP == LCD_COLOR8
 # define COLOR_MASK(c)		(c)
+#elif LCD_BPP == LCD_COLOR4
+
 #else
 # error Unsupported LCD BPP.
 #endif

@@ -1,1 +1,1 @@
-#define U_BOOT_VERSION "U-Boot 1.1.4d"
+#define U_BOOT_VERSION "U-Boot 1.1.4e"

@@ -35,7 +35,7 @@
 #include <mach/ts.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
-#include <asm/arch-s3c2410/n311.h>
+#include <asm/arch-s3c2410/n300.h>
 
 #include <plat/regs-serial.h>
 #include <plat/regs-timer.h>
@@ -73,7 +73,7 @@
 #include <linux/input.h>
 
 #include <linux/leds.h>
-#include "n311-lcd.c"
+#include "n300-lcd.c"
 
 #define UCON S3C2410_UCON_DEFAULT | S3C2410_UCON_UCLK
 #define ULCON S3C2410_LCON_CS8 | S3C2410_LCON_PNONE | S3C2410_LCON_STOPB
@@ -176,7 +176,7 @@ static struct mtd_partition n300_nand_part[] = {
 		.name		= "WindowsMob",
 		.offset		= 0,
 		.size		= SZ_64M,			// 128 kB
-		.mask_flags	= 0, 	//then is write protected 
+		.mask_flags	= 0, 	//if MTD_WRITEABLE then is write protected 
 		},
 };
 #else
@@ -184,25 +184,25 @@ static struct mtd_partition n300_nand_part[] = {
 	[0] = {
 		.name		= "u-boot",
 		.offset		= 0,
-		.size		= 0x20000,			// 128 kB
+		.size		= 0x40000,			// 256 kB
 		.mask_flags	= 0, //if MTD_WRITEABLE then is write protected 
 		},
 	[1] = {
 		.name		= "environ",
-        .offset 	= 0x20000,
+        .offset 	= 0x40000,
 		.size		= 0x4000,
 		.mask_flags	= 0,				// write allowed
 		},
 	[2] = {
 		.name		= "uImage",
-        .offset 	= 0x20000+0x4000,
+        .offset 	= 0x40000+0x4000,
 		.size		= 0x300000,
 		.mask_flags	= 0,
 		},
 	[3] = {
 		.name		= "filesystem",
-        .offset 	=0x20000+0x4000+0x300000,
-		.size		= SZ_64M-(0x20000+0x4000+0x300000),
+        .offset 	=0x40000+0x4000+0x300000,
+		.size		= SZ_64M-(0x40000+0x4000+0x300000),
 		.mask_flags	= 0,
 		},
 };
@@ -336,7 +336,7 @@ static struct platform_device n311_gpio_leds = {
 	}
 };
 
-int n311_backlight_power(int on) {
+int n300_backlight_power(int on) {
 	if (on) {
 	  s3c2410_gpio_cfgpin(S3C2410_GPB0, S3C2410_GPB0_TOUT0);
 	  s3c2410_gpio_pullup(S3C2410_GPB0, 0);
@@ -348,9 +348,9 @@ int n311_backlight_power(int on) {
 	  }
 	return 0;
 }
-EXPORT_SYMBOL_GPL(n311_backlight_power);
+EXPORT_SYMBOL_GPL(n300_backlight_power);
 
-void n311_set_brightness(int tcmpb0) {
+void n300_set_brightness(int tcmpb0) {
 	unsigned long tcfg0;
 	unsigned long tcfg1;
 	unsigned long tcon;
@@ -358,7 +358,7 @@ void n311_set_brightness(int tcmpb0) {
 	{DPRINTK("Brightness val -> %d\n", tcmpb0);}
 
 	/* configure power on/off */
-	n311_backlight_power(tcmpb0 ? 1 : 0);
+	n300_backlight_power(tcmpb0 ? 1 : 0);
 
 	tcfg0=readl(S3C2410_TCFG0);
 	tcfg1=readl(S3C2410_TCFG1);
@@ -394,7 +394,7 @@ static struct generic_bl_info n311_bl_machinfo = {
 	.name =         "n311_bl_machinfo",
 	.max_intensity = 0x2c,					//NOTE: will become backlight_device->props.max_brightness
 	.default_intensity = 0x16,
-	.set_bl_intensity = n311_set_brightness,
+	.set_bl_intensity = n300_set_brightness,
 };
 
 static struct platform_device n311_device_bl = {
@@ -407,7 +407,7 @@ static struct platform_device n311_device_bl = {
 
 
 
-void n311_udc_pullup(enum s3c2410_udc_cmd_e cmd) {
+void n300_udc_pullup(enum s3c2410_udc_cmd_e cmd) {
 	switch (cmd) {
         case S3C2410_UDC_P_ENABLE :
 		  //printk("S3C2410_UDC_P_ENABLE %d\n", cmd);
@@ -421,14 +421,14 @@ void n311_udc_pullup(enum s3c2410_udc_cmd_e cmd) {
 		  {DPRINTK("S3C2410_UDC_P_RESET\n");}
 		  break;
         default:
-		  {DPRINTK("n311_udc_pullup unknown cmd -> %d\n", cmd);}
+		  {DPRINTK("n300_udc_pullup unknown cmd -> %d\n", cmd);}
 		  break;
 	}
 }
-EXPORT_SYMBOL(n311_udc_pullup);
+EXPORT_SYMBOL(n300_udc_pullup);
 
 static struct s3c2410_udc_mach_info n311_udc_cfg __initdata = {
-        .udc_command            = n311_udc_pullup,
+        .udc_command            = n300_udc_pullup,
         //.vbus_pin               = S3C2410_GPG?,
         //.vbus_pin_inverted      = 0,
 
@@ -526,12 +526,12 @@ static void n311_hw_init(void) {
 	/* switch-type key: switch on/off display (IRQ9) */
 	/*
 	if (gpio_get_value(S3C2410_GPG1)==0) {
-	  DPRINTK("n311_backlight_power(0);\n");
-	  n311_backlight_power(0);
+	  DPRINTK("n300_backlight_power(0);\n");
+	  n300_backlight_power(0);
 	  }
 	else {
-	  DPRINTK("n311_backlight_power(1);\n");
-	  n311_backlight_power(1);
+	  DPRINTK("n300_backlight_power(1);\n");
+	  n300_backlight_power(1);
 	  }
 	*/
 	/* GOFORCE4000 Power ??*/
@@ -625,7 +625,7 @@ static struct platform_device *n311_devices[] __initdata = {
 	&s3c_device_usbgadget,
 	&s3c_device_ts,
 	&s3c_device_sdi,
-	&n311_lcdpower,
+	&n300_lcdpower,
 	&n311_button_device,
 	&n311_gpio_leds,
 	&n311_device_bl,

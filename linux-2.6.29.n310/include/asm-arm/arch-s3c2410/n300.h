@@ -18,10 +18,10 @@
 #define H1940_SUSPEND_RESUMEAT		(0x30081000)
 #define H1940_SUSPEND_CHECK		(0x30080000)
 
-extern int n311_backlight_power(int enable);
-extern int n311_lcdpower_lcd_enable(int enable);
-extern void n311_udc_pullup(enum s3c2410_udc_cmd_e cmd);
-extern void n311_set_brightness(int val);
+extern int n300_backlight_power(int enable);
+extern int n300_lcdpower_lcd_enable(int enable);
+extern void n300_udc_pullup(enum s3c2410_udc_cmd_e cmd);
+extern void n300_set_brightness(int val);
 
 #define GOFORCEMEMSTART 	0x20000000
 #define MEMSZ 				0xb20

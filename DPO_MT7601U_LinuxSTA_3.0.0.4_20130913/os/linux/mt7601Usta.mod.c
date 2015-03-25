@@ -23,4 +23,4 @@ MODULE_ALIAS("usb:v148Fp7650d*dc*dsc*dp*ic*isc*ip*");
 MODULE_ALIAS("usb:v148Fp6370d*dc*dsc*dp*ic*isc*ip*");
 MODULE_ALIAS("usb:v148Fp7601d*dc*dsc*dp*ic*isc*ip*");
 
-MODULE_INFO(srcversion, "A35516FF894806E2271CC1A");
+MODULE_INFO(srcversion, "2AA81E12B1120069EB7CF4B");

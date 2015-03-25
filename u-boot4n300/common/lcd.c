@@ -27,7 +27,7 @@
 /* ** HEADER FILES							*/
 /************************************************************************/
 
-/* #define DEBUG */
+#define DEBUG
 
 #include <config.h>
 #include <common.h>
@@ -79,7 +79,7 @@ static int lcd_init (void *lcdbase);
 
 static int lcd_clear (cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]);
 extern void lcd_ctrl_init (void *lcdbase);
-extern void lcd_enable (void);
+extern void lcd_enable (char *);
 static void *lcd_logo (void);
 
 
@@ -343,7 +343,11 @@ int drv_lcd_init (void)
 	device_t lcddev;
 	int rc;
 
+#ifdef CONFIG_N300
+	lcd_base=(void *)panel_info.screen;
+#else
 	lcd_base = (void *)(gd->fb_base);
+#endif
 
 	lcd_line_length = (panel_info.vl_col * NBITS (panel_info.vl_bpix)) / 8;
 
@@ -360,6 +364,7 @@ int drv_lcd_init (void)
 
 	rc = device_register (&lcddev);
 
+	//debug ("[LCD] drv_lcd_init end\n");
 	return (rc == 0) ? 1 : rc;
 }
 
@@ -420,11 +425,11 @@ U_BOOT_CMD(
 static int lcd_init (void *lcdbase)
 {
 	/* Initialize the lcd controller */
-	debug ("[LCD] Initializing LCD frambuffer at %p\n", lcdbase);
+	debug ("Initializing LCD frambuffer at %p\n", lcdbase);
 
 	lcd_ctrl_init (lcdbase);
 	lcd_clear (NULL, 1, 1, NULL);	/* dummy args */
-	lcd_enable ();
+	lcd_enable (&lcd_is_enabled);
 
 	/* Initialize the console */
 	console_col = 0;
@@ -433,8 +438,8 @@ static int lcd_init (void *lcdbase)
 #else
 	console_row = 1;	/* leave 1 blank line below logo */
 #endif
-	lcd_is_enabled = 1;
 
+	debug ("LCD frambuffer Initialized\n");
 	return 0;
 }
 
@@ -463,8 +468,8 @@ ulong lcd_setmem (ulong addr)
 	size = (size + (PAGE_SIZE - 1)) & ~(PAGE_SIZE - 1);
 
 	/* Allocate pages for the frame buffer. */
-	addr -= size;
-
+	//addr -= size;
+	addr = panel_info.screen;
 	debug ("Reserving %ldk for LCD Framebuffer at: %08lx\n", size>>10, addr);
 
 	return (addr);
@@ -533,6 +538,8 @@ void bitmap_plot (int x, int y)
 		cmap = (ushort *)fbi->palette;
 #elif defined(CONFIG_MPC823)
 		cmap = (ushort *)&(cp->lcd_cmap[BMP_LOGO_OFFSET*sizeof(ushort)]);
+#elif defined(CONFIG_N300)
+		cmap = (ushort *)panel_info.screen;
 #endif
 
 		WATCHDOG_RESET();
@@ -620,8 +627,7 @@ int lcd_display_bitmap(ulong bmp_image, int x, int y)
 		return 1;
 	}
 
-	debug ("Display-bmp: %d x %d  with %d colors\n",
-		(int)width, (int)height, (int)colors);
+	debug ("Display-bmp: %d x %d  with %d colors\n", (int)width, (int)height, (int)colors);
 
 	if (bpix==8) {
 #if defined(CONFIG_PXA250)
@@ -668,6 +674,8 @@ int lcd_display_bitmap(ulong bmp_image, int x, int y)
 			*(fb++)=*(bmap++);
 #elif defined(CONFIG_MPC823)
 			*(fb++)=255-*(bmap++);
+#elif defined(CONFIG_N300)
+			*(fb++)=*(bmap++);
 #endif
 		bmap += (width - padded_line);
 		fb   -= (width + lcd_line_length);

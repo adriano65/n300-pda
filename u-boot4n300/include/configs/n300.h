@@ -8,8 +8,8 @@
 
  -------------------------------------- LOAD u-boot into nand (from u-boot)
  loady 				(be quick !)
- nand erase 0 0x30000
- nand write 0x30008000 0 0x00030000
+ nand erase 0 0x40000
+ nand write 0x30008000 0 0x00040000
  -- ufo command ... mww 0x56000000 0x005EA71F  .. in case of error ;-)
  
  -------------------------------------- LOAD u-boot into nand (from jtag and u-boot)
@@ -17,8 +17,8 @@
  (load_image /opt/N310/u-boot4n300/eboot.nb0 0x30008000)	do not load @ 0x33f80000 !! it relocates itself
  resume
  --> from serialconsole 
- nand erase 0 0x30000
- nand write 0x30008000 0 0x00030000
+ nand erase 0 0x40000
+ nand write 0x30008000 0 0x00040000
  -- OR (128M nand flash)---
  nand erase 0 0x40000
  nand write 0x30008000 0 0x40000
@@ -26,8 +26,8 @@
  --------------------------(128M nand flash) TEST LOAD u-boot into far-nand-address (from jtag and u-boot)
  load_image /opt/N310/u-boot4n300/u-boot.bin 0x30008000
  --> from serialconsole 
- nand erase 0x100000 0x30000
- nand write 0x30008000 0x100000 0x30000
+ nand erase 0x100000 0x40000
+ nand write 0x30008000 0x100000 0x40000
  --> from jtag console
  nand dump 0 /opt/N310/u-boot4n300/dump 0x100000 0x20000
  
@@ -51,8 +51,8 @@
 	dd if=/dev/zero ibs=1k count=256 | tr "\000" "\377" >superipl.bin (NOT .nb0!!)
 	(memo: try eboot.nb0 name filename)
 	
- 2. copy u-boot (NAND VERSION! nand erase 0 0x30000
- nand write 0x30008000 0 0x00030000not RAM one) to superipl.bin
+ 2. copy u-boot (NAND VERSION! nand erase 0 0x40000
+ nand write 0x30008000 0 0x00040000not RAM one) to superipl.bin
 	dd if=u-boot.nand of=superipl.nb0 conv=notrunc
 	
  3. put file on SD card (dir ACERN300) and use update FW procedure for N300
@@ -102,7 +102,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-//#define _BOOT_FROM_DRAM		// could be used by command line (make ...)
+#define _BOOT_FROM_DRAM		// could be used by command line (make ...)
 
 #ifdef _BOOT_FROM_DRAM
   /* If we want to start u-boot downloaded from JTAG in DRAM 
@@ -163,6 +163,12 @@
 //#define CONFIG_BAUDRATE		9600
 #undef CONFIG_HWFLOW
 
+
+/************************************************************
+ * display configuration
+ ************************************************************/
+#define CONFIG_LCD
+#define CONFIG_LCD_LOGO
 /************************************************************
  * i2c
  ************************************************************/
@@ -196,10 +202,10 @@
 			CFG_CMD_NAND	| \
 			CFG_CMD_MMC	 	| \
 			CFG_CMD_FAT	 	| \
+			CFG_CMD_EXT2	| \
 			CFG_CMD_REGINFO)
 
 /*			
-			CFG_CMD_EXT2	| \
             CFG_CMD_LOADS   | \
        		G_CMD_FLASH  | \
 			CFG_CMD_EEPROM | \
@@ -219,7 +225,7 @@
 
 #define CONFIG_BOOTDELAY	10
 //#define CONFIG_BOOTARGS    	"noinitrd root=31:03 init=/linuxrc console=ttySAC0"
-#define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 ro rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3"
+#define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 ro rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3"
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 earlyprintk=serial,uart0,115200 console=ttySAC0,115200n8'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=2 console=tty0 console=ttySAC0,115200n8 panic=3'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=5 console=tty0 console=ttySAC0,115200n8 panic=30'
@@ -230,7 +236,6 @@
 #define CONFIG_CMDLINE_TAG
 #define CONFIG_SETUP_MEMORY_TAGS
 #define CONFIG_SERIAL_TAG
-#define CONFIG_AUTO_COMPLETE
 //#define CONFIG_SHOW_BOOT_PROGRESS
 //#define CONFIG_BOOTCOMMAND	"nand read 30008000 30000 200000;go 30008000"
 //#define CONFIG_BOOTCOMMAND	"mmcinit; fatload mmc 0:1 30008000 zImage; go 30008000"
@@ -252,6 +257,8 @@
 #define CFG_BARGSIZE		CFG_CBSIZE	/* Boot Argument Buffer Size	*/
 #define CFG_HUSH_PARSER
 #define CFG_PROMPT_HUSH_PS2	"u-boot "
+#define CONFIG_AUTO_COMPLETE
+
 #define CFG_MEMTEST_START	0x30000000	/* memtest works on	*/
 #define CFG_MEMTEST_END		0x33F00000	/* 63 MB in DRAM	*/
 
@@ -277,8 +284,6 @@
 #define CONFIG_STACKSIZE_FIQ	(4*1024)	/* FIQ stack */
 #endif
 
-#define CFG_NO_FLASH
-
 /*-----------------------------------------------------------------------
  * Physical Memory Map
  ------------------------------------------------------------------------*/
@@ -295,6 +300,8 @@
 
 //#define CMD_SAVEENV
 #define CFG_MONITOR_BASE        PHYS_SDRAM_1
+
+#define CFG_NO_FLASH
 
 /*-----------------------------------------------------------------------
  * NAND and environment organization
@@ -323,7 +330,7 @@
 	#define CFG_NAND_SMALLPAGE
 	#define SECTORSIZE				512		/* used by nand_legacy_rw , BE CAREFUL: See board/n300/nand_read.c*/
 	/* ---------------------------------- NAND loader ------ */
-	#define CFG_UBOOT_SIZE		0x20000 	/* size of u-boot, for NAND loading */
+	#define CFG_UBOOT_SIZE		0x40000 	/* size of u-boot, for NAND loading */
 	#define CFG_ENV_SIZE		0x4000		/* Total Size of Environment Sector */
 	//#define DYNAMIC_CRC_TABLE	
 #else								// 128M NAND

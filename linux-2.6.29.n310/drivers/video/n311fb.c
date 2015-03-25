@@ -29,10 +29,10 @@
 #include <linux/uaccess.h>
 
 #include <asm/io.h>
-#include <asm/arch-s3c2410/n311.h>
+#include <asm/arch-s3c2410/n300.h>
 
-//#undef N311_DEBUG
-#define N311_DEBUG
+#undef N311_DEBUG
+//#define N311_DEBUG
 #ifdef N311_DEBUG
 #define DBG(x...) printk(KERN_INFO x)
 #else
@@ -142,7 +142,7 @@ static int n311_ioctl(struct fb_info *info, unsigned int cmd, unsigned long arg)
 			break;
 		}
 	case FB_BLANK_UNBLANK:
-		retval=n311_backlight_power(!wasOn);
+		retval=n300_backlight_power(!wasOn);
 		wasOn=!wasOn;
 		break;
 
@@ -324,13 +324,13 @@ static int n311fb_blank(int blank, struct fb_info *info) {
 
   switch (blank) {
 	case FB_BLANK_UNBLANK:
-	  n311_backlight_power(1);
+	  n300_backlight_power(1);
 	  break;
 	case FB_BLANK_POWERDOWN:
 	case FB_BLANK_VSYNC_SUSPEND:
 	case FB_BLANK_HSYNC_SUSPEND:
 	case FB_BLANK_NORMAL:
-	  n311_backlight_power(0);
+	  n300_backlight_power(0);
 	  break;
 
 	default:
@@ -365,8 +365,7 @@ static int __init n311fb_setup(char *options)
      *  Initialisation
      */
 
-static int __init n311fb_probe(struct platform_device *dev)
-{
+static int __init n311fb_probe(struct platform_device *dev) {
 	struct fb_info *info;
 	int retval = -ENOMEM;
 	
@@ -431,16 +430,15 @@ static int n311fb_remove(struct platform_device *dev)
 
 #ifdef CONFIG_PM
 
-static int n311fb_suspend(struct platform_device *dev, pm_message_t state) {
+static void n311fb_suspend(struct platform_device *dev, pm_message_t state) {
 	struct fb_info	   *fbinfo = platform_get_drvdata(dev);
 
-	n311_backlight_power(0);
-	return 0;
+	n300_backlight_power(0);
 }
 
-static int n311fb_resume(struct platform_device *dev) {
+static void n311fb_resume(struct platform_device *dev) {
 	struct fb_info	   *fbinfo = platform_get_drvdata(dev);
-	n311_backlight_power(1);
+	n300_backlight_power(1);
 }
 #else
 #define n311fb_suspend NULL

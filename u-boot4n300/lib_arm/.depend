@@ -31,7 +31,8 @@ armlinux.o: armlinux.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/byteorder.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
+  /opt/N310/u-boot4n300/include/status_led.h
 board.o: board.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \

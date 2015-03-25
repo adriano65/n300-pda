@@ -26,6 +26,7 @@ main.o: main.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
   /opt/N310/u-boot4n300/include/watchdog.h \
   /opt/N310/u-boot4n300/include/command.h \
+  /opt/N310/u-boot4n300/include/hush.h \
   /opt/N310/u-boot4n300/include/post.h
 ACEX1K.o: ACEX1K.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
@@ -204,7 +205,8 @@ cmd_autoscript.o: cmd_autoscript.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/byteorder.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
+  /opt/N310/u-boot4n300/include/hush.h
 cmd_bdinfo.o: cmd_bdinfo.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -374,7 +376,8 @@ cmd_bootm.o: cmd_bootm.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/byteorder.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
-  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
+  /opt/N310/u-boot4n300/include/hush.h
 cmd_cache.o: cmd_cache.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -689,7 +692,16 @@ cmd_ext2.o: cmd_ext2.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/global_data.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
-  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h
+  /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
+  /opt/N310/u-boot4n300/include/command.h \
+  /opt/N310/u-boot4n300/include/linux/ctype.h \
+  /opt/N310/u-boot4n300/include/asm/byteorder.h \
+  /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
+  /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
+  /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
+  /opt/N310/u-boot4n300/include/ext2fs.h \
+  /opt/N310/u-boot4n300/include/usb.h \
+  /opt/N310/u-boot4n300/include/usb_defs.h
 cmd_fat.o: cmd_fat.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
@@ -2117,7 +2129,9 @@ lcd.o: lcd.c /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/devices.h \
   /opt/N310/u-boot4n300/include/lists.h \
   /opt/N310/u-boot4n300/include/lcd.h \
-  /opt/N310/u-boot4n300/include/watchdog.h
+  /opt/N310/u-boot4n300/include/watchdog.h \
+  /opt/N310/u-boot4n300/include/video_font.h \
+  /opt/N310/u-boot4n300/include/bmp_logo.h
 lists.o: lists.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \

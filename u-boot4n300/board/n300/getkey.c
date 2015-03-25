@@ -21,9 +21,7 @@
 #include <command.h>
 #include <asm/arch/regs-gpio.h>
 #include <s3c2440.h>
-
-static const int rows = 4;
-static const int cols = 3;
+#include "n300.h"
 
 
 #if 0
@@ -44,13 +42,13 @@ static const int cols = 3;
 	KEY(3, 2, KEY_ENTER),	//Nav centre key
 #endif
 
-static void keypad_init(void) {
+void keypad_init(void) {
 
 	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
 
 	/* blue led */
 	//s3c2410_gpio_setpin(S3C2410_GPD10, 1);	//switch on
-	gpio->GPDCON |= ~(1<<10);						//switch on
+	gpio->GPDDAT |= ~(1<<10);						//switch on
 	S3C2440_GPIO_CONFIG (gpio->GPDCON, 10, GPIO_OUTPUT);		// enable blue led
 	
 	//{KEY_A, S3C2410_GPF4, 1, "Home button",EV_KEY},
@@ -58,17 +56,14 @@ static void keypad_init(void) {
 }
 
 static void n300_setkey(void) {
-#if 0
 	char str[16];
 	unsigned long key;
 
-	key =  KPAS;
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
+	key =  gpio->GPFCON & 4 ;
 
-	sprintf(str, "%i", (key >> 4) & 0x0F);
-	setenv("keyrow", str);
-	sprintf(str, "%i", key & 0x0F);
-	setenv("keycol", str);
-#endif
+	sprintf(str, "%i", key );
+	setenv("key_code", str);
 }
 
 static void n300_getkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
@@ -106,12 +101,12 @@ static void n300_waitkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]){
 
 U_BOOT_CMD(
 	getkey,	1,	0,	n300_getkey,
-	"getkey - get the current key pressed from the keypad and set the environment vars keyrow and keycol (single press only)\n",
+	"getkey - get the current key pressed from the keypad and set the environment var key_code (single press only)\n",
 	NULL
 );
 
 U_BOOT_CMD(
 	waitkey,	1,	0,	n300_waitkey,
-	"waitkey - wait for a key to be pressed and set the environment vars keyrow and keycol (single press only)\n",
+	"waitkey - wait for a key to be pressed and set the environment var key_code (single press only)\n",
 	NULL
 );

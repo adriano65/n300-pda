@@ -1137,13 +1137,14 @@ modules: $(vmlinux-dirs) $(if $(KBUILD_BUILTIN),vmlinux)
 	@$(kecho) '  Building modules, stage 2.';
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.fwinst obj=firmware __fw_modbuild
-	@echo '  Copying to rootfs.'
+	@echo ' --> Copying to rootfs.'
 	/opt/N310/linux-2.6.29.n310/uboot-mkimage.sh uzImage
 	mkdir -p $(INSTALL_MOD_PATH)/media
 	mkdir -p $(INSTALL_MOD_PATH)/media/mmcblk0p1
 	mv $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage.old
 	cp /opt/N310/linux-2.6.29.n310/uzImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/uzImage
-	cp /opt/N310/linux-2.6.29.n310/arch/arm/boot/zImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/zImage
+	# ----> ' next line only for one partition MTD'
+	#cp /opt/N310/linux-2.6.29.n310/arch/arm/boot/zImage $(INSTALL_MOD_PATH)/media/mmcblk0p1/zImage
 
 
 # Target to prepare building external modules

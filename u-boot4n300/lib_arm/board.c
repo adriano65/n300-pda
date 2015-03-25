@@ -260,9 +260,7 @@ init_fnc_t *init_sequence[] = {
 void start_armboot (void) {
 	init_fnc_t **init_fnc_ptr;
 	char *s;
-#ifndef CFG_NO_FLASH
 	ulong size;
-#endif
 #if defined(CONFIG_VFD) || defined(CONFIG_LCD)
 	unsigned long addr;
 #endif
@@ -371,6 +369,7 @@ void start_armboot (void) {
 	}
 
 	devices_init ();	/* get the devices list going. */
+    //puts("devices initialized\n");
 
 #ifdef CONFIG_CMC_PU2
 	load_sernum_ethaddr ();
@@ -378,7 +377,9 @@ void start_armboot (void) {
 
 	jumptable_init ();
 
+    //puts("fully initializing console as a device\n");
 	console_init_r ();	/* fully init console as a device */
+    //puts("console initialized\n");
 
 #if defined(CONFIG_MISC_INIT_R)
 	/* miscellaneous platform dependent initialisations */
@@ -424,6 +425,7 @@ void start_armboot (void) {
 	dm9000_init();
 #endif
 
+    //puts("endless loop\n");
 	for (;;) {
 		main_loop ();
 	}

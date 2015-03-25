@@ -4746,7 +4746,6 @@ INT RTMPQueryInformation(
 }
 
 
-#ifdef DBG
 /* 
     ==========================================================================
     Description:
@@ -5383,9 +5382,6 @@ next:
 	DBGPRINT(RT_DEBUG_TRACE, ("<==RTMPIoctlRF\n"));
 }
 #endif /* RLT_RF */
-
-
-#endif /* DBG */
 
 
 #ifdef RT65xx

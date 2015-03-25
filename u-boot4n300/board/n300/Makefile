@@ -25,7 +25,7 @@ include $(TOPDIR)/config.mk
 
 LIB	= lib$(BOARD).a
 
-OBJS	:= n300.o nand_read.o nand.o getkey.o
+OBJS	:= n300.o nand_read.o nand.o getkey.o n300lcd.o
 #OBJS	:= n300.o nand_read.o
 SOBJS	:= lowlevel_init.o
 

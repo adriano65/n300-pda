@@ -25,7 +25,7 @@
 #include <mach/hardware.h>
 #include <mach/usb-control.h>
 #include <mach/regs-gpio.h>
-#include <asm/arch-s3c2410/n311.h>
+#include <asm/arch-s3c2410/n300.h>
 #include <mach/regs-irq.h>
 
 #define valid_port(idx) ((idx) == 1 || (idx) == 2)
@@ -419,11 +419,11 @@ static ssize_t set_usb_mode(struct device *dev, struct device_attribute *attr,
 	if (!strncmp(buf, "host", 4)) {
 		printk("s3c2410: changing usb to host\n");
 		s3c2410_modify_misccr(S3C2410_MISCCR_USBHOST, S3C2410_MISCCR_USBHOST);
-		n311_udc_pullup(S3C2410_UDC_P_DISABLE);
+		n300_udc_pullup(S3C2410_UDC_P_DISABLE);
 	} else if (!strncmp(buf, "device", 6)) {
 		printk("s3c2410: changing usb to device\n");
 		s3c2410_modify_misccr(S3C2410_MISCCR_USBHOST, 0);
-		n311_udc_pullup(S3C2410_UDC_P_ENABLE);
+		n300_udc_pullup(S3C2410_UDC_P_ENABLE);
 	} else
 		printk("s3c2410: unknown mode\n");
 		return -EINVAL;
@@ -630,7 +630,7 @@ static int ohci_hcd_s3c2410_drv_suspend(struct platform_device * pdev, pm_messag
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 
 	dev_info(hcd->self.controller, "ohci_hcd_s3c2410_drv_suspend\n");
-	//n311_lcdpower_bl_enable(0);
+	//n300_lcdpower_bl_enable(0);
 	return 0;
 }
 

@@ -509,6 +509,7 @@ int console_init_r (void)
 	     i++
 	    ) {
 		device_t *dev = ListGetPtrToItem (devlist, i);
+		//puts ("scanning..\n");
 
 		if ((dev->flags & DEV_FLAGS_INPUT) && (inputdev == NULL)) {
 			inputdev = dev;
@@ -523,11 +524,13 @@ int console_init_r (void)
 		console_setfile (stdout, outputdev);
 		console_setfile (stderr, outputdev);
 	}
+	//puts ("output console..\n");
 
 	/* Initializes input console */
 	if (inputdev != NULL) {
 		console_setfile (stdin, inputdev);
 	}
+	//puts ("input console..\n");
 
 	gd->flags |= GD_FLG_DEVINIT;	/* device initialization completed */
 
