@@ -177,3 +177,132 @@ void show_boot_progress(int progress) {
 
 #endif
 
+#if 0
+static inline void EnterSleep() {
+ __asm__ ("; Function for entering power down mode 
+  ; 1. SDRAM should be in self-refresh mode. 
+  ; 2. All interrupt should be maksked for SDRAM / DRAM self-refresh. 
+  ; 3. LCD controller should be disabled for SDRAM / DRAM self-refresh. 
+  ; 4. The I-cache may have to be turned on. 
+  ; 5. The location of the following code may have not to be changed. 
+
+
+; To void EnterPWDN (int CLKCON); 
+  EnterPWDN 
+  MOV R2, R0    ; R2 = rCLKCON 
+  tst r0, # 0x8    ; SLEEP mode? 
+  BNE ENTER_SLEEP 
+
+
+  ENTER_STOP 
+  ldr r0, = REFRESH 
+  LDR r3, [r0]    ; R3 = rREFRESH 
+  MOV r1, r3 
+  orr r1, r1, # BIT_SELFREFRESH 
+  str r1, [r0]    ; Enable SDRAM self-refresh 
+
+
+  mov r1, # 16    ; Wait until self-refresh is issued. May not be needed. 
+  0    subs r1, r1, # 1 
+  bne% B0 
+
+
+  ldr r0, = CLKCON ; Enter STOP Mode. 
+  str r2, [r0] 
+
+
+  mov r1, # 32 
+  0    subs r1, r1, # 1 ; 1) wait until the STOP mode is in effect. 
+  bne% B0    			; 2) Or wait here until the CPU & Peripherals will be turned-off 
+; Entering SLEEP mode, only the reset by wake-up is available. 
+
+
+  ldr r0, = REFRESH; exit from SDRAM self refresh mode. 
+  str r3, [r0] 
+
+
+  MOV_PC_LR 
+
+
+  ENTER_SLEEP 
+  ; NOTE. 
+  ; 1) rGSTATUS3 should have the return address after wake-up from SLEEP mode. 
+
+
+  ldr r0, = REFRESH 
+  ldr r1, [r0]    ; R1 = rREFRESH 
+  orr r1, r1, # BIT_SELFREFRESH 
+  str r1, [r0]    ; Enable SDRAM self-refresh 
+
+
+  mov r1, # 16    ; Wait until self-refresh is issued, which may not be needed. 
+  0    subs r1, r1, # 1 
+  bne% B0 
+
+
+  ldr    r1, = MISCCR 
+  ldr    R0, [r1] 
+  orr    r0, r0, # (7 << 17); Set SCLK0 = 0, SCLK1 = 0, SCKE = 0. 
+  str    R0, [r1] 
+
+
+  ldr r0, = CLKCON ; Enter Sleep Mode 
+  str r2, [r0] 
+
+
+b.    ; CPU will die here. 
+
+
+
+  ;24, read MISCCR register value, the value is set when entering Sleep mode,
+
+  ;BIC instruction: The BIC (BIt Clear) instruction performs an AND operation on the bits in Rnwith the complements of the corresponding bits in the value of Operand2.
+
+  WAKEUP_SLEEP 
+  ; Release SCLKn after wake-up from the SLEEP mode. 
+  ldr    r1, = MISCCR 
+  ldr    R0, [r1] 
+  bic    r0, r0, # (7 << 17); SCLK0: 0 -> SCLK, SCLK1: 0 -> SCLK, SCKE: 0 -> = SCKE. 
+  str    R0, [r1] 
+
+  ;25, set from Sleep Wakeup state, then began to set the Memory Control register
+
+  ;BWSCON: BUS WIDTH & WAIT CONTROL REGISTER
+
+  ;SMRDATA a label is defined in this document is the starting address of a memory, this memory 13 * 4 = 52 bytes
+
+  The following line, the first line of 0 indicates that mean? Local label
+
+  The following line% B0 said what does that mean? A reference to a local label, B Backward
+
+  The value in the memory SMRDATA beginning, set the to the BWSCON address register, a total of 13 registers
+
+ ; Set memory control registers 
+ldr    r0, = SMRDATA 
+ldr    r1, = BWSCON ; BWSCON Address 
+add  
+
+0 
+ldr    r3, [r0], # 4 
+str    r3, [r1], # 4 
+cmp    r2, r0 
+bne    % B0 
+
+
+Here is the implementation of 256 subtraction, no particular usefulness is purely a waste of CPU time, waiting for the other hardware to complete the operation
+
+ mov r1, # 256 
+0    subs r1, r1, # 1 ; 1) wait until the SelfRefresh is released. 
+bne% B0 
+
+
+
+Here should be to restore the state before the Sleep proceed. . .
+
+ ldr r1, = GSTATUS3 ; GSTATUS3 has the start address just after SLEEP wake-up 
+LDR r0, [r1] 
+
+mov pc, r0 
+#endif
+
+

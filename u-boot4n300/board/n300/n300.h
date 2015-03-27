@@ -3,7 +3,7 @@
  * project.
  *
  */
-#define LCD_BPP		LCD_COLOR4
+#define LCD_BPP		LCD_COLOR8
 #define PAGE_SIZE	640*480*2
 
 #include <lcd.h>
@@ -43,6 +43,9 @@ DECLARE_GLOBAL_DATA_PTR;
 
 
 #define VIDEO_BASE_REG32(x) (*(volatile unsigned long *)(0x20000000+x))
+//#define VIDEO_BASE_REG8(x) (*(volatile unsigned char *)(0x20000000+x))
+//#define VIDEO_BASE_REG8(x) (*(volatile unsigned short *)(0x20000000+x))
+#define VIDEO_BASE_REG32wDelay(x) delay(20); (*(volatile unsigned long *)(0x20000000+x))
 #define VIDEO_BASE          VIDEO_BASE_REG32(0x0)
 
 int sharp_lcd_init (void);
