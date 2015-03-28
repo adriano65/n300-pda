@@ -12,6 +12,7 @@
  */
 
 #include <common.h>
+#include <command.h>
 #include <s3c2440.h>
 #include <asm/arch/regs-gpio.h>
 #include "n300.h"
@@ -158,7 +159,16 @@ int print_cpuinfo (void) {
 	printf("Boot reason: %s \n", (gpio->GSTATUS2 & S3C2410_GSTATUS2_WTRESET) ? "Watchdog" : 
 								 ((gpio->GSTATUS2 & S3C2410_GSTATUS2_OFFRESET) ? "Sleep" :
 								 ((gpio->GSTATUS2 & S3C2410_GSTATUS2_PONRESET) ? "Power ON" : "") ));
+	printf("GSTATUS3 == 0x%8X\n", gpio->GSTATUS3); 
+	printf("GSTATUS4 == 0x%8X\n", gpio->GSTATUS4); 
 	return (0);
+}
+static void n300_getGStatus3(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
+	char str[16];
+  
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
+	sprintf(str, "0x%8X", gpio->GSTATUS3 );
+	setenv("GStatus3", str);
 }
 
 void get_board_serial(struct tag_serialnr *serialnr) {
@@ -179,49 +189,41 @@ void show_boot_progress(int progress) {
 
 #if 0
 static inline void EnterSleep() {
- __asm__ ("; Function for entering power down mode 
+  /*
+  ; Function for entering power down mode \
   ; 1. SDRAM should be in self-refresh mode. 
   ; 2. All interrupt should be maksked for SDRAM / DRAM self-refresh. 
   ; 3. LCD controller should be disabled for SDRAM / DRAM self-refresh. 
   ; 4. The I-cache may have to be turned on. 
   ; 5. The location of the following code may have not to be changed. 
+  */
 
+  // To void EnterPWDN (int CLKCON); 
+ __asm__ ("EnterPWDN"
+		  "MOV R2, R0"    	// R2 = rCLKCON 
+		  "tst r0, # 0x8"   // SLEEP mode? 
+		  "BNE ENTER_SLE"
 
-; To void EnterPWDN (int CLKCON); 
-  EnterPWDN 
-  MOV R2, R0    ; R2 = rCLKCON 
-  tst r0, # 0x8    ; SLEEP mode? 
-  BNE ENTER_SLEEP 
+		  "ENTER_STOP "
+		  "ldr r0, = REFRESH "
+		  "LDR r3, [r0]    	"	// R3 = rREFRESH 
+		  "MOV r1, r3 "
+		  "orr r1, r1, # BIT_SELFREFRESH "
+		  "str r1, [r0]"		// Enable SDRAM self-refresh 
 
+		  "mov r1, # 16 " 		//   Wait until self-refresh is issued. May not be needed. 
+		  "0    subs r1, r1, # 1 
+		  "bne% B0 "
+		  "ldr r0, = CLKCO	"	//	; Enter STOP Mode. 
+		  "str r2, [r0] "
+		  "mov r1, # 32 "
+		  "0    subs r1, r1, # 1"	// 1) wait until the STOP mode is in effect. 
+		  "bne% B0 "  				// 2) Or wait here until the CPU & Peripherals will be turned-off 
+									// Entering SLEEP mode, only the reset by wake-up is available. 
+		  "ldr r0, = REFRESH"		// exit from SDRAM self refresh mode. 
+		  "str r3, [r0]"
 
-  ENTER_STOP 
-  ldr r0, = REFRESH 
-  LDR r3, [r0]    ; R3 = rREFRESH 
-  MOV r1, r3 
-  orr r1, r1, # BIT_SELFREFRESH 
-  str r1, [r0]    ; Enable SDRAM self-refresh 
-
-
-  mov r1, # 16    ; Wait until self-refresh is issued. May not be needed. 
-  0    subs r1, r1, # 1 
-  bne% B0 
-
-
-  ldr r0, = CLKCON ; Enter STOP Mode. 
-  str r2, [r0] 
-
-
-  mov r1, # 32 
-  0    subs r1, r1, # 1 ; 1) wait until the STOP mode is in effect. 
-  bne% B0    			; 2) Or wait here until the CPU & Peripherals will be turned-off 
-; Entering SLEEP mode, only the reset by wake-up is available. 
-
-
-  ldr r0, = REFRESH; exit from SDRAM self refresh mode. 
-  str r3, [r0] 
-
-
-  MOV_PC_LR 
+		  "MOV_PC_LR "
 
 
   ENTER_SLEEP 
@@ -305,4 +307,9 @@ LDR r0, [r1]
 mov pc, r0 
 #endif
 
+U_BOOT_CMD(
+	getGS3,	1,	0,	n300_getGStatus3,
+	"getGS3  - get the GStatus3 cpu register \n",
+	NULL
+);
 

@@ -101,12 +101,12 @@ static void n300_waitkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]){
 
 U_BOOT_CMD(
 	getkey,	1,	0,	n300_getkey,
-	"getkey - get the current key pressed from the keypad and set the environment var key_code (single press only)\n",
+	"getkey  - get the current key pressed from the keypad and set the environment var key_code (single press only)\n",
 	NULL
 );
 
 U_BOOT_CMD(
 	waitkey,	1,	0,	n300_waitkey,
-	"waitkey - wait for a key to be pressed and set the environment var key_code (single press only)\n",
+	"waitkey  - wait for a key to be pressed and set the environment var key_code (single press only)\n",
 	NULL
 );

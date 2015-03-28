@@ -43,7 +43,7 @@
 
  -------------------------------------- LOAD linux (uzImage) from nand - 64M)
  (nand erase 0x24000 0x300000)
- nand read 0x31000000 0x24000 0x300000
+ nand read 0x31000000 0x44000 0x300000
  bootm 0x31000000
  
  -------------------------------------- LOAD u-boot into nand (from original bootloader of N300)
@@ -102,7 +102,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#define _BOOT_FROM_DRAM		// could be used by command line (make ...)
+//#define _BOOT_FROM_DRAM		// could be used by command line (make ...)
 
 #ifdef _BOOT_FROM_DRAM
   /* If we want to start u-boot downloaded from JTAG in DRAM 
@@ -223,10 +223,11 @@
 #define CONFIG_USB_OHCI
 #define CONFIG_USB_STORAGE
 
+#define CONFIG_PREBOOT	"setenv stdout serial;setenv stderr serial"
 
 #define CONFIG_BOOTDELAY	10
-//#define CONFIG_BOOTARGS    	"noinitrd root=31:03 init=/linuxrc console=ttySAC0"
-#define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 ro rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3"
+
+#define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3"
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 earlyprintk=serial,uart0,115200 console=ttySAC0,115200n8'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=2 console=tty0 console=ttySAC0,115200n8 panic=3'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=5 console=tty0 console=ttySAC0,115200n8 panic=30'
@@ -238,11 +239,10 @@
 #define CONFIG_SETUP_MEMORY_TAGS
 #define CONFIG_SERIAL_TAG
 //#define CONFIG_SHOW_BOOT_PROGRESS
-//#define CONFIG_BOOTCOMMAND	"nand read 30008000 30000 200000;go 30008000"
-//#define CONFIG_BOOTCOMMAND	"mmcinit; fatload mmc 0:1 30008000 zImage; go 30008000"
 // --- AAGH load address MUST be different from kernel jump address (0x30008000)
 #define CONFIG_BOOTCOMMAND	"mmcinit; fatload mmc 0:1 31000000 uzImage; bootm 31000000"
 // setenv bootcmd 'mmcinit; fatload mmc 0:1 31000000 uzImage; bootm 31000000'
+// setenv bootcmd 'nand read 30008000 44000 300000;go 30008000'
 #define CONFIG_MMC_CLK	15000000
 // mmc_clk=nPCLK/15000000L - 1;  
 //	sdi->SDIPRE = nPCLK/(s ? simple_strtol(s, NULL, 11000000L) : 15000000L)-1;
@@ -252,13 +252,14 @@
  */
 #define	CONFIG_LONGHELP				/* undef to save memory		*/
 #define	CFG_PROMPT		"u-boot # "	/* Monitor Command Prompt*/
-#define	CFG_CBSIZE		256		/* Console I/O Buffer Size	*/
+#define	CFG_CBSIZE		256			/* Console I/O Buffer Size	*/
 #define	CFG_PBSIZE (CFG_CBSIZE+sizeof(CFG_PROMPT)+16) /* Print Buffer Size */
-#define	CFG_MAXARGS		16		/* max number of command args	*/
+#define	CFG_MAXARGS		16			/* max number of command args	*/
 #define CFG_BARGSIZE		CFG_CBSIZE	/* Boot Argument Buffer Size	*/
 #define CFG_HUSH_PARSER
 #define CFG_PROMPT_HUSH_PS2	"u-boot "
-#define CONFIG_AUTO_COMPLETE
+#define CONFIG_AUTO_COMPLETE	1
+#define CONFIG_COMMAND_HISTORY	1
 
 #define CFG_MEMTEST_START	0x30000000	/* memtest works on	*/
 #define CFG_MEMTEST_END		0x33F00000	/* 63 MB in DRAM	*/
