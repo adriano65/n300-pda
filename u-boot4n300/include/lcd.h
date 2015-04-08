@@ -166,6 +166,7 @@ typedef struct vidinfo {
 	u_char	vl_vsp;		/* Vertical Sync polarity */
 	u_char	vl_dp;		/* Data polarity */
 	u_char	vl_bpix;	/* Bits per pixel, 0 = 1, 1 = 2, 2 = 4, 3 = 8 */
+	u_char	vl_lbw;		/* LCD Bus width, 0 = 4, 1 = 8 */
 	u_long	screen;		/* physical address of frame buffer */
 	
 } vidinfo_t;
@@ -208,6 +209,16 @@ void	lcd_printf	(const char *fmt, ...);
 #define LCD_COLOR4	2
 #define LCD_COLOR8	3
 #define LCD_COLOR16	4
+#define LCD_COLOR32	5
+#define LCD_COLOR15	15
+#define LCD_COLOR24	24
+
+#define FB_VISUAL_MONO01		0	/* Monochr. 1=Black 0=White */
+#define FB_VISUAL_MONO10		1	/* Monochr. 1=White 0=Black */
+#define FB_VISUAL_TRUECOLOR		2	/* True color	*/
+#define FB_VISUAL_PSEUDOCOLOR		3	/* Pseudo color (like atari) */
+#define FB_VISUAL_DIRECTCOLOR		4	/* Direct color */
+#define FB_VISUAL_STATIC_PSEUDOCOLOR	5	/* Pseudo color readonly */
 
 /*----------------------------------------------------------------------*/
 #if defined(CONFIG_LCD_INFO_BELOW_LOGO)
@@ -259,13 +270,21 @@ void	lcd_printf	(const char *fmt, ...);
 # define CONSOLE_COLOR_GREY	14
 # define CONSOLE_COLOR_WHITE	15	/* Must remain last / highest	*/
 
-#else
+#elif LCD_BPP == LCD_COLOR16
 
 /*
  * 16bpp color definitions
  */
 # define CONSOLE_COLOR_BLACK	0x0000
 # define CONSOLE_COLOR_WHITE	0xffff	/* Must remain last / highest	*/
+
+#else
+
+/*
+ * 24bpp color definitions
+ */
+# define CONSOLE_COLOR_BLACK	0x000000
+# define CONSOLE_COLOR_WHITE	0xffffff /* Must remain last / highest */
 
 #endif /* color definitions */
 
@@ -296,9 +315,14 @@ void	lcd_printf	(const char *fmt, ...);
 #if LCD_BPP == LCD_MONOCHROME
 # define COLOR_MASK(c)		((c)	  | (c) << 1 | (c) << 2 | (c) << 3 | \
 				 (c) << 4 | (c) << 5 | (c) << 6 | (c) << 7)
+#elif LCD_BPP == LCD_COLOR4
+
 #elif LCD_BPP == LCD_COLOR8
 # define COLOR_MASK(c)		(c)
-#elif LCD_BPP == LCD_COLOR4
+#elif LCD_BPP == LCD_COLOR16
+# define COLOR_MASK(c)		(c)
+#elif LCD_BPP == LCD_COLOR24
+# define COLOR_MASK(c)		(c)
 
 #else
 # error Unsupported LCD BPP.

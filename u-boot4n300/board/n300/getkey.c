@@ -19,6 +19,7 @@
 
 #include <common.h>
 #include <command.h>
+#include <stdlib.h>    /* getenv, atoi */
 #include <asm/arch/regs-gpio.h>
 #include <s3c2440.h>
 #include "n300.h"
@@ -55,46 +56,32 @@ void keypad_init(void) {
 	S3C2440_GPIO_CONFIG (gpio->GPFCON, 4, GPIO_INPUT);
 }
 
-static void n300_setkey(void) {
-	char str[16];
-	unsigned long key;
-
+unsigned int getHomeButton(void) {
 	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
-	key =  gpio->GPFCON & 4 ;
+	return  (gpio->GPFCON & 4)==4 ? 1 : 0;
+}
 
-	sprintf(str, "%i", key );
+void n300_setkey(void) {
+	char str[16];
+
+	sprintf(str, "%i", getHomeButton() );
 	setenv("key_code", str);
 }
 
 static void n300_getkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
-
-#if 0
-	KPC |= KPC_AS; /* Perform a single auto-scan */
-
-	while(KPC & KPC_AS){ }	/* wait for it to finish */
-
-	udelay(1000); /* Make sure the key has reached the regs */
-#endif
 	n300_setkey();
 }
 
 static void n300_waitkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]){
-#if 0
+	int nBootDelay;
+	
+	nBootDelay=atoi(getenv("bootdelay"))*1000;
 
-	KPC |= KPC_AS; /* Perform a single auto-scan first, to clear any previous getkey() result still in the KPAS register*/
-	while(KPC & KPC_AS){ } /* wait for it to finish */
-
-	udelay(1000); /* Make sure the key has reached the regs */
-	if ( (KPAS & 0xFF) != 0xFF){ /* key already pressed, return that */
-		n300_setkey();
-		return;
-	}
-
-	KPC |= KPC_ASACT; /* Turn on auto-scan on activity */
-
-	while( (KPAS & KPAS_SO) || ((KPAS & 0xFF) == 0xFF) ){ } /* Wait for scan not in progress and valid row/col data */
-#endif
-	n300_setkey();
+	while (nBootDelay && getHomeButton()) {
+	  
+	  udelay(1000);
+	  nBootDelay--;
+	  }
 }
 
 

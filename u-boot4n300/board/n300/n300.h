@@ -3,7 +3,7 @@
  * project.
  *
  */
-#define LCD_BPP		LCD_COLOR8
+#define LCD_BPP		LCD_COLOR16
 #define PAGE_SIZE	640*480*2
 
 #include <lcd.h>

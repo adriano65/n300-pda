@@ -211,7 +211,7 @@ chk_pwrsupply:	ldr	r0, .gpcdat
 
 supply_present:	ldr	r0, .gpgdat_add		@ 0x518
 .0x244:			ldr	r1, [r0]
-				tst	r1, #0x800			@ check GPG11 - what function has ??			
+				tst	r1, #0x800			@ check GPG11 - case open button	
 				beq	no_ACsupply
 				ldr	r0, .gstatus3
 				mov	r1, #0x580

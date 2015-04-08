@@ -281,6 +281,7 @@ static struct gpio_keys_button n311_buttons[] = {
 
 	/* switch-type key: switch on/off display (IRQ9)
  	{KEY_COFFEE, S3C2410_GPG1, 1, "Key lock"}, 
+ 	{KEY_COFFEE, S3C2410_GPD6, 1, "Key lock"}, 
 	*/
 	{KEY_A, S3C2410_GPF4, 1, "Home button",EV_KEY},
 	{KEY_TAB, S3C2410_GPF5, 1, "Calendar button",EV_KEY},

@@ -204,6 +204,7 @@
 			CFG_CMD_MMC	 	| \
 			CFG_CMD_FAT	 	| \
 			CFG_CMD_EXT2	| \
+			CFG_CMD_RUN		| \
 			CFG_CMD_REGINFO)
 
 /*			
@@ -230,9 +231,7 @@
 #define CONFIG_BOOTARGS		"root=/dev/mmcblk0p3 rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3"
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 earlyprintk=serial,uart0,115200 console=ttySAC0,115200n8'
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=2 console=tty0 console=ttySAC0,115200n8 panic=3'
-// setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootdelay=5 console=tty0 console=ttySAC0,115200n8 panic=30'
 // setenv bootargs 'root=/dev/mmcblk0p3 ro rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3'
-// setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 rootwait console=tty0 console=ttySAC0,115200n8 panic=3'
 // ------ android -----------------------------
 // setenv bootargs 'root=/dev/mmcblk0p3 rootfstype=ext3 init=/init rootdelay=2 console=ttySAC0,115200n8'
 #define CONFIG_CMDLINE_TAG
@@ -241,8 +240,15 @@
 //#define CONFIG_SHOW_BOOT_PROGRESS
 // --- AAGH load address MUST be different from kernel jump address (0x30008000)
 #define CONFIG_BOOTCOMMAND	"mmcinit; fatload mmc 0:1 31000000 uzImage; bootm 31000000"
-// setenv bootcmd 'mmcinit; fatload mmc 0:1 31000000 uzImage; bootm 31000000'
-// setenv bootcmd 'nand read 30008000 44000 300000;go 30008000'
+// setenv bootcmd1 'fatload mmc 0:1 31000000 uzImage; bootm 31000000'
+// setenv bootcmd2 'nand read 31000000 44000 300000;bootm 31000000'
+
+//setenv bootcmd 'if mmcinit; then $bootcmd1; else $bootcmd2; fi;'
+//setenv bootcmd 'if mmcinit; then fatload mmc 0:1 31000000 uzImage; else nand read 31000000 44000 300000; setenv bootargs $bootargs2; fi; bootm 31000000'
+#define CONFIG_EXTRA_ENV_SETTINGS \
+			"bootargs2=console=ttySAC0,115200n8 root=ubi0:rootfs rw ubi.mtd=3,512 rootfstype=ubifs ro rootwait panic=3\0" \
+			"bootargs=root=/dev/mmcblk0p3 rootfstype=ext3 rootwait ro console=tty0 console=ttySAC0,115200n8 panic=3\0"
+
 #define CONFIG_MMC_CLK	15000000
 // mmc_clk=nPCLK/15000000L - 1;  
 //	sdi->SDIPRE = nPCLK/(s ? simple_strtol(s, NULL, 11000000L) : 15000000L)-1;
@@ -257,7 +263,7 @@
 #define	CFG_MAXARGS		16			/* max number of command args	*/
 #define CFG_BARGSIZE		CFG_CBSIZE	/* Boot Argument Buffer Size	*/
 #define CFG_HUSH_PARSER
-#define CFG_PROMPT_HUSH_PS2	"u-boot "
+#define CFG_PROMPT_HUSH_PS2	"> "
 #define CONFIG_AUTO_COMPLETE	1
 #define CONFIG_COMMAND_HISTORY	1
 
