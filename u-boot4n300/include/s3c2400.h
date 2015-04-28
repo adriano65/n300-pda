@@ -509,46 +509,6 @@ static inline S3C2400_MMC * const S3C2400_GetBase_MMC(void)
 #define pISR_ADC	(*(unsigned *)(_ISR_STARTADDRESS+0xA0))
 
 
-/* PENDING BIT */
-#define BIT_EINT0	(0x1)
-#define BIT_EINT1	(0x1<<1)
-#define BIT_EINT2	(0x1<<2)
-#define BIT_EINT3	(0x1<<3)
-#define BIT_EINT4	(0x1<<4)
-#define BIT_EINT5	(0x1<<5)
-#define BIT_EINT6	(0x1<<6)
-#define BIT_EINT7	(0x1<<7)
-#define BIT_TICK	(0x1<<8)
-#define BIT_WDT		(0x1<<9)
-#define BIT_TIMER0	(0x1<<10)
-#define BIT_TIMER1	(0x1<<11)
-#define BIT_TIMER2	(0x1<<12)
-#define BIT_TIMER3	(0x1<<13)
-#define BIT_TIMER4	(0x1<<14)
-#define BIT_UERR01	(0x1<<15)
-#define BIT_NOTUSED	(0x1<<16)
-#define BIT_DMA0	(0x1<<17)
-#define BIT_DMA1	(0x1<<18)
-#define BIT_DMA2	(0x1<<19)
-#define BIT_DMA3	(0x1<<20)
-#define BIT_MMC		(0x1<<21)
-#define BIT_SPI		(0x1<<22)
-#define BIT_URXD0	(0x1<<23)
-#define BIT_URXD1	(0x1<<24)
-#define BIT_USBD	(0x1<<25)
-#define BIT_USBH	(0x1<<26)
-#define BIT_IIC		(0x1<<27)
-#define BIT_UTXD0	(0x1<<28)
-#define BIT_UTXD1	(0x1<<29)
-#define BIT_RTC		(0x1<<30)
-#define BIT_ADC		(0x1<<31)
-#define BIT_ALLMSK	(0xFFFFFFFF)
-
-#define ClearPending(bit) {\
-		 rSRCPND = bit;\
-		 rINTPND = bit;\
-		 rINTPND;\
-		 }
 /* Wait until rINTPND is changed for the case that the ISR is very short. */
 #endif
 #endif /*__S3C2400_H__*/

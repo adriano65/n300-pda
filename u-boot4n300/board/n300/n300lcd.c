@@ -62,7 +62,7 @@ void lcd_setcolreg (ushort regno, ushort red, ushort green, ushort blue) {
 	//puts("lcd_setcolreg\n");
 }
 
-static void lcd_disable (void) {
+void lcd_disable (void) {
 	n300_set_brightness(0);
 }
 

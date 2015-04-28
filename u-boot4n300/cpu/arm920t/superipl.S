@@ -163,7 +163,7 @@ gpio_init:
 				str	r1, [r0]
 				ldr	r0, .gpddat
 				ldr	sl, [r0]
-				tst	sl, #64		@ 0x40	--> GPD6
+				tst	sl, #64		@ 0x40	--> GPD6 - switch
 				beq	b_low_power
 				mov	r1, #7
 				b	b_1a8

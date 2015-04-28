@@ -24,10 +24,11 @@
  * MA 02111-1307 USA
  */
 
-#define __STARTS 
 
 #include <config.h>
 #include <version.h>
+
+#define __DONOTINCLUDE_ASSEMBLER 
 #include <s3c2440.h>
 
 /*
@@ -103,191 +104,192 @@ FIQ_STACK_START:
 	.word 0x0badc0de
 #endif
 
-
-/*
- * the actual reset code
- */
-
 reset:
-	/* ------------------------------------------------ steppingstone code */
-	/*
-	 * set the cpu to SVC32 mode
-	 */
-	mrs	r0, cpsr
-	bic	r0, r0, #0x1f
-	orr	r0, r0, #0xd3
-	msr	cpsr, r0
+				/* ------------------ steppingstone code */
+				/*
+				 * set the cpu to SVC32 mode
+				*/
+				mrs	r0, cpsr
+				bic	r0, r0, #0x1f
+				orr	r0, r0, #0xd3
+				msr	cpsr, r0
 
-	ldr r0, =S3C24X0_GPADAT
-	/* runtime value linux-haret-WM6 */
-	@ldr r1, =0x00040800
-	/* original from acer NAND */
-	@mov r1, #0xfe000000
-	/* enable NAND writings */
-	@"GPADAT |= (1 << 11)"
-	@ldr r1, =0xfe000800
-	ldr r1, =0x00000800
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPADAT
+				/* runtime value linux-haret-WM6 */
+				@ldr r1, =0x00040800
+				/* original from acer NAND */
+				@mov r1, #0xfe000000
+				/* enable NAND writings */
+				@"GPADAT |= (1 << 11)"
+				@ldr r1, =0xfe000800
+				ldr r1, =0x00000800
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPACON
-	/* runtime value linux-haret-WM6 */
-	@ldr r1, =0x01fdf7ff		
-	/* runtime value linux-u-boot */
-	@ldr r1, =0x005ca71f		
-	/* original from acer NAND */
-	@ldr r1, =0x005EAF1F
-	/* enable pin output for NAND writings */
-	ldr r1, =0x005EA71F
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPACON
+				/* runtime value linux-haret-WM6 */
+				@ldr r1, =0x01fdf7ff		
+				/* runtime value linux-u-boot */
+				@ldr r1, =0x005ca71f		
+				/* original from acer NAND */
+				@ldr r1, =0x005EAF1F
+				/* enable pin output for NAND writings */
+				ldr r1, =0x005EA71F
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPBUP
-	ldr r1, =0x00001FFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPBUP
+				ldr r1, =0x00001FFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPBDAT
-	ldr r1, =0x00000146
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPBDAT
+				ldr r1, =0x00000146
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPBCON
-	ldr r1, =0x00155455
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPBCON
+				ldr r1, =0x00155455
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPCUP
-	ldr r1, =0x0000FFFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPCUP
+				ldr r1, =0x0000FFFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPCDAT
-	ldr r1, =0x12
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPCDAT
+				ldr r1, =0x12
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPCCON
-	ldr r1, =0x55551515
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPCCON
+				ldr r1, =0x55551515
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPDUP
-	ldr r1, =0x0000EFFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPDUP
+				ldr r1, =0x0000EFFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPDCON
-	ldr r1, =0x00001000
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPDCON
+				ldr r1, =0x00001000
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPDDAT
-	ldr r1, =0x05514514
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPDDAT
+				ldr r1, =0x05514514
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPEUP
-	ldr r1, =0x0000FFFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPEUP
+				ldr r1, =0x0000FFFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPEDAT
-	ldr r1, =0x0
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPEDAT
+				ldr r1, =0x0
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPECON
-	ldr r1, =0x05555555		@ superipl (N300 NAND) original val
-	@ldr r1, =0xa02aaaaa	@ N310 linux runtime val
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPECON
+				ldr r1, =0x05555555		@ superipl (N300 NAND) original val
+				@ldr r1, =0xa02aaaaa	@ N310 linux runtime val
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPFUP
-	MOV r1, #0xff
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPFUP
+				MOV r1, #0xff
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPFDAT
-	MOV r1, #0x00
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPFDAT
+				MOV r1, #0x00
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPFCON		/*   0x56000050 */
-	MOV r1, #0x02
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPFCON		/*   0x56000050 */
+				MOV r1, #0x02
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPGUP
-	ldr r1, =0x0000FFFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPGUP
+				ldr r1, =0x0000FFFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPGDAT
-	MOV r1, #0x00
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPGDAT
+				MOV r1, #0x00
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPGCON
-	ldr r1, =0x01150010
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPGCON
+				ldr r1, =0x01150010
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPHUP
-	ldr r1, =0x000007FF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPHUP
+				ldr r1, =0x000007FF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPHDAT
-	MOV r1, #0x200
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPHDAT
+				MOV r1, #0x200
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPHCON
-	@ldr r1, =0x00155514			/* superipl (N300 NAND) original value  */
-	@ldr r1, =0x0000a0aa			/* N310 linux runtime val  */
-	ldr r1, =0x0016faaa				/* SMDK2440 and eboot.nb0 UARTinit val  */
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPHCON
+				@ldr r1, =0x00155514			/* superipl (N300 NAND) original value  */
+				@ldr r1, =0x0000a0aa			/* N310 linux runtime val  */
+				ldr r1, =0x0016faaa				/* SMDK2440 and eboot.nb0 UARTinit val  */
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPJUP
-	ldr r1, =0x00001FFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPJUP
+				ldr r1, =0x00001FFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPJDAT
-	ldr r1, =0x00001FFF
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPJDAT
+				ldr r1, =0x00001FFF
+				STR r1, [r0]
 
-	ldr r0, =S3C24X0_GPJCON
-	ldr r1, =0x55555555
-	STR r1, [r0]
+				ldr r0, =S3C24X0_GPJCON
+				ldr r1, =0x55555555
+				STR r1, [r0]
 
-	/* turn off the watchdog */
-	ldr     r0, =S3C24X0_WATCHDOG_BASE
-	mov     r1, #0x0
-	str     r1, [r0]
-	ldr     r0, =S3C24X0_INTERRUPT_MASK
-	mov     r1, #0xffffffff
-	str     r1, [r0]
-	ldr     r0, =S3C24X0_INTERRUPT_SUBMASK
-	mov     r1, #0xffffffff
-	str     r1, [r0]
+				/* turn off the watchdog */
+				ldr     r0, =S3C24X0_WATCHDOG_BASE
+				mov     r1, #0x0
+				str     r1, [r0]
+				ldr     r0, =S3C24X0_INTERRUPT_MASK
+				mov     r1, #0xffffffff
+				str     r1, [r0]
+				ldr     r0, =S3C24X0_INTERRUPT_SUBMASK
+				str     r1, [r0]
 
-	/*
-	root@n310ingresso:~# getCLKDIVN 
-	data register 4c000014:  00000005
-	0000(07,06,05,04) 0101(03,02,01,00)
-	bit 3 -> UCLK select register(UCLK must be 48MHz for USB)
-			0: UCLK = UPLL clock
-			1: UCLK = UPLL clock / 2 
-	bit 2.1 ->      00 : HCLK = FCLK/1.
-					01 : HCLK = FCLK/2.
-					10 : HCLK = FCLK/4 when CAMDIVN[9] = 0.
-						HCLK= FCLK/8 when CAMDIVN[9] = 1.
-					11 : HCLK = FCLK/3 when CAMDIVN[8] = 0.
-						HCLK = FCLK/6 when CAMDIVN[8] = 1.
-	bit 0 -> 0: PCLK has the clock same as the HCLK/1.
-			1: PCLK has the clock same as the HCLK/2.
-	*/
-	ldr r0, =S3C24X0_CLKDIVN
-	@mov r1, #0x7
-	@ldr r1, =S3C24X0_CLKDIVN_HCLK50MHZ			@HCLK= FCLK/8 when CAMDIVN[9] = 1
-	@ldr r1, =S3C24X0_CLKDIVN_WINZ
-	ldr r1, =S3C24X0_CLKDIVN_HCLK100M_P50		@HCLK= FCLK/4 when CAMDIVN[9] = 0
-	str     r1, [r0]
+				mov     r1, #0x0
+				ldr     r0, =S3C24X0_INTERRUPT_SRCPND
+				str     r1, [r0]
+				ldr     r0, =S3C24X0_INTERRUPT_PENDING
+				str     r1, [r0]
 
-	ldr	r0, =S3C24X0_CLKCON		/* clkcon */
-	ldr	r1, =0xf2ffd0			/* no camera, no lcdc */
-	str	r1, [r0]
+				/*
+				root@n310ingresso:~# getCLKDIVN 
+				data register 4c000014:  00000005
+				0000(07,06,05,04) 0101(03,02,01,00)
+				bit 3 -> UCLK select register(UCLK must be 48MHz for USB)
+					0: UCLK = UPLL clock
+					1: UCLK = UPLL clock / 2 
+				bit 2.1 ->      00 : HCLK = FCLK/1.
+							01 : HCLK = FCLK/2.
+							10 : HCLK = FCLK/4 when CAMDIVN[9] = 0.
+								HCLK= FCLK/8 when CAMDIVN[9] = 1.
+							11 : HCLK = FCLK/3 when CAMDIVN[8] = 0.
+								HCLK = FCLK/6 when CAMDIVN[8] = 1.
+				bit 0 -> 0: PCLK has the clock same as the HCLK/1.
+					1: PCLK has the clock same as the HCLK/2.
+				*/
+				ldr r0, =S3C24X0_CLKDIVN
+				@mov r1, #0x7
+				@ldr r1, =S3C24X0_CLKDIVN_HCLK50MHZ			@HCLK= FCLK/8 when CAMDIVN[9] = 1
+				@ldr r1, =S3C24X0_CLKDIVN_WINZ
+				ldr r1, =S3C24X0_CLKDIVN_HCLK100M_P50		@HCLK= FCLK/4 when CAMDIVN[9] = 0
+				str     r1, [r0]
 
-	/* NOTE init uart --> done in cpu/arm920t/s3c24x0/serial.c (serial_setbrg)  */
+				ldr	r0, =S3C24X0_CLKCON		/* clkcon */
+				ldr	r1, =0xf2ffd0			/* no camera, no lcdc */
+				str	r1, [r0]
 
-	/* Set Async BusMode */
-	MRC p15, 0x00, r0, c1, c0, 0x00
-	ORR r0, r0, #0xc0000000
-	MCR p15, 0x00, r0, c1, c0, 0x00
+				/* NOTE init uart --> done in cpu/arm920t/s3c24x0/serial.c (serial_setbrg)  */
+
+				/* Set Async BusMode */
+				MRC p15, 0x00, r0, c1, c0, 0x00
+				ORR r0, r0, #0xc0000000
+				MCR p15, 0x00, r0, c1, c0, 0x00
 
 #define USE_TEST_CODE
 #ifdef USE_TEST_CODE
 @ ---------------------------------------- T E S T  C O D E --------------
-test_code_start:	ldr	r1, =S3C24X0_GPFCON
+/*
+test_code_start:  	ldr	r1, =S3C24X0_GPFCON
 					mov	r2, #0x100						@ set GPF4 as output (Home button)
 					str	r2, [r1]						@ r1==S3C24X0_GPFCON
 					mov	r2, #0xff
@@ -310,46 +312,67 @@ test_code_start:	ldr	r1, =S3C24X0_GPFCON
 					str	r2, [r1, #8]
 					mov	r2, #0	
 					str	r2, [r1, #4]                @ @ set GPF6 to zero
+*/
+					@ check the wake up reason
+check_wakeup_reason: ldr r0, =S3C24X0_GSTATUS2
+					tst	r0, #3		@ test bit 3 (1-based) to check wake up from sleep
+					beq	normal_reset
+
+					@ Clear sleep reset bit
+					ldr    r0, =S3C24X0_GSTATUS2
+					mov    r1, #3
+					str    r1, [r0]
+
+					@ Release the SDRAM signal protections
+					ldr    r0, =S3C2440_MISCCR
+					ldr    r1, [r0]
+					bic    r1, r1, #(~(7 << 17))
+					str    r1, [r0]
+
+					@ldr r0 , =S3C24X0_GSTATUS3
+					@ldr r0 , [r0]
+					@mov pc , r0
+normal_reset:
 @ ---------------------------------------- T E S T  C O D E --------------
 #endif
 
 #ifndef CONFIG_SKIP_LOWLEVEL_INIT
 #define oNFCONF                 0x00
 
-	ldr r0, =S3C24X0_CLOCK_LOCKTIME
-	@MVN r1, #0xff000000
-	ldr r1, =S3C24X0_CLKLCKTIM_VAL
-	str     r1, [r0]
+				ldr r0, =S3C24X0_CLOCK_LOCKTIME
+				@MVN r1, #0xff000000
+				ldr r1, =S3C24X0_CLKLCKTIM_VAL
+				str     r1, [r0]
 
-	ldr     r0, =S3C24X0_UPLLCON		@=0x0003C042	
-	ldr     r1, =UPLLCON_VALUE
-	str     r1, [r0]
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	ldr     r0, =S3C24X0_CAMDIVN
-	@mov     r1, #0x0
-	@mov     r1, #0x100
-	@mov     r1, #0x200
-	@ldr     r1, =S3C24X0_CAMDIVN_WINZ
-	ldr     r1, =S3C24X0_CAMDIVN_HCLK100MHZ
-	str     r1, [r0]
+				ldr     r0, =S3C24X0_UPLLCON		@=0x0003C042	
+				ldr     r1, =UPLLCON_VALUE
+				str     r1, [r0]
+				nop
+				nop
+				nop
+				nop
+				nop
+				nop
+				nop
+				ldr     r0, =S3C24X0_CAMDIVN
+				@mov     r1, #0x0
+				@mov     r1, #0x100
+				@mov     r1, #0x200
+				@ldr     r1, =S3C24X0_CAMDIVN_WINZ
+				ldr     r1, =S3C24X0_CAMDIVN_HCLK100MHZ
+				str     r1, [r0]
 
-	ldr     r0, =S3C24X0_MPLLCON
-	@ldr     r1, =0x00096030	@ RESET Value
-	@ldr     r1, =0x00074051	@ ? power down value
-	@ldr     r1, =S3C24X0_MPLLCON_266MHz		@ see include/linux/s3c2440.h
-	ldr     r1, =S3C24X0_MPLLCON_WINZ			@ FCLK -> 300 MHz, HCLK -> 100 MHz
-	@ldr     r1, =S3C24X0_MPLLCON_400MHz			@ see include/linux/s3c2440.h
-	str     r1, [r0]
-	mov r0, #0x200
-lo:	SUBS r0, r0, #0x1
-	bne lo
-	ldr     r0, =S3C24X0_GPCDAT
+				ldr     r0, =S3C24X0_MPLLCON
+				@ldr     r1, =0x00096030	@ RESET Value
+				@ldr     r1, =0x00074051	@ ? power down value
+				@ldr     r1, =S3C24X0_MPLLCON_266MHz		@ see include/linux/s3c2440.h
+				ldr     r1, =S3C24X0_MPLLCON_WINZ			@ FCLK -> 300 MHz, HCLK -> 100 MHz
+				@ldr     r1, =S3C24X0_MPLLCON_400MHz			@ see include/linux/s3c2440.h
+				str     r1, [r0]
+
+				mov r0, #0x200
+waitloop01:		SUBS r0, r0, #0x1
+				bne waitloop01
 
 /*
  *************************************************************************
@@ -361,30 +384,30 @@ lo:	SUBS r0, r0, #0x1
  *
  *************************************************************************
  */
-	/* flush v4 I/D caches */
-	mov	r0, #0
-	mcr	p15, 0, r0, c7, c7, 0	/* flush v3/v4 cache */
-	mcr	p15, 0, r0, c8, c7, 0	/* flush v4 TLB */
+				/* flush v4 I/D caches */
+				mov	r0, #0
+				mcr	p15, 0, r0, c7, c7, 0	/* flush v3/v4 cache */
+				mcr	p15, 0, r0, c8, c7, 0	/* flush v4 TLB */
 
-	/*
-	 * disable MMU stuff and caches
-	 */
-	mrc	p15, 0, r0, c1, c0, 0
-	bic	r0, r0, #0x00002300	@ clear bits 13, 9:8 (--V- --RS)
-	bic	r0, r0, #0x00000087	@ clear bits 7, 2:0 (B--- -CAM)
-	orr	r0, r0, #0x00000002	@ set bit 2 (A) Align
-	orr	r0, r0, #0x00001000	@ set bit 12 (I) I-Cache
-	mcr	p15, 0, r0, c1, c0, 0
+				/*
+				* disable MMU stuff and caches
+				*/
+				mrc	p15, 0, r0, c1, c0, 0
+				bic	r0, r0, #0x00002300	@ clear bits 13, 9:8 (--V- --RS)
+				bic	r0, r0, #0x00000087	@ clear bits 7, 2:0 (B--- -CAM)
+				orr	r0, r0, #0x00000002	@ set bit 2 (A) Align
+				orr	r0, r0, #0x00001000	@ set bit 12 (I) I-Cache
+				mcr	p15, 0, r0, c1, c0, 0
 
-	/* --------------------------------------------------
-	 * before relocating, we have to setup RAM timing
-	 * because memory timing is board-dependend, you will
-	 * find a lowlevel_init.S in your board directory.
-	 */
-	mov	ip, lr
+				/* --------------------------------------------------
+				* before relocating, we have to setup RAM timing
+				* because memory timing is board-dependend, you will
+				* find a lowlevel_init.S in your board directory.
+				*/
+				mov	ip, lr
 
-	/* -------------------------------------------------- */
-	bl	lowlevel_init
+				/* -------------------------------------------------- */
+				bl	lowlevel_init
 
 #endif
 

@@ -28,6 +28,10 @@
 	#define U_M_SDIV	0x2
 #endif
 
+#define mdelay(n) ({unsigned long msec=(n); while (msec--) udelay(1000);})
+static int to_bcd(int value);
+static int from_bcd(int value);
+
 extern void keypad_init(void);
 
 DECLARE_GLOBAL_DATA_PTR;
@@ -50,8 +54,13 @@ DECLARE_GLOBAL_DATA_PTR;
 
 int sharp_lcd_init (void);
 void n300_set_brightness(int tcmpb0);
-
+extern void lcd_disable (void);
 static const int rows = 4;
 static const int cols = 3;
+
+void SetRTCAlarm(void);
+void ConfigSleepGPIO(S3C2440_GPIO * const);
+void RestartFromSleep(void);
+
 
 

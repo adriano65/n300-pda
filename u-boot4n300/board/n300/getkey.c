@@ -19,7 +19,6 @@
 
 #include <common.h>
 #include <command.h>
-#include <stdlib.h>    /* getenv, atoi */
 #include <asm/arch/regs-gpio.h>
 #include <s3c2440.h>
 #include "n300.h"
@@ -50,50 +49,58 @@ void keypad_init(void) {
 	/* blue led */
 	//s3c2410_gpio_setpin(S3C2410_GPD10, 1);	//switch on
 	gpio->GPDDAT |= ~(1<<10);						//switch on
-	S3C2440_GPIO_CONFIG (gpio->GPDCON, 10, GPIO_OUTPUT);		// enable blue led
+	S3C2440_GPIO_CONFIG(gpio->GPDCON, 10, GPIO_OUTPUT);		// enable blue led
 	
-	//{KEY_A, S3C2410_GPF4, 1, "Home button",EV_KEY},
-	S3C2440_GPIO_CONFIG (gpio->GPFCON, 4, GPIO_INPUT);
+	//{KEY_A, S3C2410_GPF4, 1, "Home button",EV_KEY}
+	S3C2440_GPIO_PULLUP(gpio->GPFUP, 4, GPIO_PULLUP_ENABLE);
+	S3C2440_GPIO_CONFIG(gpio->GPFCON, 4, GPIO_INPUT);
+	
+	//{KEY_TAB, S3C2410_GPF5, 1, "Calendar button",EV_KEY}
+	S3C2440_GPIO_PULLUP(gpio->GPFUP, 5, GPIO_PULLUP_ENABLE);
+	S3C2440_GPIO_CONFIG(gpio->GPFCON, 5, GPIO_INPUT);
+	
+	setenv("key_code", "0");
 }
 
-unsigned int getHomeButton(void) {
+unsigned int IsHomeBtnReleased(void) {
 	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
-	return  (gpio->GPFCON & 4)==4 ? 1 : 0;
+	return  (gpio->GPFDAT & (1<<4)) ? 1 : 0;
+}
+
+unsigned int IsCalendarBtnReleased(void) {
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
+	//return  (gpio->GPFDAT & (1<<5)) ? 0 : 1;
+	return  (gpio->GPFDAT & (1<<5)) ? 1 : 0;
 }
 
 void n300_setkey(void) {
 	char str[16];
 
-	sprintf(str, "%i", getHomeButton() );
+	sprintf(str, "%i", IsHomeBtnReleased() );
 	setenv("key_code", str);
 }
 
-static void n300_getkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
-	n300_setkey();
-}
-
-static void n300_waitkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]){
+int n300_waitkey(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]){
 	int nBootDelay;
 	
-	nBootDelay=atoi(getenv("bootdelay"))*1000;
+	nBootDelay=simple_strtoul(getenv("bootdelay"), NULL, 10);
 
-	while (nBootDelay && getHomeButton()) {
-	  
-	  udelay(1000);
+	while (nBootDelay && IsHomeBtnReleased()) {
+	  mdelay(1000);		// 1 second
 	  nBootDelay--;
 	  }
+	if (!nBootDelay) {
+		setenv("key_code", "0"); 
+		return 0;
+		}
+	else {
+		setenv("key_code", "1");
+		return 1;
+		}
 }
-
-
-
-U_BOOT_CMD(
-	getkey,	1,	0,	n300_getkey,
-	"getkey  - get the current key pressed from the keypad and set the environment var key_code (single press only)\n",
-	NULL
-);
 
 U_BOOT_CMD(
 	waitkey,	1,	0,	n300_waitkey,
-	"waitkey  - wait for a key to be pressed and set the environment var key_code (single press only)\n",
+	"waitkey  - wait Home key to be pressed and set the environment var key_code (single press only)\n",
 	NULL
 );

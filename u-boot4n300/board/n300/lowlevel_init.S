@@ -30,6 +30,8 @@
 
 #include <config.h>
 #include <version.h>
+#define __DONOTINCLUDE_ASSEMBLER 
+#include <s3c2440.h>
 
 
 /* some parameters for the board */
@@ -117,13 +119,6 @@
 #define B7_Trcd		 	0x1	/* 3clk */
 #define B7_SCAN		 	0x1	/* 9bit */
 
-/* REFRESH parameter */
-#define REFEN		 	0x1	/* Refresh enable */
-#define TREFMD		 	0x0	/* CBR(CAS before RAS)/Auto refresh */
-#define Trp		 		0x1	/* 2clk */
-#define Tsrc		 	0x1	/* 7clk */
-#define Tchr		 	0x2	/* 3clk */
-#define REFCNT		 	1346	
 
 /**************************************/
 
@@ -164,7 +159,7 @@ SMRDATA:
     .word ((B5_Tacs<<13)+(B5_Tcos<<11)+(B5_Tacc<<8)+(B5_Tcoh<<6)+(B5_Tah<<4)+(B5_Tacp<<2)+(B5_PMC))
     .word ((B6_MT<<15)+(B6_Trcd<<2)+(B6_SCAN))
     .word ((B7_MT<<15)+(B7_Trcd<<2)+(B7_SCAN))
-    .word ((REFEN<<23)+(TREFMD<<22)+(Trp<<20)+(Tsrc<<18)+(Tchr<<16)+REFCNT)
+    .word (REFEN + ~(TREFMD) +(Trp) + (Tsrc)+(Tchr<<16)+REFCNT)
     .word 0x32	@BANKSIZE - disable arm-core burst operations
     .word 0x30
     .word 0x30

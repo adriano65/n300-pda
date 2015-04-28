@@ -45,6 +45,17 @@ static inline void MMU_SetFastBusMode() {
 				 "mcr p15,0,r0,c1,c0,0");
 }
 
+
+static int to_bcd(int value)
+{
+    return value / 10 * 16 + value % 10;
+}
+
+static int from_bcd(int value)
+{
+    return value / 16 * 10 + value % 16;
+}
+
 /*
  * Miscellaneous platform dependent initialisations
  */
@@ -118,7 +129,6 @@ int board_init (void) {
 	s3c2410_gpio_pullup(S3C2410_GPH3, 1);	
  */	
 #endif
-	
 	/* arch number of N300-Board for linux */
 	gd->bd->bi_arch_number = MACH_TYPE_N300;		// 0x4E0
 
@@ -127,6 +137,8 @@ int board_init (void) {
 	
 	//gd->flags |= GD_FLG_RELOC;      /* tell others: relocation done */
 
+	keypad_init();
+	
 	return 0;
 }
 
@@ -138,8 +150,26 @@ int dram_init (void) {
 }
 
 int board_late_init(void) {
-	keypad_init();
+	// clears usb ints
+	S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
+	usb_device->USB_INT_REG=0x04;
+	S3C24X0_INTERRUPT * const interrupt = S3C24X0_GetBase_INTERRUPT();
+	interrupt->SRCPND=BIT_USBD;
 	
+	S3C24X0_TIMERS * const timers = S3C24X0_GetBase_TIMERS();
+	// timer4 is used by u-boot
+	//timers->TCON &= ~(1<<20);
+	// clears timer4 ints
+	//interrupt->SRCPND=BIT_TIMER4;
+	//interrupt->INTPND=BIT_TIMER4;
+	
+	// timer0 is used for lcd backlight dimming
+	//timers->TCON &= ~(1);
+	// clears timer0 ints
+	//interrupt->SRCPND=BIT_TIMER0;
+	//interrupt->INTPND=BIT_TIMER0;
+	
+	return 0;
 }
 
 #if 0
@@ -159,17 +189,42 @@ int print_cpuinfo (void) {
 	printf("Boot reason: %s \n", (gpio->GSTATUS2 & S3C2410_GSTATUS2_WTRESET) ? "Watchdog" : 
 								 ((gpio->GSTATUS2 & S3C2410_GSTATUS2_OFFRESET) ? "Sleep" :
 								 ((gpio->GSTATUS2 & S3C2410_GSTATUS2_PONRESET) ? "Power ON" : "") ));
-	printf("GSTATUS3 == 0x%8X\n", gpio->GSTATUS3); 
-	printf("GSTATUS4 == 0x%8X\n", gpio->GSTATUS4); 
+	printf("GSTATUS3 == 0x%08X\n", gpio->GSTATUS3); 
+	printf("GSTATUS4 == 0x%08X\n", gpio->GSTATUS4); 
 	return (0);
 }
-static void n300_getGStatus3(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
-	char str[16];
-  
+
+#if (CFG_CMD_IRQ)
+void do_irqinfo(cmd_tbl_t *cmdtp, bd_t *bd, int flag, int argc, char *argv[]) {
+	S3C24X0_INTERRUPT * const interrupt = S3C24X0_GetBase_INTERRUPT();
+	
+	printf("INTMASK (0x%08X) 0x%08X\n", &(interrupt->INTMSK), interrupt->INTMSK );
+	printf("INTMOD (0x%08X) 0x%08X\n", &(interrupt->INTMOD), interrupt->INTMOD );
+	printf("INTSUBMSK (0x%08X) 0x%08X\n", &(interrupt->INTSUBMSK), interrupt->INTSUBMSK );
+	printf("SRCPND (0x%08X) 0x%08X\n", &(interrupt->SRCPND), interrupt->SRCPND );
+	printf("INTPND (0x%08X) 0x%08X\n", &(interrupt->INTPND), interrupt->INTPND );	
+	printf("INTOFFSET (0x%08X)0x%08X\n\n", &(interrupt->INTOFFSET), interrupt->INTOFFSET );
+	
 	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
-	sprintf(str, "0x%8X", gpio->GSTATUS3 );
-	setenv("GStatus3", str);
+	printf("EINTMASK (0x%08X) 0x%08X\n", &(gpio->EINTMASK), gpio->EINTMASK );
+	printf("EINTPEND (0x%08X) 0x%08X\n", &(gpio->EINTPEND), gpio->EINTPEND );
+	printf("EXTINT0 (0x%08X) 0x%08X\n", &(gpio->EXTINT0), gpio->EXTINT0 );
+	printf("EXTINT1 (0x%08X) 0x%08X\n", &(gpio->EXTINT1), gpio->EXTINT1 );
+	printf("EXTINT2 (0x%08X) 0x%08X\n\n", &(gpio->EXTINT2), gpio->EXTINT2 );
+	
+	S3C24X0_RTC * const rtc = S3C24X0_GetBase_RTC();
+	printf("RTCCON (0x%08X) 0x%02X\n", &(rtc->RTCCON), rtc->RTCCON );	
+	printf("RTCALM (0x%08X) 0x%02X\n", &(rtc->RTCALM), rtc->RTCALM );	
+	printf("ALMSEC (0x%08X) 0x%02X\n\n", &(rtc->ALMSEC), rtc->ALMSEC );
+	
+	S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
+	printf("USB_INT_REG (0x%08X) 0x%02X\n", &(usb_device->USB_INT_REG), usb_device->USB_INT_REG );
+
+	S3C24X0_TIMERS * const timers = S3C24X0_GetBase_TIMERS();
+	printf("TCON (0x%08X) 0x%08X\n", &(timers->TCON), timers->TCON );
+	printf("TCFG1 (0x%08X) 0x%08X\n", &(timers->TCFG1), timers->TCFG1 );
 }
+#endif
 
 void get_board_serial(struct tag_serialnr *serialnr) {
   serialnr->high=1;
@@ -226,39 +281,39 @@ static inline void EnterSleep() {
 		  "MOV_PC_LR "
 
 
-  ENTER_SLEEP 
-  ; NOTE. 
-  ; 1) rGSTATUS3 should have the return address after wake-up from SLEEP mode. 
+		  ENTER_SLEEP 
+		  ; NOTE. 
+		  ; 1) rGSTATUS3 should have the return address after wake-up from SLEEP mode. 
 
 
-  ldr r0, = REFRESH 
-  ldr r1, [r0]    ; R1 = rREFRESH 
-  orr r1, r1, # BIT_SELFREFRESH 
-  str r1, [r0]    ; Enable SDRAM self-refresh 
+		  ldr r0, = REFRESH 
+		  ldr r1, [r0]    ; R1 = rREFRESH 
+		  orr r1, r1, # BIT_SELFREFRESH 
+		  str r1, [r0]    ; Enable SDRAM self-refresh 
 
 
-  mov r1, # 16    ; Wait until self-refresh is issued, which may not be needed. 
-  0    subs r1, r1, # 1 
-  bne% B0 
+		  mov r1, # 16    ; Wait until self-refresh is issued, which may not be needed. 
+		  0    subs r1, r1, # 1 
+		  bne% B0 
 
 
-  ldr    r1, = MISCCR 
-  ldr    R0, [r1] 
-  orr    r0, r0, # (7 << 17); Set SCLK0 = 0, SCLK1 = 0, SCKE = 0. 
-  str    R0, [r1] 
+		  ldr    r1, = MISCCR 
+		  ldr    R0, [r1] 
+		  orr    r0, r0, # (7 << 17); Set SCLK0 = 0, SCLK1 = 0, SCKE = 0. 
+		  str    R0, [r1] 
 
 
-  ldr r0, = CLKCON ; Enter Sleep Mode 
-  str r2, [r0] 
+		  ldr r0, = CLKCON ; Enter Sleep Mode 
+		  str r2, [r0] 
 
 
-b.    ; CPU will die here. 
+b.    		; CPU will die here. 
 
 
 
   ;24, read MISCCR register value, the value is set when entering Sleep mode,
 
-  ;BIC instruction: The BIC (BIt Clear) instruction performs an AND operation on the bits in Rnwith the complements of the corresponding bits in the value of Operand2.
+  ;BIC instruction: The BIC (BIt Clear) instruction performs an AND operation on the bits in Rn with the complements of the corresponding bits in the value of Operand2.
 
   WAKEUP_SLEEP 
   ; Release SCLKn after wake-up from the SLEEP mode. 
@@ -303,13 +358,130 @@ Here should be to restore the state before the Sleep proceed. . .
 
  ldr r1, = GSTATUS3 ; GSTATUS3 has the start address just after SLEEP wake-up 
 LDR r0, [r1] 
+mov pc, r0
 
-mov pc, r0 
 #endif
 
+void go2sleep(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]){
+	S3C2440_GPIO * const gpio = S3C2440_GetBase_GPIO();
+	ConfigSleepGPIO(gpio);
+
+	//Interrupt initialization
+	S3C24X0_INTERRUPT * const interrupt = S3C24X0_GetBase_INTERRUPT();
+   	interrupt->SRCPND = 0x00000000;	// clears all pending requests
+   	interrupt->INTPND = 0x00000000;	// clears all pending requests
+    interrupt->INTMOD = 0;			// set all ints to IRQ mode (not FIQ)
+	//SetRTCAlarm(); return;
+	
+   	interrupt->INTMSK = ~(BIT_RTC);
+    //interrupt->INTSUBMSK |= (BIT_RTC | BIT_EINT0);
+    interrupt->INTSUBMSK |= (BIT_RTC);
+
+    // USB suspend mode
+    gpio->MISCCR |= (1<<12); //USB port0 = suspend    
+    gpio->MISCCR |= (1<<13); //USB port1 = suspend    	
+
+	// Data Bus Pull-up
+	gpio->MISCCR &= ~(3<<0);     //disable
+    
+    //Lcd Off
+	lcd_disable();
+	  
+    //gpio->EXTINT0 &= ~(7<<0)|(2<<0);  //EINT0=falling edge triggered    
+    //gpio->GPFCON &= ~(3<<0)|(2<<0); //PF0=EINT0    
+    
+    // S3C2440 will wake up by RTC alarm (10 sec) or EINT0   
+    SetRTCAlarm();
+
+    // ADC TOUCH SCREEN STAND BY
+    //rADCCON|=(1<<2);   
+ 
+    // set restart address in GSTATUS3   
+    //gpio->GSTATUS3 = (void *)RestartFromSleep;  // memory control part in startup code. MUST be in SteppingStone Static RAM !!
+    gpio->GSTATUS3 = (void *)0x00000000;  // memory control part in startup code.    
+   
+	// ----------------------------------------- REAL SLEEP	
+	S3C24X0_MEMCTL * const memctl = S3C24X0_GetBase_MEMCTL();
+	memctl->REFRESH |= REFEN;			// Enable SDRAM self-refresh
+	mdelay(1);
+	
+	S3C24X0_CLOCK_POWER * const clk_power = S3C24X0_GetBase_CLOCK_POWER();	
+	gpio->MISCCR |= (7 << 17);	// Set SCLK0 = 1, SCLK1 = 1, SCKE = 1 to protect SDRAM
+
+	clk_power->CLKCON = 0x04; // Enter Sleep Mode 
+  
+	for (;;);	//endless loop
+
+}
+
+void RestartFromSleep(void) {
+  //__asm__ ("EnterPWDN");
+  //do_reset(NULL, 0, 0, NULL);
+  reset_cpu (0);
+}
+
+void ConfigSleepGPIO(S3C2440_GPIO * const gpio) {
+	S3C2440_GPIO_CONFIG(gpio->GPCCON, 13, GPIO_INPUT);
+	S3C2440_GPIO_CONFIG(gpio->GPCCON, 14, GPIO_INPUT);
+	S3C2440_GPIO_CONFIG(gpio->GPCCON, 15, GPIO_INPUT);
+}
+
+void SetRTCAlarm(void) {
+	#define TESTYEAR    (0x00)
+	#define TESTMONTH   (0x12)
+	#define TESTDATE    (0x31)
+	#define TESTDAY     (0x06)  // SUN:1 MON:2 TUE:3 WED:4 THU:5 FRI:6 SAT:7  
+	#define TESTHOUR    (0x23)
+	#define TESTMIN     (0x59)
+	#define TESTSEC     (0x59)
+	
+	#define TESTYEAR2   (0x01)
+	#define TESTMONTH2  (0x01)
+	#define TESTDATE2   (0x01)
+	#define TESTDAY2    (0x07)  // SUN:1 MON:2 TUE:3 WED:4 THU:5 FRI:6 SAT:7  
+	#define TESTHOUR2   (0x00)
+	#define TESTMIN2    (0x00)
+	#define TESTSEC2    (0x00)
+	S3C24X0_RTC * const rtc = S3C24X0_GetBase_RTC();
+	
+	rtc->RTCCON = 0x1;	// write to register enabled, 1/32768, Normal(merge), No reset
+	rtc->TICNT = 0x0;	// Tick time count disabled
+ 
+	/*
+    rtc->BCDYEAR = TESTYEAR;
+    rtc->BCDMON  = TESTMONTH;
+    rtc->BCDDAY  = TESTDAY; // SUN:1 MON:2 TUE:3 WED:4 THU:5 FRI:6 SAT:7
+    rtc->BCDDATE = TESTDATE;
+    rtc->BCDHOUR = TESTHOUR;
+    rtc->BCDMIN  = TESTMIN;
+    rtc->BCDSEC  = TESTSEC;
+    rtc->ALMYEAR=TESTYEAR2 ;
+    rtc->ALMMON =TESTMONTH2;
+    rtc->ALMDATE=TESTDATE2  ;
+    rtc->ALMHOUR=TESTHOUR2 ;
+    rtc->ALMMIN =TESTMIN2  ;
+    rtc->ALMSEC =TESTSEC2+3;
+	
+    rtc->ALMYEAR=rtc->BCDYEAR;
+    rtc->ALMMON =rtc->BCDMON;
+    rtc->ALMDATE=rtc->BCDDATE;
+    rtc->ALMHOUR=rtc->BCDHOUR;
+    rtc->ALMMIN =rtc->BCDMIN;
+	*/
+	
+    rtc->ALMSEC = to_bcd( (from_bcd(rtc->BCDSEC) > 45) ? 0 : from_bcd(rtc->BCDSEC)+10 );
+    //rtc->ALMSEC = 0;	// every minute
+	
+    rtc->RTCALM = RTC_BIT_ALMEN | RTC_BIT_SECEN;	// only seconds alarm enable
+ 
+    rtc->RTCCON=0x0;   // write disabled (to prevent unwanted writes when sleeping)
+  
+}
+
 U_BOOT_CMD(
-	getGS3,	1,	0,	n300_getGStatus3,
-	"getGS3  - get the GStatus3 cpu register \n",
+	go2sleep,	1,	0,	go2sleep,
+	"go2sleep - go to sleep and wake up after n seconds\n",
 	NULL
 );
+
 

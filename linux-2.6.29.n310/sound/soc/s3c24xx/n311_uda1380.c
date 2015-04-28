@@ -361,9 +361,6 @@ static void n311_codec_enable(int enable)
 	unsigned long flags;
 	down(&n311_power_mutex);
 	if (enable) {
-		//if (gpio_get_value(S3C2410_GPA11))
-		//	goto done;
-
 		local_irq_save(flags);
         DBG("Pin ON\n");
 
@@ -372,11 +369,8 @@ static void n311_codec_enable(int enable)
         //gpio_set_value(S3C2410_GPA11, 1);
 
 		local_irq_restore(flags);
-	}
+		}
 	else {
-		//if (!gpio_get_value(S3C2410_GPA11))
-		//	goto done;
-
 		local_irq_save(flags);
 
 		/* We'd like to issue codec reset before powerdown */
@@ -386,12 +380,8 @@ static void n311_codec_enable(int enable)
 		gpio_set_value(S3C2410_GPD1, 0);
 		mdelay(10);
 
-		//gpio_set_value(S3C2410_GPA11, 1);
-		//gpio_set_value(S3C2410_GPA11, 0);
-
 		local_irq_restore(flags);
-	}
-done:
+		}
 	up(&n311_power_mutex);
 }
 
@@ -404,16 +394,6 @@ static int __init n311_init(void)
 		DBG(KERN_ERR "platform_dev_alloc failed\n");
 		return -ENOMEM;
 	}
-	// cxlabs: disabled to avoid kernel panic
-	/*
-	if (request_irq(IRQ_EINT16, codec_enabled,
-			IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
-			"snd_soc_n311_uda1380", s3c24xx_snd_device)) {
-		DBG(KERN_ERR "n311_uda1380: can't get irq.\n");
-		// FIXME: fix memory leak here!
-		return -ENOENT;
-	}
-	*/
 	
 	/* enable codec's power */
 	n311_codec_enable(1);
@@ -426,6 +406,17 @@ static int __init n311_init(void)
 		DBG("ret = %i\n",ret);
 		platform_device_put(s3c24xx_snd_device);
 	}
+	
+	// cxlabs: disabled to avoid kernel panic
+	/*
+	if (request_irq(IRQ_EINT16, codec_enabled,
+			IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
+			"snd_soc_n311_uda1380", s3c24xx_snd_device)) {
+		DBG(KERN_ERR "n311_uda1380: can't get irq.\n");
+		// FIXME: fix memory leak here!
+		return -ENOENT;
+	}
+	*/
 	
     INIT_WORK(&jack_work, n311_jack_work);
 	

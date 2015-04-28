@@ -14,6 +14,7 @@
  
  -------------------------------------- LOAD u-boot into nand (from jtag and u-boot)
  load_image /opt/N310/u-boot4n300/u-boot.nand-64M 0x30008000
+ load_image /opt/N310/u-boot4n300/u-boot.bin 0x30008000
  (load_image /opt/N310/u-boot4n300/eboot.nb0 0x30008000)	do not load @ 0x33f80000 !! it relocates itself
  resume
  --> from serialconsole 
@@ -89,7 +90,7 @@
  --> from serialconsole --> bootm 0x31000000
 
  -------------------------------------- LOAD u-boot from JTAG
- nand erase 0 0 0x20000 (2 times better)
+ nand erase 0 0 0x40000 (2 times better)
  nand write 0 /opt/N310/u-boot4n300/u-boot.nand 0
  nand dump 0 /opt/N310/u-boot4n300/dump 0x40000 0x1000
  
@@ -136,10 +137,14 @@
 #define CONFIG_SYS_CLK_FREQ	16934400/* 16.9344MHz input clock */
 //NOTE: Touch screen uses X-tal clock(3.68MHz)
 
+/* the PWM TImer 4 uses a counter of 15625 for 10 ms, so we need */
+/* it to wrap 100 times (total 1562500) to get 1 sec. */
+#define	CFG_HZ			1562500
+
 //#undef USE_920T_MMU
 #define USE_920T_MMU
-#undef CONFIG_USE_IRQ			/* we don't need IRQ/FIQ stuff */
 //#define CONFIG_USE_IRQ
+#undef CONFIG_USE_IRQ
 
 /*
  * Size of malloc() pool
@@ -152,7 +157,7 @@
  * Hardware drivers
  ****************************************************** */
 #define CONFIG_DISPLAY_CPUINFO
-#define BOARD_LATE_INIT
+#define BOARD_LATE_INIT		// int board_late_init(void); in n300.c
 /************************************************************
  * serial console configuration
  ************************************************************/
@@ -205,6 +210,8 @@
 			CFG_CMD_FAT	 	| \
 			CFG_CMD_EXT2	| \
 			CFG_CMD_RUN		| \
+			CFG_CMD_DATE	| \
+			CFG_CMD_IRQ		| \
 			CFG_CMD_REGINFO)
 
 /*			
@@ -273,10 +280,6 @@
 #undef  CFG_CLKS_IN_HZ		/* everything, incl board info, in Hz */
 
 #define	CFG_LOAD_ADDR		0x30008000	/* default load address	for loady, loadb ecc*/
-
-/* the PWM TImer 4 uses a counter of 15625 for 10 ms, so we need */
-/* it to wrap 100 times (total 1562500) to get 1 sec. */
-#define	CFG_HZ			1562500
 
 /* valid baudrates */
 #define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }

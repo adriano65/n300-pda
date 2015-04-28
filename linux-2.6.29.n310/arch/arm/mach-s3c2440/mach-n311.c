@@ -280,8 +280,7 @@ static struct gpio_keys_button n311_buttons[] = {
 	//S3C2410_GPF3 is USB device supply present
 
 	/* switch-type key: switch on/off display (IRQ9)
- 	{KEY_COFFEE, S3C2410_GPG1, 1, "Key lock"}, 
- 	{KEY_COFFEE, S3C2410_GPD6, 1, "Key lock"}, 
+ 	{KEY_COFFEE, S3C2410_GPG1, 1, "lock switch"}, 
 	*/
 	{KEY_A, S3C2410_GPF4, 1, "Home button",EV_KEY},
 	{KEY_TAB, S3C2410_GPF5, 1, "Calendar button",EV_KEY},
@@ -352,41 +351,11 @@ int n300_backlight_power(int on) {
 EXPORT_SYMBOL_GPL(n300_backlight_power);
 
 void n300_set_brightness(int tcmpb0) {
-	unsigned long tcfg0;
-	unsigned long tcfg1;
-	unsigned long tcon;
-
-	{DPRINTK("Brightness val -> %d\n", tcmpb0);}
-
 	/* configure power on/off */
 	n300_backlight_power(tcmpb0 ? 1 : 0);
 
-	tcfg0=readl(S3C2410_TCFG0);
-	tcfg1=readl(S3C2410_TCFG1);
-
-	tcfg0 &= ~S3C2410_TCFG_PRESCALER0_MASK;
-	tcfg0 |= 0x18;
-
-	tcfg1 &= ~S3C2410_TCFG1_MUX0_MASK;
-	tcfg1 |= S3C2410_TCFG1_MUX0_DIV2;
-
-	writel(tcfg0, S3C2410_TCFG0);
-	writel(tcfg1, S3C2410_TCFG1);
-	writel(0x31, S3C2410_TCNTB(0));
-
-	tcon = readl(S3C2410_TCON);
-	tcon &= ~0x0F;
-	tcon |= S3C2410_TCON_T0RELOAD;
-	tcon |= S3C2410_TCON_T0MANUALUPD;
-
-	writel(tcon, S3C2410_TCON);
 	writel(0x31, S3C2410_TCNTB(0));
 	writel(tcmpb0, S3C2410_TCMPB(0));
-
-	/* start the timer running */
-	tcon |= S3C2410_TCON_T0START;
-	tcon &= ~S3C2410_TCON_T0MANUALUPD;
-	writel(tcon, S3C2410_TCON);
 }
 
 
@@ -610,9 +579,6 @@ static void n311_hw_init(void) {
 	s3c2410_gpio_pullup(S3C2410_GPG11, 1);
 	s3c2410_gpio_cfgpin(S3C2410_GPG11, S3C2410_GPIO_INPUT);
 	*/
-
-	/* Disable Unused Clocks to peripherals*/
-	//__raw_writel(0xf7ffd0, 0x4C00000C);		// !! BAD !!
 }
 
 static struct platform_device *n311_devices[] __initdata = {
@@ -675,8 +641,8 @@ TBD
 		TBD
 				TBD
 						TBD
-																						n311_codec_enable
-																								enable_NAND_write
+																				n311_codec_enable?
+																						enable_NAND_write
 																																		mmc_def_setpower
 
 GPB0	GPB1	GPB2	GPB3	GPB4	GPB5	GPB6	GPB7	GPB8	GPB9	GPB10
@@ -705,7 +671,7 @@ TBD
 		Enable Speaker Output
 				TBD
 						TBD
-												switch
+												switch key
 																		enable green led
 																				enable blue led
 
@@ -733,7 +699,7 @@ Power button
 
 GPG0	GPG1	GPG2	GPG3	GPG4	GPG5	GPG6	GPG7	GPG8	GPG9	GPG10	GPG11	GPG12	GPG13	GPG14	GPG15	
 TBD
-		Key lock
+		Lock switch
 				TBD
 						Ok button
 								Left button
@@ -743,7 +709,7 @@ TBD
 																input 4 headphones
 																		TBD
 																				TBD
-																						TBD
+																						case opened button
 																		
 																								TS_XMON
 																										TS_nXPON
