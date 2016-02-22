@@ -1180,10 +1180,11 @@ PHONY += _modinst_post
 _modinst_post: _modinst_
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.fwinst obj=firmware __fw_modinst
 	$(call cmd,depmod)
-	cp /opt/N310/rtl8712_8188_8191_8192SU_usb_linux_v2.6.6.0.20110401/driver/rtl8712_8188_8191_8192SU_usb_linux_v2.6.6.0.20110401/8712u.ko $(MODLIB)/kernel/drivers/net/wireless/8712u.ko
-	cp /opt/N310/RTL8188C_8192C_USB_linux_v3.4.4_4749.20121105/driver/rtl8188C_8192C_usb_linux_v3.4.4_4749.20121105/8192cu.ko $(MODLIB)/kernel/drivers/net/wireless/8192cu.ko
+	cp /opt/N310/rtl8712_usb_linux_v2.6.6.0.20110401/driver/rtl8712_8188_8191_8192SU_usb_linux_v2.6.6.0.20110401/8712u.ko $(MODLIB)/kernel/drivers/net/wireless/8712u.ko
+	cp /opt/N310/rtl8192C_USB_linux_v3.4.4_4749.20121105/driver/rtl8188C_8192C_usb_linux_v3.4.4_4749.20121105/8192cu.ko $(MODLIB)/kernel/drivers/net/wireless/8192cu.ko
 	cp /opt/N310/2011_0719_RT3070_RT3370_RT5370_RT5372_Linux_STA_V2.5.0.3_DPO/os/linux/rt5370sta.ko $(MODLIB)/kernel/drivers/net/wireless/rt5370sta.ko
 	cp /opt/N310/DPO_MT7601U_LinuxSTA_3.0.0.4_20130913/os/linux/mt7601Usta.ko $(MODLIB)/kernel/drivers/net/wireless/
+	cp /opt/N310/rtl8188eu/8188eu.ko $(MODLIB)/kernel/drivers/net/wireless/
  
 else # CONFIG_MODULES
 
