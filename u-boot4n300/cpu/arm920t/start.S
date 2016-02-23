@@ -286,6 +286,7 @@ reset:
 				MCR p15, 0x00, r0, c1, c0, 0x00
 
 #define USE_TEST_CODE
+//#undefine USE_TEST_CODE
 #ifdef USE_TEST_CODE
 @ ---------------------------------------- T E S T  C O D E --------------
 /*

@@ -103,7 +103,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-//#define _BOOT_FROM_DRAM		// could be used by command line (make ...)
+#define _BOOT_FROM_DRAM		// could be used by command line (make ...)
 
 #ifdef _BOOT_FROM_DRAM
   /* If we want to start u-boot downloaded from JTAG in DRAM 

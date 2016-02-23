@@ -377,6 +377,7 @@ cmd_bootm.o: cmd_bootm.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/little_endian.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/swab.h \
   /opt/N310/u-boot4n300/include/linux/byteorder/generic.h \
+  /opt/N310/u-boot4n300/include/rtc.h \
   /opt/N310/u-boot4n300/include/hush.h
 cmd_cache.o: cmd_cache.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \

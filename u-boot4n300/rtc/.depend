@@ -557,7 +557,10 @@ s3c24x0_rtc.o: s3c24x0_rtc.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/asm/mach-types.h \
   /opt/N310/u-boot4n300/include/asm/setup.h \
   /opt/N310/u-boot4n300/include/asm/u-boot-arm.h \
-  /opt/N310/u-boot4n300/include/command.h
+  /opt/N310/u-boot4n300/include/command.h \
+  /opt/N310/u-boot4n300/include/s3c2440.h \
+  /opt/N310/u-boot4n300/include/s3c24x0.h \
+  /opt/N310/u-boot4n300/include/rtc.h
 rs5c372.o: rs5c372.c /opt/N310/u-boot4n300/include/common.h \
   /opt/N310/u-boot4n300/include/config.h \
   /opt/N310/u-boot4n300/include/configs/n300.h \
